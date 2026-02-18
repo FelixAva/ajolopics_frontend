@@ -1,5 +1,6 @@
 import { Outlet, Link, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const RootComponent = () => {
   return (
@@ -15,6 +16,7 @@ const RootComponent = () => {
       <hr />
       <Outlet />
       <TanStackRouterDevtools />
+      <ReactQueryDevtools />
     </>
   );
 };
