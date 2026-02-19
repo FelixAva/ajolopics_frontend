@@ -9,8 +9,8 @@ const RootComponent = () => {
         <Link to="/" className="[&.active]:font-bold]">
           Home
         </Link>
-        <Link to="/about" className="[&.active]:font-bold]">
-          About
+        <Link to="/auth" className="[&.active]:font-bold]">
+          Login
         </Link>
       </div>
       <hr />
