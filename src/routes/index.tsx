@@ -7,7 +7,7 @@ export const Route = createFileRoute('/')({
 function RouteComponent() {
   return (
       <>
-        <p>Welcome to the virtual gallery</p>
+        <p className='text-3xl text-center'>Welcome to the virtual gallery</p>
       </>
     );
 }
