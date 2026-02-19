@@ -1,1 +1,72 @@
 @import "tailwindcss";
+
+@theme {
+  /* -------------------------------- Fonts -------------------------------- */
+  --font-poppins: Poppins, sans-serif;
+  --font-lexend: Lexend, sans-serif;
+
+  /* -------------------------------- Colors -------------------------------- */
+  --color-midnight-violet: #2B061E;
+  --color-midnight-violet-50: #fce9f5;
+  --color-midnight-violet-100: #f9d2eb;
+  --color-midnight-violet-200: #f3a5d8;
+  --color-midnight-violet-300: #ed78c4;
+  --color-midnight-violet-400: #e74bb0;
+  --color-midnight-violet-500: #e01f9d;
+  --color-midnight-violet-600: #b4187d;
+  --color-midnight-violet-700: #87125e;
+  --color-midnight-violet-800: #5a0c3f;
+  --color-midnight-violet-900: #2d061f;
+  --color-midnight-violet-950: #1f0416;
+
+  --color-smoky-rose: #875053;
+  --color-smoky-rose-50: #f6efef;
+  --color-smoky-rose-100: #ecdfe0;
+  --color-smoky-rose-200: #d9bfc0;
+  --color-smoky-rose-300: #c69fa1;
+  --color-smoky-rose-400: #b47e81;
+  --color-smoky-rose-500: #a15e62;
+  --color-smoky-rose-600: #814b4e;
+  --color-smoky-rose-700: #60393b;
+  --color-smoky-rose-800: #402627;
+  --color-smoky-rose-900: #201314;
+  --color-smoky-rose-950: #160d0e;
+
+  --color-beige: #f7f9eb;
+  --color-beige-100: #eef3d8;
+  --color-beige-200: #dde7b1;
+  --color-beige-300: #ccdb8a;
+  --color-beige-400: #bbcf63;
+  --color-beige-500: #aac33c;
+  --color-beige-600: #889c30;
+  --color-beige-700: #667524;
+  --color-beige-800: #444e18;
+  --color-beige-900: #22270c;
+  --color-beige-950: #181b08;
+
+  --color-deep-teal: #496F5D;
+  --color-deep-teal-50: #f0f5f2;
+  --color-deep-teal-100: #e0ebe6;
+  --color-deep-teal-200: #c1d7cd;
+  --color-deep-teal-300: #a2c3b4;
+  --color-deep-teal-400: #84ae9a;
+  --color-deep-teal-500: #659a81;
+  --color-deep-teal-600: #517b67;
+  --color-deep-teal-700: #3c5d4e;
+  --color-deep-teal-800: #283e34;
+  --color-deep-teal-900: #141f1a;
+  --color-deep-teal-950: #0e1612;
+
+  --color-dusty-olive: #657153;
+  --color-dusty-olive-50: #f3f4f0;
+  --color-dusty-olive-100: #e6e9e2;
+  --color-dusty-olive-200: #ced4c4;
+  --color-dusty-olive-300: #b5bea7;
+  --color-dusty-olive-400: #9ca88a;
+  --color-dusty-olive-500: #83936c;
+  --color-dusty-olive-600: #697557;
+  --color-dusty-olive-700: #4f5841;
+  --color-dusty-olive-800: #353b2b;
+  --color-dusty-olive-900: #1a1d16;
+  --color-dusty-olive-950: #12150f;
+}
