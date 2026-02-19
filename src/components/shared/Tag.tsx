@@ -24,8 +24,8 @@ const Tag = ({
       className={clsx(
         "w-min text-md py-1 px-2.5 rounded-3xl",
         isSelected
-        ? "bg-[#657153] text-white border-transparent"
-        : "bg-transparent text-[#657153] border border-[#657153]"
+        ? "bg-dusty-olive text-white border-transparent"
+        : "bg-transparent text-dusty-olive border border-dusty-olive"
     )}>
       <p>{ title }</p>
     </button>
