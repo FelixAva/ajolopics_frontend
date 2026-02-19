@@ -17,6 +17,7 @@
     "@tanstack/react-router": "^1.160.2",
     "@tanstack/react-router-devtools": "^1.160.2",
     "axios": "^1.13.5",
+    "clsx": "^2.1.1",
     "D": "^1.0.0",
     "lucide-react": "^0.574.0",
     "react": "^19.2.0",
