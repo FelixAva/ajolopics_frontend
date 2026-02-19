@@ -8,7 +8,7 @@ function RouteComponent() {
   return (
     <>
       <p>Login</p>
-      <Link to="/auth/register" className="[&.active]:font-bold]">
+      <Link to="/auth/register" className="[&.active]:font-bold]" preload="intent">
         Register
       </Link>
     </>
