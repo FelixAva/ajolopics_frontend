@@ -6,7 +6,7 @@ interface Props {
   isDisable?: boolean;
 }
 
-const Tag = ({
+const Badge = ({
   title,
   isDisable
 }: Props ) => {
@@ -32,4 +32,4 @@ const Tag = ({
   );
 };
 
-export default Tag;
+export default Badge;

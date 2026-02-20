@@ -1,9 +1,15 @@
+// Import form components
+import Input from './form/Input';
+
 // Import Shared components
 import Button from './shared/Button';
-import Tag from './shared/Tag';
+import Badge from './shared/Badge';
 
 export {
   // Export Shared components
   Button,
-  Tag,
+  Badge,
+
+  // Export form components
+  Input,
 }
