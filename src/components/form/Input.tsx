@@ -14,8 +14,8 @@ const Input = ({
   error
 }: Props ) => {
   return (
-    <div className='w-min flex flex-col ml-5'>
-      <p className='text-lg'>{ label }</p>
+    <div className='w-min flex flex-col'>
+      <p className='text-left text-lg'>{ label }</p>
 
       <input
         type={ type }
