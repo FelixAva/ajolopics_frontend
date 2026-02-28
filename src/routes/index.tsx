@@ -8,7 +8,7 @@ export const Route = createFileRoute('/')({
 function RouteComponent() {
 
   return (
-      <>
+      <div className='flex-1'>
         <p className='text-3xl text-center text-black'>Welcome to the virtual gallery</p>
         <Input label='Input' placeholder='Title, author, tag...' error='Errores de input' />
         <Button
@@ -18,6 +18,6 @@ function RouteComponent() {
           variant='ghost'
         />
         <Badge title='Abstract' />
-      </>
+      </div>
     );
 }
