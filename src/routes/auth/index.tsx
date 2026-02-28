@@ -1,3 +1,5 @@
+import { AuthService } from '../../api/auth.service';
+
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
@@ -19,7 +21,18 @@ function RouteComponent() {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+
+  const onSubmit: SubmitHandler<IFormInput> = async(data) => {
+    try {
+      const result = await AuthService.login(data);
+
+      localStorage.setItem('token', result.token);
+
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className='flex flex-1 justify-center items-center text-center'>
@@ -35,17 +48,13 @@ function RouteComponent() {
         >
           <Input
             label='Email'
-            type='email'
+            type='text'
             placeholder='you@email.com'
             {...register('email', {
               required: 'The email is required',
               maxLength: {
                 value: 255,
                 message: 'The max length is of 255'
-              },
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: 'This is not a valid email format'
               }
             })}
             error={ errors.email?.message }
@@ -61,16 +70,12 @@ function RouteComponent() {
                   value: 8,
                   message: "The min length is of 8"
                 },
-                pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-                  message: "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-                }
             })}
             error={ errors.password?.message }
           />
 
           <Button
-            title='Sign In'
+            title='Login'
             type='submit'
             action={() => {}}
           />
