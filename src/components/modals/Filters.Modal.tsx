@@ -9,7 +9,8 @@ const Filters = () => {
     position:'top-right',
     title: <i>Input something</i>,
     html: <div className='flex justify-center'><Input label='Search' /></div>,
-    confirmButtonText: 'Cool',
+    cancelButtonText:'Clear Filters',
+    
   });
 }
 
