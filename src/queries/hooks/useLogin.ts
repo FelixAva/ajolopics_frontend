@@ -9,6 +9,7 @@ const useAuth = () => {
     onSuccess: (data) => {
       localStorage.setItem('token', data.token);
       alert('Redirecting...');
+      window.location.href = '/';
     },
     onError: (error) => {
       console.error(error.message);
@@ -19,6 +20,7 @@ const useAuth = () => {
     mutationFn: (data) => AuthService.register(data),
     onSuccess: () => {
       alert('Registered successfully');
+      window.location.href = '/auth'; // ! Zustand to user session management
     },
     onError: (error) => {
       console.error(error);
