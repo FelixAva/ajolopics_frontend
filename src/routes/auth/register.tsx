@@ -1,17 +1,16 @@
-import { AuthService } from '../../api/auth.service';
-
+// Libraries imports
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
+
+// Hooks imports
+import useAuth from '../../queries/hooks/useLogin';
+
+// Types and Interfaces imports
 import type { SubmitHandler } from 'react-hook-form';
+import type { IRegisterFormInput } from '../../types/form.auth.types';
 
+// Components imports
 import { Input, Button } from '../../components';
-
-type IFormInput = {
-  name: string;
-  email: string;
-  password: string;
-  confPassword: string;
-}
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,
@@ -23,15 +22,12 @@ function RouteComponent() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
+  } = useForm<IRegisterFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = async(data) => {
-    try {
-      const result = await AuthService.register(data);
-      console.log(result);
-    } catch (error) {
-      console.error(error);
-    }
+  const { register: authRegister } = useAuth();
+
+  const onSubmit: SubmitHandler<IRegisterFormInput> = async(data) => {
+    authRegister.mutate(data);
   };
 
   return (
