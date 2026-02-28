@@ -22,7 +22,7 @@ const Badge = ({
     <button
       onClick={ selectTag }
       className={clsx(
-        "w-min text-md py-1 px-2.5 rounded-3xl",
+        "w-min text-md py-1 px-2.5 rounded-3xl cursor-pointer",
         isSelected
         ? "bg-dusty-olive text-white border-transparent"
         : "bg-transparent text-dusty-olive border border-dusty-olive"

@@ -4,11 +4,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const RootComponent = () => {
   return (
-    <>
+    <div className='flex flex-col w-auto h-screen'>
       <div className="p-2 flex gap-2">
         <Link to="/" className="[&.active]:font-bold]" preload="intent">
-          Home
+          Ajolopics
         </Link>
+        <span className='self-center text-smoky-rose text-[14px] font-thin'>Virtual Gallery</span>
         <Link to="/auth" className="[&.active]:font-bold]" preload="intent">
           Login
         </Link>
@@ -17,7 +18,7 @@ const RootComponent = () => {
       <Outlet />
       <TanStackRouterDevtools />
       <ReactQueryDevtools />
-    </>
+    </div>
   );
 };
 

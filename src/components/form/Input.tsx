@@ -1,26 +1,23 @@
-import type { HTMLInputTypeAttribute } from 'react';
+import { forwardRef } from 'react';
+import type { InputHTMLAttributes } from 'react';
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  placeholder?: string;
-  type?: HTMLInputTypeAttribute;
   error?: string;
 }
 
-const Input = ({
-  label,
-  placeholder,
-  type='text',
-  error
-}: Props ) => {
+const Input = forwardRef<HTMLInputElement, Props> (function Input (
+  { label, error, className, ...rest },
+  ref
+) {
   return (
-    <div className='w-min flex flex-col ml-5'>
+    <div className='w-fill flex flex-col text-left'>
       <p className='text-lg'>{ label }</p>
 
       <input
-        type={ type }
-        placeholder={ placeholder }
-        className='border border-dusty-olive rounded-lg px-2.5 py-1.5 focus:outline-dusty-olive-700'
+        ref={ref}
+        {...rest}
+        className={`border border-dusty-olive rounded-lg px-2.5 py-1.5 focus:outline-dusty-olive-700 ${className ?? ''}`}
       />
 
       {
@@ -30,6 +27,6 @@ const Input = ({
       }
     </div>
   );
-};
+});
 
 export default Input;

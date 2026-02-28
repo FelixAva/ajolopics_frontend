@@ -4,7 +4,7 @@ import { clsx } from 'clsx';
 
 interface Props {
   title: string;
-  icon: IconName;
+  icon?: IconName;
   variant?: 'default' | 'ghost';
   type?: 'button' | 'submit';
   action: () => void;
@@ -29,9 +29,11 @@ const Button = ({
       type={type}
     >
       {(
-        <div className="flex items-center gap-3">
-          <DynamicIcon name={icon} size={22} />
-          <p>{ title }</p>
+        <div className="flex items-center justify-center gap-3 text-center">
+          {
+            icon && <DynamicIcon name={icon} size={22} />
+          }
+          <p className='w-fill'>{ title }</p>
         </div>
       )}
     </button>
