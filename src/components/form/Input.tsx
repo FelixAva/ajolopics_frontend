@@ -11,13 +11,13 @@ const Input = forwardRef<HTMLInputElement, Props> (function Input (
   ref
 ) {
   return (
-    <div className='w-fill flex flex-col text-left'>
+    <div className='w-auto flex flex-col text-left'>
       <p className='text-lg'>{ label }</p>
 
       <input
         ref={ref}
         {...rest}
-        className={`border border-dusty-olive rounded-lg px-2.5 py-1.5 focus:outline-dusty-olive-700 ${className ?? ''}`}
+        className={`w-full border border-dusty-olive rounded-lg px-2.5 py-1.5 focus:outline-dusty-olive-700 ${className ?? ''}`}
       />
 
       {

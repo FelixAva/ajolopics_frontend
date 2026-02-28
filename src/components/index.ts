@@ -4,7 +4,8 @@ import Input from './form/Input';
 // Import Shared components
 import Button from './shared/Button';
 import Badge from './shared/Badge';
-import Filters from './modals/Filters.Modal'
+import FiltersModal from './modals/Filter/Filters.Modal'
+import FiltersComponent from './modals/Filter/Filters.Component'
 
 export {
   // Export Shared components
@@ -14,5 +15,6 @@ export {
   // Export Form components
   Input,
 
-  Filters,
+  FiltersModal,
+  FiltersComponent,
 }

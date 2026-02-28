@@ -6,7 +6,7 @@ interface Props {
   title: string;
   icon?: IconName;
   variant?: 'default' | 'ghost';
-  type?: 'button' | 'submit';
+  type?: 'button' | 'submit' | 'reset';
   action: () => void;
 }
 
@@ -23,8 +23,8 @@ const Button = ({
       className={clsx(
         "w-auto h-min px-3.5 py-2 rounded-lg md:text-lg transition-colors duration-200 border hover:cursor-pointer",
         variant === "default"
-          ? "bg-deep-teal text-white border-transparent hover:bg-transparent hover:text-deep-teal hover:border-deep-teal"
-          : "bg-transparent text-deep-teal border-deep-teal hover:bg-deep-teal hover:text-white"
+          ? "bg-deep-teal text-white border-transparent hover:bg-deep-teal-700 hover:border-deep-teal-700"
+          : "bg-transparent text-deep-teal border-deep-teal hover:bg-deep-teal-100 hover:border-deep-teal-100"
       )}
       type={type}
     >
