@@ -8,7 +8,7 @@ const useAuth = () => {
     mutationFn: (data) => AuthService.login(data),
     onSuccess: (data) => {
       localStorage.setItem('token', data.token);
-      console.log(data);
+      alert('Redirecting...');
     },
     onError: (error) => {
       console.error(error.message);
@@ -17,8 +17,8 @@ const useAuth = () => {
 
   const register = useMutation<RegisterResponse, Error, RegisterDTO>({
     mutationFn: (data) => AuthService.register(data),
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
+      alert('Registered successfully');
     },
     onError: (error) => {
       console.error(error);

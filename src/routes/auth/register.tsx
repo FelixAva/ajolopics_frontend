@@ -57,7 +57,7 @@ function RouteComponent() {
                 message: 'The max length is of 100'
               },
             })}
-            error={ errors.email?.message }
+            error={ errors.name?.message }
           />
           <Input
             label='Email'
