@@ -1,5 +1,6 @@
 // Import form components
 import Input from './form/Input';
+import InputPassword from './form/InputPassword';
 
 // Import Shared components
 import Button from './shared/Button';
@@ -21,6 +22,7 @@ export {
 
   // Export Form components
   Input,
+  InputPassword,
 
   FiltersModal,
   FiltersComponent,

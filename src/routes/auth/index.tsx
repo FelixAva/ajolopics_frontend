@@ -10,7 +10,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import type { ILoginFormInput } from '../../types/form.auth.types';
 
 // Components imports
-import { Input, Button, Spinner } from '../../components';
+import { Input, Button, Spinner, InputPassword } from '../../components';
 
 export const Route = createFileRoute('/auth/')({
   component: RouteComponent,
@@ -54,10 +54,9 @@ function RouteComponent() {
             })}
             error={ errors.email?.message }
           />
-          <Input
+          <InputPassword
             label='Password'
-            type='password'
-            placeholder='••••••••'
+            pwdRecovery
             {...register("password",
               {
                 required: "The password is required",

@@ -8,6 +8,7 @@ interface Props {
   variant?: 'default' | 'inverted' | 'ghost' | 'none' ;
   type?: 'button' | 'submit' | 'reset';
   action: () => void;
+  className?: string;
 }
 
 const Button = ({
@@ -15,13 +16,14 @@ const Button = ({
   icon,
   variant='default',
   type='button',
-  action
+  action,
+  className=''
 }: Props ) => {
   return (
     <button
       onClick={action}
       className={clsx(
-        "w-auto h-min px-3.5 py-2 rounded-lg md:text-lg transition-colors duration-200 select-none hover:cursor-pointer",
+        `w-auto h-min px-3.5 py-2 rounded-lg md:text-lg transition-colors duration-200 select-none hover:cursor-pointer ${className}`,
         {
           'bg-deep-teal text-white border-transparent hover:bg-deep-teal-700 hover:border-deep-teal-700': variant === 'default',
           'bg-transparent text-deep-teal border border-deep-teal hover:bg-deep-teal-100 hover:border-deep-teal-100': variant === 'inverted',

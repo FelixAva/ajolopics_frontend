@@ -10,7 +10,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import type { IRegisterFormInput } from '../../types/form.auth.types';
 
 // Components imports
-import { Input, Button, Spinner } from '../../components';
+import { Input, Button, Spinner, InputPassword } from '../../components';
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,
@@ -76,10 +76,8 @@ function RouteComponent() {
             })}
             error={ errors.email?.message }
           />
-          <Input
+          <InputPassword
             label='Password'
-            type='password'
-            placeholder='••••••••'
             {...register("password",
               {
                 required: "The password is required",
@@ -94,10 +92,8 @@ function RouteComponent() {
             })}
             error={ errors.password?.message }
           />
-          <Input
+          <InputPassword
             label='Confirm password'
-            type='password'
-            placeholder='••••••••'
             {...register("confPassword",
               {
                 required: "The password is required",
