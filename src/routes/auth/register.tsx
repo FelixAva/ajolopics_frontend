@@ -3,11 +3,11 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 
 // Hooks imports
-import useAuth from '../../queries/hooks/useLogin';
+import useAuth from '../../features/auth/useAuth';
 
 // Types and Interfaces imports
 import type { SubmitHandler } from 'react-hook-form';
-import type { IRegisterFormInput } from '../../types/form.auth.types';
+import type { IRegisterFormInput } from '../../features/auth/form.auth.types';
 
 // Components imports
 import { Input, Button, Spinner, InputPassword } from '../../components';

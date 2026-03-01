@@ -1,5 +1,10 @@
-import type { LoginDTO, LoginResponse, RegisterDTO, RegisterResponse } from '../types/api.auth.types';
-import { api } from './axios';
+import type {
+  LoginDTO,
+  LoginResponse,
+  RegisterDTO,
+  RegisterResponse
+} from './api.auth.types';
+import { api } from '../../api/axios';
 
 export const AuthService = {
   async login(data: LoginDTO) {

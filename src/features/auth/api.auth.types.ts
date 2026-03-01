@@ -1,3 +1,5 @@
+import type { UserRole } from './user.types';
+
 export interface LoginDTO {
   email: string;
   password: string;
@@ -17,5 +19,5 @@ export interface RegisterResponse {
   name: string;
   email: string;
   id: string;
-  role: "USER" | "ADMIN";
+  role: UserRole;
 }

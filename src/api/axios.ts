@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { useAuthStore } from '../features/auth/useAuthStore';
+import { router } from '../lib/router';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -12,7 +14,8 @@ export const api  = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    // Read token from >ustand
+    const token = useAuthStore.getState().token;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -27,10 +30,11 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token expirado o no autorizado
-      localStorage.removeItem('token');
-      alert('Expired Session');
-      window.location.href = '/auth';
+      // Logout procces from >ustand
+      useAuthStore.getState().logout();
+
+      // Redirect to auth - without hard reload
+      router.navigate({ to: '/auth' });
     }
 
     return Promise.reject(error);
