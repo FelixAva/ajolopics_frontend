@@ -71,7 +71,7 @@ const FiltersComponent = () => {
           icon='x'
           type='reset'
           action={() => setSelectedTags([])}
-          variant='ghost'
+          variant='inverted'
         />
         <Button
           title='Search'

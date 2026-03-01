@@ -5,6 +5,7 @@ import Input from './form/Input';
 import Button from './shared/Button';
 import Badge from './shared/Badge';
 import Spinner from './shared/Spinner';
+import Header from './shared/Header';
 
 // Import Modals components
 import FiltersModal from './modals/Filter/Filters.Modal'
@@ -16,6 +17,7 @@ export {
   Button,
   Badge,
   Spinner,
+  Header,
 
   // Export Form components
   Input,
