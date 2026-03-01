@@ -29,7 +29,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       // Token expirado o no autorizado
       localStorage.removeItem('token');
-      window.location.href = '/auth'; // ! Zustand to user session management
+      alert('Expired Session');
+      window.location.href = '/auth';
     }
 
     return Promise.reject(error);

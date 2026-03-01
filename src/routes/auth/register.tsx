@@ -10,7 +10,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import type { IRegisterFormInput } from '../../types/form.auth.types';
 
 // Components imports
-import { Input, Button } from '../../components';
+import { Input, Button, Spinner } from '../../components';
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,
@@ -106,11 +106,27 @@ function RouteComponent() {
             error={ errors.confPassword?.message }
           />
 
-          <Button
-            title='Register'
-            type='submit'
-            action={() => {}}
-          />
+          {
+            authRegister.isError && (
+                <span className='text-sm text-red-400'>{authRegister.error.response?.data.message}</span>
+              )
+          }
+
+          {
+            authRegister.isPending
+              ? (
+                <div className='self-center'>
+                  <Spinner />
+                </div>
+              )
+              : (
+                <Button
+                  title='Register'
+                  type='submit'
+                  action={() => {}}
+                />
+              )
+          }
         </form>
 
         <Link to="/auth" className="[&.active]:font-bold]" preload="intent">

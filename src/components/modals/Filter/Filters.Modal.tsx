@@ -10,7 +10,7 @@ const FiltersModal = () => {
     customClass: {
       container: '!p-0',
       htmlContainer: '!flex !flex-col !flex-1 !h-screen',
-      popup: '!w-full !h-screen !flex !flex-col !flex-1 md:!w-auto',
+      popup: '!w-full !h-screen !flex !flex-col !flex-1 !rounded-none md:!w-auto',
       title: '!text-left !text-2xl',
       closeButton: '!absolute !right-0'
     },
