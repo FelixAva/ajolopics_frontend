@@ -10,7 +10,9 @@ const RootComponent = () => {
 
       <hr />
 
-      <Outlet />
+      <div className='px-5 flex flex-1 md:px-10'>
+        <Outlet />
+      </div>
       <TanStackRouterDevtools />
       <ReactQueryDevtools />
     </div>
