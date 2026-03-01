@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Input, Button, Badge, Filters as FiltersModal } from '../components';
+import { Input, Button, Badge, FiltersModal } from '../components';
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,

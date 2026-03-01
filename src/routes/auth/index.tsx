@@ -10,7 +10,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import type { ILoginFormInput } from '../../types/form.auth.types';
 
 // Components imports
-import { Input, Button } from '../../components';
+import { Input, Button, Spinner } from '../../components';
 
 export const Route = createFileRoute('/auth/')({
   component: RouteComponent,
@@ -69,11 +69,27 @@ function RouteComponent() {
             error={ errors.password?.message }
           />
 
-          <Button
-            title='Login'
-            type='submit'
-            action={() => {}}
-          />
+          {
+            login.isError && (
+                <span className='text-sm text-red-400'>{login.error.response?.data.message}</span>
+              )
+          }
+
+          {
+            login.isPending
+              ? (
+                <div className='self-center'>
+                  <Spinner />
+                </div>
+              )
+              : (
+                <Button
+                  title='Login'
+                  type='submit'
+                  action={() => {}}
+                />
+              )
+          }
         </form>
 
         <Link to="/auth/register" className="[&.active]:font-bold]" preload="intent">
