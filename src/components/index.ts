@@ -1,6 +1,10 @@
 // Import form components
 import Input from './form/Input';
 import InputPassword from './form/InputPassword';
+import Select from './form/Select';
+
+// Import Post components
+import PostPreviewCard from './post/PostPreviewCard';
 
 // Import Shared components
 import Button from './shared/Button';
@@ -14,6 +18,9 @@ import FiltersComponent from './modals/Filter/Filters.Component'
 import AdviceModal from './modals/AdviceModal';
 
 export {
+  // Export Post components
+  PostPreviewCard,
+
   // Export Shared components
   Button,
   Badge,
@@ -23,7 +30,9 @@ export {
   // Export Form components
   Input,
   InputPassword,
+  Select,
 
+  // Modals 
   FiltersModal,
   FiltersComponent,
   AdviceModal,

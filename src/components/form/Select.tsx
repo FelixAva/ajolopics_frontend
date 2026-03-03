@@ -1,0 +1,64 @@
+import Select from 'react-select';
+import type { GroupBase, Props as SelectProps } from 'react-select';
+
+type Option = {
+  value: string;
+  label: string;
+};
+
+interface CustomSelectProps extends Omit<SelectProps<Option, boolean, GroupBase<Option>>, 'options'> {
+  label: string;
+  options: Option[];
+  error?: string;
+}
+
+const SelectInput = ({
+  label,
+  name,
+  options,
+  isMulti,  
+  error,
+  ...rest
+}: CustomSelectProps) => {
+  return (
+    <div className='w-full flex flex-col text-left gap-1'>
+      <p className='text-lg'>{label}</p>
+
+      <Select
+        {...rest}
+        isMulti={isMulti}
+        name={name}
+        options={options}
+        unstyled // Eliminamos los estilos por defecto para usar Tailwind
+        classNames={{
+          // Contenedor principal (estilo del input)
+          control: ({ isFocused }) => `
+            flex w-full border rounded-lg px-1.5 py-0.5 transition-all
+            ${isFocused ? 'border-dusty-olive-700 ring-1 ring-dusty-olive-700' : 'border-dusty-olive'}
+            bg-white
+          `,
+          // El badge de los items seleccionados (Multi)
+          multiValue: () => 'bg-deep-teal text-white rounded-3xl px-2 py-0.5 m-0.5 flex items-center',
+          multiValueLabel: () => 'text-sm font-medium text-white',
+          multiValueRemove: () => 'hover:text-deep-teal-200 ml-1 rounded-full p-0.5 cursor-pointer',
+
+          // Estilo del dropdown (Menu)
+          menu: () => 'mt-2 border border-dusty-olive bg-white rounded-lg shadow-lg overflow-hidden',
+          option: ({ isFocused, isSelected }) => `
+            px-3 py-2 cursor-pointer transition-colors
+            ${isSelected ? 'bg-deep-teal text-white' : ''}
+            ${isFocused && !isSelected ? 'bg-dusty-olive/20 text-dusty-olive-900' : ''}
+          `,
+          placeholder: () => 'text-gray-400',
+          noOptionsMessage: () => 'p-2 text-gray-500',
+        }}
+      />
+
+      {error && (
+        <span className='text-sm text-red-400'>{error}</span>
+      )}
+    </div>
+  );
+};
+
+export default SelectInput;

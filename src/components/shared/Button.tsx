@@ -7,7 +7,7 @@ interface Props {
   icon?: IconName;
   variant?: 'default' | 'inverted' | 'ghost' | 'none' ;
   type?: 'button' | 'submit' | 'reset';
-  action: () => void;
+  action?: () => void;
   className?: string;
 }
 
@@ -17,7 +17,7 @@ const Button = ({
   variant='default',
   type='button',
   action,
-  className=''
+  className
 }: Props ) => {
   return (
     <button
