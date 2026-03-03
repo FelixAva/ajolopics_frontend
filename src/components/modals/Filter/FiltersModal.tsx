@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 import withReactContent from 'sweetalert2-react-content';
 
-import FiltersComponent from './Filters.Component';
+import FiltersComponent from './FiltersForm';
 
 const FiltersModal = () => {
   withReactContent(Swal).fire({

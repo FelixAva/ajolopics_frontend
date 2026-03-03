@@ -16,7 +16,7 @@ const SelectInput = ({
   label,
   name,
   options,
-  isMulti,  
+  isMulti,
   error,
   ...rest
 }: CustomSelectProps) => {
@@ -29,21 +29,28 @@ const SelectInput = ({
         isMulti={isMulti}
         name={name}
         options={options}
-        unstyled // Eliminamos los estilos por defecto para usar Tailwind
+        unstyled
+        menuPortalTarget={document.body}
+        menuPosition={'fixed'}
+        styles={{
+          menuPortal: base => ({ ...base, zIndex: 9999 })
+        }}
         classNames={{
-          // Contenedor principal (estilo del input)
           control: ({ isFocused }) => `
             flex w-full border rounded-lg px-1.5 py-0.5 transition-all
             ${isFocused ? 'border-dusty-olive-700 ring-1 ring-dusty-olive-700' : 'border-dusty-olive'}
             bg-white
           `,
-          // El badge de los items seleccionados (Multi)
           multiValue: () => 'bg-deep-teal text-white rounded-3xl px-2 py-0.5 m-0.5 flex items-center',
           multiValueLabel: () => 'text-sm font-medium text-white',
           multiValueRemove: () => 'hover:text-deep-teal-200 ml-1 rounded-full p-0.5 cursor-pointer',
 
-          // Estilo del dropdown (Menu)
           menu: () => 'mt-2 border border-dusty-olive bg-white rounded-lg shadow-lg overflow-hidden',
+
+          // --- ESTA ES LA LÍNEA CLAVE PARA QUE NO CREZCA DE MÁS ---
+          menuList: () => 'max-h-48 overflow-y-auto',
+          // -------------------------------------------------------
+
           option: ({ isFocused, isSelected }) => `
             px-3 py-2 cursor-pointer transition-colors
             ${isSelected ? 'bg-deep-teal text-white' : ''}

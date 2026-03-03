@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Input, Badge, Button } from '../../';
+import { Input, Badge, Button } from '../..';
 
 const filterTags = [
   {id: 1, title: 'Abstract'},
