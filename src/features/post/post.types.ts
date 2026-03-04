@@ -1,4 +1,5 @@
 import type { User } from '../auth/user.types';
+import type { Tag } from '../tag/tag.type';
 
 export type AspectRatioType = "SQUARE" | "LANDSCAPE" | "PORTRAIT";
 
@@ -33,7 +34,7 @@ export type MediaVariant = {
   mimeType: string;
 }
 
-export type Tag = {
-  id: number;
-  name: string;
+export type FileWithPreview = {
+  file: File;
+  previewUrl: string;
 }

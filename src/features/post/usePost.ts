@@ -4,8 +4,7 @@ import type { AxiosError } from 'axios';
 import type { ErrorDTO } from '../../types/api.types'
 import type {
   CreatePostDTO,
-  GetFeedDTO
-} from './api.post.type'
+} from './api.post.types'
 import type { PaginatedResponseDTO } from '../../types/api.paginated.response.types';
 import type { Post } from './post.types';
 
@@ -21,6 +20,6 @@ const usePost = () => {
   });
 
   return { createPost };
-}
+};
 
 export default usePost;

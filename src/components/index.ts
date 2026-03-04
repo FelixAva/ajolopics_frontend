@@ -2,6 +2,7 @@
 import Input from './form/Input';
 import InputPassword from './form/InputPassword';
 import SelectInput from './form/SelectInput';
+import InputFile from './form/InputFile';
 
 // Import Post components
 import PostPreviewCard from './post/PostPreviewCard';
@@ -12,6 +13,7 @@ import Button from './shared/Button';
 import Badge from './shared/Badge';
 import Spinner from './shared/Spinner';
 import Header from './shared/Header';
+import { imageCompressor } from './shared/imageCompressor.canvas';
 
 // Import Modals components
 import FiltersModal from './modals/Filter/FiltersModal'
@@ -28,11 +30,13 @@ export {
   Badge,
   Spinner,
   Header,
+  imageCompressor,
 
   // Export Form components
   Input,
   InputPassword,
   SelectInput,
+  InputFile,
 
   // Modals
   FiltersModal,
