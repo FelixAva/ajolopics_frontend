@@ -1,4 +1,4 @@
-import Button from '../shared/Button';
+//import Button from '../shared/Button';
 
 interface Props {
   id: string;
@@ -17,6 +17,7 @@ const PostPreviewCard = ({
   thumbnail,
   aspect,
 }: Props) => {
+  console.log(id,tags,thumbnail,aspect)
   return (
     <div className='w-max relative' onClick={() => alert('Open detail')}>
       <img

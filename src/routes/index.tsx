@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { PostPreviewCard, SelectInput } from '../components';
+import {  SelectInput } from '../components';
 import CreatePostForm from '../components/post/CreatePostForm';
 
 export const Route = createFileRoute('/')({

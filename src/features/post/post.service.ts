@@ -1,5 +1,5 @@
 import { api } from '../../api/axios';
-import type { CreatePostDTO } from './api.post.type';
+import type { CreatePostDTO } from './api.post.types';
 
 export const PostService = {
   async createPost(data: CreatePostDTO) {
