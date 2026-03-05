@@ -9,6 +9,7 @@ interface Props {
   type?: 'button' | 'submit' | 'reset';
   action?: () => void;
   className?: string;
+  isDisabled: boolean;
 }
 
 const Button = ({
@@ -17,7 +18,8 @@ const Button = ({
   variant='default',
   type='button',
   action,
-  className
+  className,
+  isDisabled
 }: Props ) => {
   return (
     <button
@@ -32,6 +34,7 @@ const Button = ({
         },
       )}
       type={type}
+      disabled={isDisabled}
     >
       {(
         <div className="flex items-center justify-center gap-3 text-center">

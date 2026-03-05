@@ -84,7 +84,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
-        className={`flex flex-col items-center justify-center w-full min-h-[10rem] p-4 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${
+        className={`flex flex-col items-center justify-center w-full min-h-40 p-4 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${
           isDragging ? 'border-deep-teal bg-deep-teal/10' :
           isProcessing ? 'border-gray-300 bg-gray-50 cursor-not-allowed' :
           'border-dusty-olive hover:bg-dusty-olive/5'

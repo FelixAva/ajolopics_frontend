@@ -13,9 +13,7 @@ export const PostService = {
 
     // 2. Tags
     if (data.tags && data.tags.length > 0) {
-      data.tags.forEach(tagId => {
-        formData.append('tag[]', tagId.toString());
-      });
+      formData.append('tags', data.tags.join(','));
     }
 
     // 3. Media

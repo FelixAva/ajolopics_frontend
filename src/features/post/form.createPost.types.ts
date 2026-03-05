@@ -1,6 +1,14 @@
+import type { FileWithPreview } from "./post.types";
+
+export type Option = {
+  value: string;
+  label: string;
+}
+
+
 export type ICreatePostFormInput = {
   title: string;
   description: string;
-  media: File[];
-  tags: number[];
+  media: FileWithPreview[];
+  tags: Option[];
 }

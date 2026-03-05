@@ -1,10 +1,6 @@
 import Select from 'react-select';
 import type { GroupBase, Props as SelectProps } from 'react-select';
-
-type Option = {
-  value: string;
-  label: string;
-};
+import type { Option } from '../../features/post/form.createPost.types';
 
 interface CustomSelectProps extends Omit<SelectProps<Option, boolean, GroupBase<Option>>, 'options'> {
   label: string;
