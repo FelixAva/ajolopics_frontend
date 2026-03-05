@@ -85,7 +85,6 @@ function RouteComponent() {
                 <Button
                   title='Login'
                   type='submit'
-                  action={() => {}}
                 />
               )
           }

@@ -119,7 +119,6 @@ function RouteComponent() {
                 <Button
                   title='Register'
                   type='submit'
-                  action={() => {}}
                 />
               )
           }

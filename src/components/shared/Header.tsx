@@ -1,14 +1,14 @@
 import { Link, useLocation } from '@tanstack/react-router';
+import { useState } from 'react';
 import { DynamicIcon } from 'lucide-react/dynamic';
 
-import { useState } from 'react';
-
-import { Button, FiltersModal } from '../';
+import { Button, FiltersModal, CreatePostModal } from '../';
 import clsx from 'clsx';
 
 const Header = () => {
   const location = useLocation();
   const [isNavigationOpen, setIsNavigationOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const hiddenRoutes = ['/auth', '/auth/register'];
   const showButton = !hiddenRoutes.includes(location.pathname);
@@ -80,9 +80,14 @@ const Header = () => {
 
             <Button
               title='Make a Post'
-              action={ FiltersModal }
+              action={ () => setIsModalOpen(true) }
               icon='plus'
               variant='ghost'
+            />
+
+            <CreatePostModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
             />
           </>
         )}

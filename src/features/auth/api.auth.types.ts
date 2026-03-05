@@ -5,7 +5,7 @@ export interface LoginDTO {
   password: string;
 }
 
-export interface LoginResponse {
+export interface LoginResponseDTO {
   token: string;
 }
 
@@ -15,7 +15,7 @@ export interface RegisterDTO {
   password: string;
 }
 
-export interface RegisterResponse {
+export interface RegisterResponseDTO {
   name: string;
   email: string;
   id: string;
