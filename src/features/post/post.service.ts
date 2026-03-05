@@ -1,5 +1,7 @@
 import { api } from '../../api/axios';
-import type { CreatePostRequestDTO } from './api.post.types';
+import type { PaginatedResponseDTO } from '../../types/api.paginated.response.types';
+import type { CreatePostRequestDTO, GetFeedRequestDTO } from './api.post.types';
+import type { Post } from './post.types';
 
 export const PostService = {
   async createPost(data: CreatePostRequestDTO) {
@@ -27,6 +29,11 @@ export const PostService = {
       },
     });
 
+    return response.data;
+  },
+
+  async getFeed(data: GetFeedRequestDTO) {
+    const response = await api.post<PaginatedResponseDTO<Post>>('/posts/feed', data);
     return response.data;
   }
 }

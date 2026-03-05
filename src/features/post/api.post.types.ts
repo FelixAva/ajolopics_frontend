@@ -1,5 +1,7 @@
 import type { AspectRatioType } from './post.types';
 
+// * The GetFeedResponseDTO its the paginatedResponse.
+
 export interface GetFeedRequestDTO {
   page: number;
   size: number;
