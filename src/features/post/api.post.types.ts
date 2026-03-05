@@ -1,6 +1,6 @@
 import type { AspectRatioType } from './post.types';
 
-export interface GetFeedDTO {
+export interface GetFeedRequestDTO {
   page: number;
   size: number;
   search: string;
@@ -13,7 +13,7 @@ export interface FiltersSet {
   authorIds: string[];
 }
 
-export interface CreatePostDTO {
+export interface CreatePostRequestDTO {
   title: string;
   description?: string;
   tags?: number[];

@@ -1,8 +1,8 @@
 import { api } from '../../api/axios';
-import type { CreatePostDTO } from './api.post.types';
+import type { CreatePostRequestDTO } from './api.post.types';
 
 export const PostService = {
-  async createPost(data: CreatePostDTO) {
+  async createPost(data: CreatePostRequestDTO) {
     const formData = new FormData();
 
     // 1. Texts
@@ -16,6 +16,11 @@ export const PostService = {
       data.tags.forEach(tagId => {
         formData.append('tag[]', tagId.toString());
       });
+    }
+
+    // 3. Media
+    for (let i = 0; i < data.media.length; i++) {
+      formData.append('media', data.media[i]);
     }
 
     const response = await api.post('/posts', formData, {

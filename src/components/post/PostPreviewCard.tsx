@@ -1,29 +1,26 @@
-//import Button from '../shared/Button';
+import type { Post } from '../../features/post/post.types';
 
-interface Props {
-  id: string;
-  author: string;
-  title: string;
-  tags: [];
-  thumbnail: string;
-  aspect: string;
-}
+const PostPreviewCard = ( post: Post) => {
 
-const PostPreviewCard = ({
-  id,
-  author,
-  title,
-  tags,
-  thumbnail,
-  aspect,
-}: Props) => {
-  console.log(id,tags,thumbnail,aspect)
+  // const getThumbnail = () => {
+  //   post.assets.map(asset => {
+  //     asset.
+  //   })
+  // }
+
   return (
-    <div className='w-max relative' onClick={() => alert('Open detail')}>
+    <div key={post.id} className="break-inside-avoid mb-4 relative group">
       <img
-        src="https://placehold.co/200"
-        alt={`Post by ${author} - Post title ${title}`}
+        src=''
+        alt={post.id.toString()}
+        className="w-full rounded-xl object-cover bg-gray-200" // bg-gray-200 sirve de placeholder mientras carga
+        loading="lazy"
       />
+
+      {/* Overlay oscuro opcional para hover (sin el botón que pediste ignorar) */}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors rounded-xl pointer-events-none">
+      </div>
+
     </div>
   );
 };

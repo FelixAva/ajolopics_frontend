@@ -77,7 +77,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
   };
 
   return (
-    <div className={`w-full flex flex-col text-left ${className ?? ''}`}>
+    <div className={`w-full flex flex-col text-left select-none ${className ?? ''}`}>
       {label && <p className='text-lg mb-1'>{label}</p>}
 
       <label

@@ -3,8 +3,10 @@ import Input from './form/Input';
 import InputPassword from './form/InputPassword';
 import SelectInput from './form/SelectInput';
 import InputFile from './form/InputFile';
+import InputArea from './form/InputArea';
 
 // Import Post components
+import PostsMasonryGrid from './post/PostsMasonryGrid';
 import PostPreviewCard from './post/PostPreviewCard';
 import CreatePostModal from './post/CreatePostModal';
 
@@ -22,6 +24,7 @@ import AdviceModal from './modals/AdviceModal';
 
 export {
   // Export Post components
+  PostsMasonryGrid,
   PostPreviewCard,
   CreatePostModal,
 
@@ -37,6 +40,7 @@ export {
   InputPassword,
   SelectInput,
   InputFile,
+  InputArea,
 
   // Modals
   FiltersModal,
