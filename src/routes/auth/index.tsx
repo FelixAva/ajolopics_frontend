@@ -1,6 +1,7 @@
 // Libraries imports
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 // Hooks imports
 import useAuth from '../../features/auth/useAuth';
@@ -17,6 +18,8 @@ export const Route = createFileRoute('/auth/')({
 })
 
 function RouteComponent() {
+  const { t } = useTranslation('auth');
+
   const {
     register,
     handleSubmit,
@@ -33,8 +36,8 @@ function RouteComponent() {
     <div className='flex flex-1 justify-center items-center text-center'>
       <div className='flex flex-col gap-2'>
         <div>
-          <h1 className='text-2xl'>Welcome Back</h1>
-          <h2 className='text-lg font-thin'>Check the newest Art Posts</h2>
+          <h1 className='text-2xl'>{t('login.title')}</h1>
+          <h2 className='text-lg font-thin'>{t('login.subTitle')}</h2>
         </div>
 
         <form
@@ -42,27 +45,27 @@ function RouteComponent() {
           className='w-sm flex flex-col gap-3'
         >
           <Input
-            label='Email'
-            type='text'
-            placeholder='you@email.com'
+            label={t('login.form.emailInput.name')}
+            type='index'
+            placeholder={t('login.form.emailInput.placeholder')}
             {...register('email', {
-              required: 'The email is required',
+              required: t('login.form.emailInput.errors.required'),
               maxLength: {
                 value: 255,
-                message: 'The max length is of 255'
+                message: t('login.form.emailInput.maxLength')
               }
             })}
             error={ errors.email?.message }
           />
           <InputPassword
-            label='Password'
+            label={t('login.form.pwdInput.name')}
             pwdRecovery
             {...register("password",
               {
-                required: "The password is required",
+                required: t('login.form.pwdInput.errors.required'),
                 minLength: {
                   value: 8,
-                  message: "The min length is of 8"
+                  message: t('login.form.pwdInput.errors.minLength')
                 },
             })}
             error={ errors.password?.message }
@@ -83,7 +86,7 @@ function RouteComponent() {
               )
               : (
                 <Button
-                  title='Login'
+                  title={t('login.form.submitButton.title')}
                   type='submit'
                 />
               )
@@ -91,7 +94,7 @@ function RouteComponent() {
         </form>
 
         <Link to="/auth/register" className="[&.active]:font-bold]" preload="intent">
-          Don't you have an account? <span className='text-deep-teal underline'>Register</span>
+          {t('login.registerLink.text')} <span className='text-deep-teal underline'>{t('login.registerLink.path')}</span>
         </Link>
       </div>
     </div>

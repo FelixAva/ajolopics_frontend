@@ -1,10 +1,9 @@
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 import withReactContent from 'sweetalert2-react-content';
-
 import FiltersComponent from './FiltersForm';
 
-const FiltersModal = () => {
+const FiltersModal = (title: string) => {
   withReactContent(Swal).fire({
     position:'top-right',
     customClass: {
@@ -14,7 +13,7 @@ const FiltersModal = () => {
       title: '!text-left !text-2xl',
       closeButton: '!absolute !right-0'
     },
-    title: 'Filters',
+    title: title,
     html: <FiltersComponent />,
     showCloseButton: true,
     showConfirmButton: false,

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Input, Badge, Button } from '../..';
+import { Input, Badge, Button } from '..';
+import { useTranslation } from 'react-i18next';
 
 const filterTags = [
   {id: 1, title: 'Abstract'},
@@ -14,6 +15,7 @@ const filterTags = [
 ]
 
 const FiltersComponent = () => {
+  const { t } = useTranslation('post');
   const [selectedTags, setSelectedTags] = useState<number[]>([]);
 
   const toggleTag = (id: number) => {
@@ -29,14 +31,14 @@ const FiltersComponent = () => {
       <div className='flex flex-col gap-5 text-left'>
         <div>
           <Input
-            label='Search'
-            placeholder='Title, author, tag...'
+            label={t('filtersPostForm.searchInput.name')}
+            placeholder={t('filtersPostForm.searchInput.placeholder')}
             type='text'
           />
         </div>
 
         <div>
-          <p className='text-lg'>Tags</p>
+          <p className='text-lg'>{t('filtersPostForm.tagsInput.name')}</p>
 
           <div className='max-w-113.75 h-auto pt-1.5 flex flex-wrap gap-2'>
             {
@@ -55,11 +57,11 @@ const FiltersComponent = () => {
 
         <div className='flex gap-3'>
           <Input
-            label='Aspect'
+            label={t('filtersPostForm.aspectInput.name')}
             type='text'
           />
           <Input
-            label='Author'
+            label={t('filtersPostForm.authorInput.name')}
             type='text'
           />
         </div>
@@ -67,14 +69,14 @@ const FiltersComponent = () => {
 
       <div className='flex flex-col gap-2.5'>
         <Button
-          title='Clear Filters'
+          title={t('filtersPostForm.clearButton.titleDefault')}
           icon='x'
           type='reset'
           action={() => setSelectedTags([])}
           variant='inverted'
         />
         <Button
-          title='Search'
+          title={t('filtersPostForm.submitButton.titleDefault')}
           icon='search'
           type='submit'
           action={() => setSelectedTags([])}

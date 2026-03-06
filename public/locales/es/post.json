@@ -1,0 +1,78 @@
+{
+  "createPostForm": {
+    "filesInput": {
+      "name": "Fotografías",
+      "errors": {
+        "minLength": "Debes subir al menos una fotografía",
+        "maxLength": "Solo puedes subir hasta 10 fotografías"
+      }
+    },
+    "titleInput": {
+      "name": "Título",
+      "placeholder": "Atardecer en cosumel...",
+      "errors": {
+        "required": "El título es obligatorio",
+        "minLength": "El tamaño minimo es de 1",
+        "maxLength": "El tamaño maximo es de 255"
+      }
+    },
+    "descriptionInput": {
+      "name": "Descripción",
+      "placeholder": "Qué te inspiró...",
+      "errors": {
+        "maxLength": "El tamaño maximo es de 5,000"
+      }
+    },
+    "tagsInput": {
+      "name": "Etiquetas",
+      "placeholder": "Etiqueta tu post",
+      "errors": {
+        "maxLength": "Solo puedes elegir hasta 5 etiquetas"
+      }
+    },
+    "submitButton": {
+      "titleUploading": "Publicando...",
+      "titleDefault": "Publicar en Galería"
+    }
+  },
+  "createPostModal": {
+    "title": "Crear Publicación"
+  },
+  "filtersPostModal": {
+    "title": "Filtros"
+  },
+  "filtersPostForm": {
+    "searchInput": {
+      "name": "Buscar",
+      "placeholder": "Título, autor, etiqueta...",
+      "errors": {
+        "maxLength": "El tamaño maximo es de 255"
+      }
+    },
+    "tagsInput": {
+      "name": "Etiquetas",
+      "errors": {
+        "maxLength": "Solo puedes elegir hasta 5 etiquetas"
+      }
+    },
+    "aspectInput": {
+      "name": "Relación de Aspecto",
+      "errors": {
+        "maxLength": "Solo puedes elegir hasta 5 etiquetas"
+      }
+    },
+    "authorInput": {
+      "name": "Autor",
+      "errors": {
+        "maxLength": "Solo puedes elegir hasta 5 etiquetas"
+      }
+    },
+    "clearButton": {
+      "titleDefault": "Limpiar Filtros"
+    },
+    "submitButton": {
+      "titleSearching": "Buscando...",
+      "titleDefault": "Buscar"
+    }
+  }
+}

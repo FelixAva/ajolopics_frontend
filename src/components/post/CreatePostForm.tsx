@@ -3,12 +3,15 @@ import useTag from '../../features/tag/useTag';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { Input, Button, SelectInput, InputFile, InputArea } from '../';
 import type { ICreatePostFormInput } from '../../features/post/form.createPost.types';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   onClose?: () => void;
 }
 
 const CreatePostForm = ({ onClose }: Props) => {
+  const { t } = useTranslation('post');
+
   // Custom hooks
   const {
     register,
@@ -60,18 +63,18 @@ const CreatePostForm = ({ onClose }: Props) => {
         rules={{
           validate: (value) =>{
             if (value.length === 0) {
-              return 'You must upload at least one picture'
+              return t('createPostForm.filesInput.errors.minLength');
             } else if (value.length > 10) {
-              return 'You can upload up to 10 pictures'
+              return t('createPostForm.filesInput.errors.maxLength')
             }
           }
         }}
         render={({ field }) => (
           <InputFile
-            label="Gallery Images"
+            label={t('createPostForm.filesInput.name')}
             accept="image/*"
             multiple
-            error={ errors.media?.message }
+            error={errors.media?.message}
             value={field.value}
             onChange={field.onChange}
           />
@@ -79,30 +82,30 @@ const CreatePostForm = ({ onClose }: Props) => {
       />
 
       <Input
-        label='Title'
+        label={t('createPostForm.titleInput.name')}
         type='text'
-        placeholder='Miami sunset...'
+        placeholder={t('createPostForm.titleInput.placeholder')}
         {...register('title', {
-          required: 'The title is required',
+          required: t('createPostForm.titleInput.errors.required'),
           minLength: {
             value: 1,
-            message: 'The min length is of 1'
+            message: t('createPostForm.titleInput.errors.minLength')
           },
           maxLength: {
             value: 255,
-            message: 'The max length is of 255'
+            message: t('createPostForm.titleInput.errors.maxLength')
           },
         })}
         error={ errors.title?.message }
       />
 
       <InputArea
-        label='Description'
-        placeholder='What did inspired you...'
+        label={t('createPostForm.descriptionInput.name')}
+        placeholder={t('createPostForm.descriptionInput.placeholder')}
         {...register('description', {
           maxLength: {
             value: 5000,
-            message: 'The max length is 5000'
+            message: t('createPostForm.descriptionInput.errors.maxLength')
           }
         })}
       />
@@ -113,16 +116,16 @@ const CreatePostForm = ({ onClose }: Props) => {
         rules={{
           validate: (value) => {
             if(value && value.length > 5) {
-              return 'You can select up to 5 tags';
+              return t('createPostForm.tagsInput.errors.maxLength');
             }
           }
         }}
         render={({ field }) => (
           <SelectInput
             {...field}
-            label='Tags'
+            label={t('createPostForm.tagsInput.name')}
             isMulti
-            placeholder="Select tags..."
+            placeholder={t('createPostForm.tagsInput.placeholder')}
             options={tagOptions}
             value={field.value}
             onChange={field.onChange}
@@ -136,7 +139,7 @@ const CreatePostForm = ({ onClose }: Props) => {
 
       <div className="pt-2">
         <Button
-          title={createPost.isPending ? 'Uploading...' : 'Publish to Gallery'}
+          title={createPost.isPending ? t('createPostForm.submitButton.titleUploading') : t('createPostForm.submitButton.titleDefault')}
           type='submit'
           icon={createPost.isPending ? 'loader-2' : 'upload'}
           className="w-full bg-[#4A6E5A] hover:bg-[#3D5B4A] text-white disabled:opacity-50"
