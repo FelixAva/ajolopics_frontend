@@ -10,7 +10,7 @@ const Header = () => {
   const location = useLocation();
   const [isNavigationOpen, setIsNavigationOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { t } = useTranslation('post');
+  const { t } = useTranslation('header');
 
   const hiddenRoutes = ['/auth', '/auth/register'];
   const showButton = !hiddenRoutes.includes(location.pathname);
@@ -18,13 +18,13 @@ const Header = () => {
   const onMenuClick = () => setIsNavigationOpen(!isNavigationOpen);
 
   return (
-    <div className="w-full h-auto px-5 py-3 items-center md:w-auto md:h-auto md:flex md:justify-between md:px-10">
+    <div className="w-full h-auto px-5 py-3 items-center md:w-auto md:h-auto md:flex md:justify-between lg:px-10">
       <div className='w-full h-auto flex items-center justify-between md:w-auto md:inline'>
         <div>
           <Link to="/" className="[&.active]:font-bold] text-xl" preload="intent">
             Ajolopics
           </Link>
-          <span className='ml-2 text-smoky-rose text-[14px] font-thin'>Virtual Gallery</span>
+          <span className='ml-2 text-smoky-rose text-[14px] font-thin'>{t('subTitle')}</span>
         </div>
 
         <div className='flex items-center md:inline'>
@@ -68,7 +68,7 @@ const Header = () => {
 
       <nav
         className={clsx(
-          "flex flex-col gap-3 overflow-hidden md:mt-0 md:flex-row md:items-center transition-all duration-500 ease-in-out",
+          "flex flex-col lg:gap-3 overflow-hidden md:mt-0 md:flex-row md:items-center transition-all duration-500 ease-in-out",
           isNavigationOpen
             ? "mt-4 max-h-80opacity-100 flex flex-col justify-around"
             : "max-h-0 opacity-0 md:opacity-100 md:overflow-auto md:max-h-80"
@@ -78,20 +78,20 @@ const Header = () => {
           icon='globe'
           action={() => alert('Choose language')}
           variant='none'
-          className='hidden sm:inline'
+          className='hidden md:inline'
         />
 
         { showButton && (
           <>
             <Button
-              title='Filters'
-              action={ () => FiltersModal(t('filtersPostModal.title')) }
+              title={t('filters')}
+              action={ () => FiltersModal(t('filters')) }
               icon='sliders-horizontal'
               variant='ghost'
             />
 
             <Button
-              title='Make a Post'
+              title={t('createPost')}
               action={ () => setIsModalOpen(true) }
               icon='plus'
               variant='ghost'
@@ -111,7 +111,7 @@ const Header = () => {
         >
           <div className="flex items-center justify-center gap-3 text-center">
             <DynamicIcon name='log-in' size={22} />
-            <p>Login</p>
+            <p>{t('loginButton')}</p>
           </div>
         </Link>
       </nav>
