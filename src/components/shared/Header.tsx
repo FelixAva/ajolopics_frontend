@@ -16,8 +16,8 @@ const Header = () => {
   const onMenuClick = () => setIsNavigationOpen(!isNavigationOpen);
 
   return (
-    <div className="w-full h-auto px-5 py-3 items-center sm:w-auto sm:h-auto sm:flex sm:justify-between md:px-10">
-      <div className='w-full h-auto flex items-center justify-between sm:w-auto sm:inline'>
+    <div className="w-full h-auto px-5 py-3 items-center md:w-auto md:h-auto md:flex md:justify-between md:px-10">
+      <div className='w-full h-auto flex items-center justify-between md:w-auto md:inline'>
         <div>
           <Link to="/" className="[&.active]:font-bold] text-xl" preload="intent">
             Ajolopics
@@ -25,48 +25,58 @@ const Header = () => {
           <span className='ml-2 text-smoky-rose text-[14px] font-thin'>Virtual Gallery</span>
         </div>
 
-        <div className='flex gap-2 items-center'>
-          <button
-            onClick={onMenuClick}
-            className="w-12.5 h-12.5 flex items-center justify-center bg-deep-teal-100 rounded-lg sm:hidden"
-          >
-            <div className="relative w-7 h-7 flex items-center justify-center">
-              <span
-                className={clsx(
-                  "absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300",
-                  isNavigationOpen ? "rotate-45 translate-y-0" : "-translate-y-2"
-                )}
-              />
-              <span
-                className={clsx(
-                  "absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300",
-                  isNavigationOpen ? "opacity-0" : "opacity-100"
-                )}
-              />
-              <span
-                className={clsx(
-                  "absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300",
-                  isNavigationOpen ? "-rotate-45 translate-y-0" : "translate-y-2"
-                )}
-              />
-            </div>
-          </button>
+        <div className='flex items-center md:inline'>
+          <Button
+            icon='globe'
+            action={() => alert('Choose language')}
+            variant='none'
+            className='inline md:hidden'
+          />
+
+          <div className='flex gap-2 items-center'>
+            <button
+              onClick={onMenuClick}
+              className="w-12.5 h-12.5 flex items-center justify-center bg-deep-teal-100 rounded-lg md:hidden"
+            >
+              <div className="relative w-7 h-7 flex items-center justify-center">
+                <span
+                  className={clsx(
+                    "absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300",
+                    isNavigationOpen ? "rotate-45 translate-y-0" : "-translate-y-2"
+                  )}
+                />
+                <span
+                  className={clsx(
+                    "absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300",
+                    isNavigationOpen ? "opacity-0" : "opacity-100"
+                  )}
+                />
+                <span
+                  className={clsx(
+                    "absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300",
+                    isNavigationOpen ? "-rotate-45 translate-y-0" : "translate-y-2"
+                  )}
+                />
+              </div>
+            </button>
+          </div>
         </div>
 
       </div>
 
       <nav
         className={clsx(
-          "flex flex-col gap-3 overflow-hidden sm:mt-0 sm:flex-row sm:items-center transition-all duration-500 ease-in-out",
+          "flex flex-col gap-3 overflow-hidden md:mt-0 md:flex-row md:items-center transition-all duration-500 ease-in-out",
           isNavigationOpen
             ? "mt-4 max-h-80opacity-100 flex flex-col justify-around"
-            : "max-h-0 opacity-0 sm:opacity-100 sm:overflow-auto sm:max-h-80"
+            : "max-h-0 opacity-0 md:opacity-100 md:overflow-auto md:max-h-80"
         )}
       >
         <Button
           icon='globe'
           action={() => alert('Choose language')}
           variant='none'
+          className='hidden sm:inline'
         />
 
         { showButton && (
