@@ -1,4 +1,4 @@
-import type { User } from '../auth/user.types';
+import type { User } from '../user/user.types';
 import type { Tag } from '../tag/tag.type';
 
 export type AspectRatioType = "SQUARE" | "LANDSCAPE" | "PORTRAIT";

@@ -9,7 +9,7 @@ import type {
   LoginResponseDTO,
   RegisterDTO,
   RegisterResponseDTO
-} from './api.auth.types';
+} from './auth.api.types';
 
 const useAuth = () => {
   // Get the setToken function from Zustand

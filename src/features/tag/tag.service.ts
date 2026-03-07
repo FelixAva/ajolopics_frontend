@@ -1,5 +1,5 @@
 import { api } from '../../api/axios';
-import type { PostTagResponseDTO, GetTagResponseDTO, PostTagDTO } from './api.tag.types';
+import type { PostTagResponseDTO, GetTagResponseDTO, PostTagDTO } from './tag.api.types';
 
 export const TagService = {
   async createTag(data: PostTagDTO) {

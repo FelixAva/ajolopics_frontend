@@ -1,6 +1,6 @@
-// src/components/modals/CreatePostModal.tsx
 import { DynamicIcon } from 'lucide-react/dynamic';
 import CreatePostForm from './CreatePostForm'; // Ajusta la ruta si es necesario
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   isOpen: boolean;
@@ -8,6 +8,8 @@ interface Props {
 }
 
 const CreatePostModal = ({ isOpen, onClose }: Props) => {
+  const { t } = useTranslation('post');
+
   if (!isOpen) return null;
 
   return (
@@ -19,7 +21,7 @@ const CreatePostModal = ({ isOpen, onClose }: Props) => {
 
         {/* Cabecera */}
         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-          <h2 className="text-2xl font-semibold text-gray-800">Preparing Artwork</h2>
+          <h2 className="text-2xl font-semibold text-gray-800">{t('createPostModal.title')}</h2>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-700 transition-colors"

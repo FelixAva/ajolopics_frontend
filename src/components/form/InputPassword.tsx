@@ -1,5 +1,6 @@
 import { forwardRef, useState } from 'react';
 import Button from '../shared/Button';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   label: string;
@@ -11,6 +12,8 @@ const InputPassword = forwardRef<HTMLInputElement, Props> (function Input (
   { label, error, pwdRecovery, ...rest },
   ref
 ) {
+  const { t } = useTranslation('components');
+
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const changeVisible = () => {
@@ -24,7 +27,7 @@ const InputPassword = forwardRef<HTMLInputElement, Props> (function Input (
       {
         pwdRecovery && (
           <div className='absolute right-0'>
-            <span>Forgot password?</span>
+            <span>{t('inputPwd.forgotPassword')}</span>
           </div>
         )
       }

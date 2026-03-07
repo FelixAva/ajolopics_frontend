@@ -3,7 +3,7 @@ import type {
   LoginResponseDTO,
   RegisterDTO,
   RegisterResponseDTO
-} from './api.auth.types';
+} from './auth.api.types';
 import { api } from '../../api/axios';
 
 export const AuthService = {

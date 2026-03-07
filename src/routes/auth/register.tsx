@@ -1,23 +1,24 @@
 // Libraries imports
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 // Hooks imports
 import useAuth from '../../features/auth/useAuth';
 
 // Types and Interfaces imports
 import type { SubmitHandler } from 'react-hook-form';
-import type { IRegisterFormInput } from '../../features/auth/form.auth.types';
+import type { IRegisterFormInput } from '../../features/auth/auth.form.types';
 
 // Components imports
 import { Input, Button, Spinner, InputPassword } from '../../components';
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,
-})
-
+});
 
 function RouteComponent() {
+  const { t } = useTranslation('auth');
   const {
     register,
     handleSubmit,
@@ -32,71 +33,71 @@ function RouteComponent() {
 
   return (
     <div className='flex flex-1 justify-center items-center text-center'>
-      <div className='flex flex-col gap-2'>
+      <div className='w-full md:w-auto flex flex-col gap-2'>
         <div>
-          <h1 className='text-2xl'>Nice to meet you</h1>
-          <h2 className='text-lg font-thin'>Register to access all the content</h2>
+          <h1 className='text-2xl'>{t('register.title')}</h1>
+          <h2 className='text-lg font-thin'>{t('register.subTitle')}</h2>
         </div>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='w-sm flex flex-col gap-3'
+          className='md:w-sm flex flex-col gap-3'
         >
           <Input
-            label='Name'
+            label={t('register.form.nameInput.name')}
             type='text'
-            placeholder='John Doe'
+            placeholder={t('register.form.nameInput.placeholder')}
             {...register('name', {
-              required: 'The name is required',
+              required: t('register.form.nameInput.errors.required'),
               minLength: {
                 value: 2,
-                message: 'The min length is of 2'
+                message: t('register.form.nameInput.errors.minLength')
               },
               maxLength: {
                 value: 100,
-                message: 'The max length is of 100'
+                message: t('register.form.nameInput.errors.maxLength')
               },
             })}
             error={ errors.name?.message }
           />
           <Input
-            label='Email'
+            label={t('register.form.emailInput.name')}
             type='text'
-            placeholder='you@email.com'
+            placeholder={t('register.form.emailInput.placeholder')}
             {...register('email', {
-              required: 'The email is required',
+              required: t('register.form.emailInput.errors.required'),
               maxLength: {
                 value: 255,
-                message: 'The max length is of 255'
+                message: t('register.form.emailInput.errors.maxLength')
               },
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: 'This is not a valid email format'
+                message: t('register.form.emailInput.errors.pattern')
               }
             })}
             error={ errors.email?.message }
           />
           <InputPassword
-            label='Password'
+            label={t('register.form.pwdInput.name')}
             {...register("password",
               {
-                required: "The password is required",
+                required: t('register.form.pwdInput.errors.required'),
                 minLength: {
                   value: 8,
-                  message: "The min length is of 8"
+                  message: t('register.form.pwdInput.errors.minLength')
                 },
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-                  message: "Password must contain at least one uppercase letter, one lowercase letter, and one number"
+                  message: t('register.form.pwdInput.errors.pattern')
                 }
             })}
             error={ errors.password?.message }
           />
           <InputPassword
-            label='Confirm password'
+            label={t('register.form.pwdConfirmInput.name')}
             {...register("confPassword",
               {
-                required: "The password is required",
+                required: t('register.form.pwdConfirmInput.errors.required'),
                 // ! Same as pwd
             })}
             error={ errors.confPassword?.message }
@@ -117,7 +118,7 @@ function RouteComponent() {
               )
               : (
                 <Button
-                  title='Register'
+                  title={t('register.form.submitButton.title')}
                   type='submit'
                 />
               )
@@ -125,7 +126,7 @@ function RouteComponent() {
         </form>
 
         <Link to="/auth" className="[&.active]:font-bold]" preload="intent">
-          Do you have an account? <span className='text-deep-teal underline'>Login</span>
+          {t('register.loginLink.text')} <span className='text-deep-teal underline'>{t('register.loginLink.path')}</span>
         </Link>
       </div>
     </div>

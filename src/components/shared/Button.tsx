@@ -9,7 +9,7 @@ interface Props {
   type?: 'button' | 'submit' | 'reset';
   action?: () => void;
   className?: string;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }
 
 const Button = ({

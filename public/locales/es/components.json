@@ -1,0 +1,11 @@
+{
+  "inputFile": {
+    "placeholder": "Arrastra y suelta o presiona para subir",
+    "processError": "Error al procesar",
+    "remove": "Presiona para elminiar",
+    "addMoreFiles": "+ Presiona aquí para añadir más fotografías"
+  },
+  "inputPwd": {
+    "forgotPassword": "¿Olvidaste tu contraseña?"
+  }
+}
