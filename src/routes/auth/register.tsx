@@ -65,14 +65,14 @@ function RouteComponent() {
             type='text'
             placeholder={t('register.form.emailInput.placeholder')}
             {...register('email', {
-              required: t('register.form.nameInput.errors.minLength'),
+              required: t('register.form.emailInput.errors.required'),
               maxLength: {
                 value: 255,
-                message: t('register.form.nameInput.errors.maxLength')
+                message: t('register.form.emailInput.errors.maxLength')
               },
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: t('register.form.nameInput.errors.pattern')
+                message: t('register.form.emailInput.errors.pattern')
               }
             })}
             error={ errors.email?.message }

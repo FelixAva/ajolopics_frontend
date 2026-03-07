@@ -53,6 +53,10 @@ function RouteComponent() {
               maxLength: {
                 value: 255,
                 message: t('login.form.emailInput.maxLength')
+              },
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: t('login.form.emailInput.errors.pattern')
               }
             })}
             error={ errors.email?.message }
