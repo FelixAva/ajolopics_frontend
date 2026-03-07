@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { AUTH_TOKEN_KEY } from '../../constants/auth.constants';
-import type { User } from './user.types';
+import type { User } from '../user/user.types';
 
 type AuthState = {
   token: string | null;

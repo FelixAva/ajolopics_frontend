@@ -1,9 +1,11 @@
 import usePost from '../../features/post/usePost.ts';
 import useTag from '../../features/tag/useTag.ts';
+import useUser from '../../features/user/useUser.ts';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { Input, Button, SelectInput } from '..';
 import { useTranslation } from 'react-i18next';
 import type { IGetFeedFiltersFormInput } from '../../features/post/post.forms.types.ts';
+import type { User } from '../../features/user/user.types.ts';
 
 interface Props {
   onClose?: () => void;
@@ -28,6 +30,7 @@ const FiltersComponent = ({ onClose }: Props) => {
 
   const { getPostFeed } = usePost();
   const { getTags } = useTag();
+  const { getUser } = useUser();
 
   const aspectRatioOptions = [
   { value: "SQUARE", label: "SQUARE" }, // El value es para el backend, el label para el usuario
@@ -40,12 +43,17 @@ const FiltersComponent = ({ onClose }: Props) => {
     label: tag.name,
   })) || []; // Repeat it with authors
 
+  const userList = getUser.data?.filter((user: User) => user.role === "ADMIN");
+
+  const creatorOptions = userList?.map((user: User) => ({
+    value: user.id,
+    label: user.name
+  })) || [];
+
   const onSubmit: SubmitHandler<IGetFeedFiltersFormInput> = async(data) => {
     const tagIds = data.tags ?  data.tags.map(tag => Number(tag.value)): null;
     const aspect = data.aspectRatio ? [data.aspectRatio.value] : null;
     const author = data.authors ? data.authors.map(author => author.value) : null;
-
-    debugger;
 
     const dataFormat = {
       page: 1,
@@ -57,15 +65,7 @@ const FiltersComponent = ({ onClose }: Props) => {
       }
     };
 
-    getPostFeed.mutate(dataFormat)
-
-    // const newData: GetFeedRequestDTO = {
-    //   filters: {
-    //     tagIds: tagIds,
-    //     aspectRatio: data.aspectRatio.label,
-    //     authorIds: data.authors
-    //   }
-    // }
+    getPostFeed.mutate(dataFormat);
   }
 
   return (
@@ -91,7 +91,7 @@ const FiltersComponent = ({ onClose }: Props) => {
         control={control}
         rules={{
           validate: (value) => {
-            if(value && value.length > 5) {
+            if(value && value.length > 10) {
               return t('filtersPostForm.tagsInput.errors.maxLength');
             }
           }
@@ -112,50 +112,47 @@ const FiltersComponent = ({ onClose }: Props) => {
         )}
       />
 
-      <div className='flex gap-3'>
-        <Controller
-          name='aspectRatio'
-          control={control}
-          render={({ field }) => (
-            <SelectInput
-              {...field}
-              label={t('filtersPostForm.aspectInput.name')}
-              placeholder={t('filtersPostForm.aspectInput.placeholder')}
-              options={aspectRatioOptions}
-              value={field.value}
-              onChange={field.onChange}
-              isLoading={getTags.isLoading}
-              isDisabled={getTags.isLoading || getTags.isError}
-              error={ errors.aspectRatio?.message }
-            />
-          )}
-        />
-        <Controller
-          name='authors'
-          control={control}
-          rules={{
-            validate: (value) => {
-              if(value && value.length > 5) {
-                return t('filtersPostForm.authorInput.errors.maxLength');
-              }
+      <Controller
+        name='authors'
+        control={control}
+        rules={{
+          validate: (value) => {
+            if(value && value.length > 5) {
+              return t('filtersPostForm.authorInput.errors.maxLength');
             }
-          }}
-          render={({ field }) => (
-            <SelectInput
-              {...field}
-              label={t('filtersPostForm.authorInput.name')}
-              isMulti
-              placeholder={t('filtersPostForm.authorInput.placeholder')}
-              options={tagOptions}
-              value={field.value}
-              onChange={field.onChange}
-              isLoading={getTags.isLoading}
-              isDisabled={getTags.isLoading || getTags.isError}
-              error={ errors.authors?.message }
-            />
-          )}
-        />
-      </div>
+          }
+        }}
+        render={({ field }) => (
+          <SelectInput
+            {...field}
+            label={t('filtersPostForm.authorInput.name')}
+            isMulti
+            placeholder={t('filtersPostForm.authorInput.placeholder')}
+            options={creatorOptions}
+            value={field.value}
+            onChange={field.onChange}
+            isLoading={getUser.isLoading}
+            isDisabled={getUser.isLoading || getUser.isError}
+            error={ errors.authors?.message }
+          />
+        )}
+      />
+
+      <Controller
+        name='aspectRatio'
+        control={control}
+        render={({ field }) => (
+          <SelectInput
+            {...field}
+            label={t('filtersPostForm.aspectInput.name')}
+            placeholder={t('filtersPostForm.aspectInput.placeholder')}
+            options={aspectRatioOptions}
+            value={field.value}
+            onChange={field.onChange}
+            error={ errors.aspectRatio?.message }
+          />
+        )}
+      />
 
       <div className='flex flex-col gap-2.5'>
         <Button

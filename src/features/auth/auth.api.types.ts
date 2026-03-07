@@ -1,4 +1,4 @@
-import type { UserRole } from './user.types';
+import type { UserRole } from '../user/user.types';
 
 export interface LoginDTO {
   email: string;

@@ -1,6 +1,6 @@
 import { api } from '../../api/axios';
 import type { PaginatedResponseDTO } from '../../types/api.paginated.response.types';
-import type { CreatePostRequestDTO, GetFeedRequestDTO } from './api.post.types';
+import type { CreatePostRequestDTO, GetFeedRequestDTO } from './post.api.types';
 import type { Post } from './post.types';
 
 export const PostService = {
