@@ -1,5 +1,5 @@
 import { DynamicIcon } from 'lucide-react/dynamic';
-import FiltersComponent from './FiltersForm';
+import FiltersForm from './FiltersForm';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
@@ -7,7 +7,10 @@ interface Props {
   onClose: () => void;
 }
 
-const FiltersModal = ({ isOpen, onClose }: Props) => {
+const FiltersModal = ({
+  isOpen,
+  onClose,
+}: Props) => {
   const { t } = useTranslation('post');
 
   if (!isOpen) return null;
@@ -26,7 +29,9 @@ const FiltersModal = ({ isOpen, onClose }: Props) => {
         </div>
 
         <div className="p-6 overflow-y-auto max-h-[80vh]">
-          <FiltersComponent />
+          <FiltersForm
+            onClose={onClose}
+          />
         </div>
       </div>
     </div>
@@ -34,10 +39,3 @@ const FiltersModal = ({ isOpen, onClose }: Props) => {
 }
 
 export default FiltersModal;
-// customClass: {
-//       container: '!p-0',
-//       htmlContainer: '!flex !flex-col !flex-1 !h-screen',
-//       popup: '!w-full !h-screen !flex !flex-col !flex-1 !rounded-none md:!w-auto',
-//       title: '!text-left !text-2xl',
-//       closeButton: '!absolute !right-0'
-//     },

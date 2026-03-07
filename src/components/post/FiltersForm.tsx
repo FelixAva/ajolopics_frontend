@@ -1,4 +1,3 @@
-import usePost from '../../features/post/usePost.ts';
 import useTag from '../../features/tag/useTag.ts';
 import useUser from '../../features/user/useUser.ts';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
@@ -6,36 +5,39 @@ import { Input, Button, SelectInput } from '..';
 import { useTranslation } from 'react-i18next';
 import type { IGetFeedFiltersFormInput } from '../../features/post/post.forms.types.ts';
 import type { User } from '../../features/user/user.types.ts';
+import { useNavigate } from '@tanstack/react-router';
+import { Route } from '../../routes/index';
 
 interface Props {
   onClose?: () => void;
 }
 
-const FiltersComponent = ({ onClose }: Props) => {
+const FiltersForm = ({ onClose }: Props) => {
   const { t } = useTranslation('post');
+  const navigate = useNavigate({ from: Route.fullPath });
 
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors }
   } = useForm<IGetFeedFiltersFormInput>({
     defaultValues: {
-      search: null,
-      tags: null,
-      aspectRatio: null,
-      authors: null
+      search: undefined,
+      tags: undefined,
+      aspectRatio: undefined,
+      authors: undefined
     }
   });
 
-  const { getPostFeed } = usePost();
   const { getTags } = useTag();
   const { getUser } = useUser();
 
   const aspectRatioOptions = [
-  { value: "SQUARE", label: "SQUARE" }, // El value es para el backend, el label para el usuario
-  { value: "LANDSCAPE", label: "LANDSCAPE" },
-  { value: "PORTRAIT", label: "PORTRAIT" },
+    { value: "LANDSCAPE", label: t('filtersPostForm.aspectOptions.landscape') },
+    { value: "PORTRAIT", label: t('filtersPostForm.aspectOptions.portrait') },
+    { value: "SQUARE", label: t('filtersPostForm.aspectOptions.square') }
   ];
 
   const tagOptions = getTags.data?.map(tag => ({
@@ -43,7 +45,7 @@ const FiltersComponent = ({ onClose }: Props) => {
     label: tag.name,
   })) || []; // Repeat it with authors
 
-  const userList = getUser.data?.filter((user: User) => user.role === "ADMIN");
+  const userList = getUser.data?.filter((user: User) => user.role === "CREATOR");
 
   const creatorOptions = userList?.map((user: User) => ({
     value: user.id,
@@ -51,22 +53,40 @@ const FiltersComponent = ({ onClose }: Props) => {
   })) || [];
 
   const onSubmit: SubmitHandler<IGetFeedFiltersFormInput> = async(data) => {
-    const tagIds = data.tags ?  data.tags.map(tag => Number(tag.value)): null;
-    const aspect = data.aspectRatio ? [data.aspectRatio.value] : null;
-    const author = data.authors ? data.authors.map(author => author.value) : null;
 
-    const dataFormat = {
-      page: 1,
-      size: 20,
-      filters: {
-        tagIds: tagIds,
-        aspectRatio: aspect,
-        authorIds: author
-      }
-    };
+    const tagsString = data.tags?.length ?  data.tags.map(tag => tag.value).join(','): undefined;
+    const authorsString = data.authors?.length ? data.authors.map(author => author.value).join(',') : undefined;
+    const aspectString = data.aspectRatio ? data.aspectRatio.value : undefined;
+    const searchString = data.search ? data.search : undefined;
 
-    getPostFeed.mutate(dataFormat);
-  }
+    navigate({
+      search: (prev) => ({
+        ...prev,
+        tags: tagsString,
+        authors: authorsString,
+        aspectRatio: aspectString,
+        search: searchString,
+      })
+    });
+
+    if (onClose) {
+      onClose();
+    }
+  };
+
+  const handleClear = () => {
+    reset();
+
+    navigate({
+      search: (prev) => ({
+        ...prev,
+        tags: undefined,
+        authors: undefined,
+        aspectRatio: undefined,
+        search: undefined
+      })
+    })
+  };
 
   return (
     <form
@@ -158,8 +178,8 @@ const FiltersComponent = ({ onClose }: Props) => {
         <Button
           title={t('filtersPostForm.clearButton.titleDefault')}
           icon='x'
-          type='reset'
-          action={() => console.log('hola')}
+          type='button'
+          action={handleClear}
           variant='inverted'
         />
         <Button
@@ -172,4 +192,4 @@ const FiltersComponent = ({ onClose }: Props) => {
   );
 };
 
-export default FiltersComponent;
+export default FiltersForm;

@@ -3,14 +3,14 @@
 export interface GetFeedRequestDTO {
   page?: number;
   size?: number;
-  search?: string | null;
+  search?: string | undefined;
   filters?: FiltersSet;
 }
 
 export interface FiltersSet {
-  tagIds: number[] | null;
-  aspectRatio: string[] | null;
-  authorIds: string[] | null;
+  tagIds: number[] | undefined;
+  aspectRatio: string[] | undefined;
+  authorIds: string[] | undefined;
 }
 
 export interface CreatePostRequestDTO {

@@ -42,6 +42,11 @@
     "title": "Filtros"
   },
   "filtersPostForm": {
+    "aspectOptions": {
+      "landscape": "HORIZONTAL",
+      "portrait": "VERTICAL",
+      "square": "CUADRADO"
+    },
     "searchInput": {
       "name": "Buscar",
       "placeholder": "Título, autor, etiqueta...",

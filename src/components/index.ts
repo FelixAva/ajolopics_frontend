@@ -19,7 +19,7 @@ import { imageCompressor } from './shared/imageCompressor.canvas';
 
 // Import Modals components
 import FiltersModal from './post/FiltersModal'
-import FiltersComponent from './post/FiltersForm'
+import FiltersForm from './post/FiltersForm'
 import AdviceModal from './modals/AdviceModal';
 
 export {
@@ -44,6 +44,6 @@ export {
 
   // Modals
   FiltersModal,
-  FiltersComponent,
+  FiltersForm as FiltersComponent,
   AdviceModal,
 }
