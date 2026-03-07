@@ -3,6 +3,7 @@ import { DynamicIcon } from 'lucide-react/dynamic';
 import { imageCompressor } from '../';
 import type { InputHTMLAttributes, ChangeEvent, DragEvent, MouseEvent } from 'react';
 import type { FileWithPreview } from '../../features/post/post.types';
+import { useTranslation } from 'react-i18next';
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'> {
   label?: string;
@@ -15,6 +16,8 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
   { label, error, className, value = [], onChange, ...rest },
   ref
 ) {
+  const { t } = useTranslation('components');
+
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -30,7 +33,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
       // Emitimos el nuevo valor al componente padre
       onChange([...value, ...processed]);
     } catch (error) {
-      console.error("Error al procesar miniaturas:", error);
+      console.error(t('inputFile.processError'), error);
     } finally {
       setIsProcessing(false);
     }
@@ -98,7 +101,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
         ) : value.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-6 text-dusty-olive">
             <DynamicIcon name="upload" size={32} className={`mb-3 transition-transform ${isDragging ? 'scale-110 text-deep-teal' : ''}`} />
-            <p className="text-lg font-medium">Drag and drop or click to upload</p>
+            <p className="text-lg font-medium">{t('inputFile.placeholder')}</p>
           </div>
         ) : (
           <div className="w-full flex flex-col items-center gap-4">
@@ -108,7 +111,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
                   key={index}
                   data-index={index}
                   className="relative aspect-square rounded-lg overflow-hidden group border border-gray-200 shadow-sm cursor-pointer bg-gray-100"
-                  title="Click to remove"
+                  title={t('inputFile.remove')}
                 >
                   <img src={fileObj.previewUrl} alt={`preview-${index}`} className="w-full h-full object-cover pointer-events-none" />
                   <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/40 flex items-center justify-center transition-all pointer-events-none">
@@ -117,7 +120,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
                 </div>
               ))}
             </div>
-            <p className="text-sm font-medium text-dusty-olive hover:text-deep-teal transition-colors">+ Click here to add more photos</p>
+            <p className="text-sm font-medium text-dusty-olive hover:text-deep-teal transition-colors">{t('inputFile.addMoreFiles')}</p>
           </div>
         )}
 
