@@ -23,14 +23,11 @@ export const Route = createFileRoute('/')({
 })
 
 function RouteComponent() {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // ! Translation
 
   return (
-      <div className='flex-1'>
-        <h1 className='text-3xl text-center text-black'>Welcome to the virtual gallery</h1>
-
+      <div className='flex-1 mt-5 lg:mt-10'>
         <PostsMasonryGrid />
-        {/* <PostPreviewCard /> */}
       </div>
     );
 }

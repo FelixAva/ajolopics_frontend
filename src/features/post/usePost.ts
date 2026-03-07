@@ -11,7 +11,7 @@ const usePost = (feedBodyParameters: GetFeedRequestDTO) => {
   const createPost = useMutation<Post, AxiosError<ErrorDTO>, CreatePostRequestDTO>({
     mutationFn: (data: CreatePostRequestDTO) => PostService.createPost(data),
     onSuccess: () => {
-      alert('Post created successfully');
+      alert('Post created successfully'); // ! Replace with a toast
       queryClient.invalidateQueries({ queryKey: ['feed'] });
     },
     onError: (error) => {

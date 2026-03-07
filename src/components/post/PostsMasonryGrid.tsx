@@ -35,7 +35,7 @@ const PostsMasonryGrid = () => {
     >
       {
         getPostFeed.isLoading ? (
-          <p>Cargando galería...</p>
+          <p>Cargando galería...</p> // ! Translation
         ) :
         getPostFeed.data?.items.map(post => (
           <PostPreviewCard key={`${post.author}-${post.id}`} {...post} />

@@ -8,7 +8,7 @@ const useTag = () => {
   const createTag = useMutation<PostTagResponseDTO, AxiosError<ErrorDTO>, PostTagDTO>({
     mutationFn: (data: PostTagDTO) => TagService.createTag(data),
     onSuccess: () => {
-      alert('Tag created');
+      alert('Tag created'); // ! Replace with a toast
     },
     onError: (error) => {
       console.error(error);
