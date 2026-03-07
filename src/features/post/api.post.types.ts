@@ -1,18 +1,16 @@
-import type { AspectRatioType } from './post.types';
-
 // * The GetFeedResponseDTO its the paginatedResponse.
 
 export interface GetFeedRequestDTO {
-  page: number;
-  size: number;
-  search: string;
-  filters: FiltersSet;
+  page?: number;
+  size?: number;
+  search?: string | null;
+  filters?: FiltersSet;
 }
 
 export interface FiltersSet {
-  tagIds: number[];
-  aspectRatio: AspectRatioType;
-  authorIds: string[];
+  tagIds: number[] | null;
+  aspectRatio: string[] | null;
+  authorIds: string[] | null;
 }
 
 export interface CreatePostRequestDTO {

@@ -8,7 +8,7 @@ import useAuth from '../../features/auth/useAuth';
 
 // Types and Interfaces imports
 import type { SubmitHandler } from 'react-hook-form';
-import type { IRegisterFormInput } from '../../features/auth/form.auth.types';
+import type { IRegisterFormInput } from '../../features/auth/auth.form.types';
 
 // Components imports
 import { Input, Button, Spinner, InputPassword } from '../../components';
@@ -33,7 +33,7 @@ function RouteComponent() {
 
   return (
     <div className='flex flex-1 justify-center items-center text-center'>
-      <div className='flex flex-col gap-2'>
+      <div className='w-full md:w-auto flex flex-col gap-2'>
         <div>
           <h1 className='text-2xl'>{t('register.title')}</h1>
           <h2 className='text-lg font-thin'>{t('register.subTitle')}</h2>
@@ -41,7 +41,7 @@ function RouteComponent() {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='w-sm flex flex-col gap-3'
+          className='md:w-sm flex flex-col gap-3'
         >
           <Input
             label={t('register.form.nameInput.name')}

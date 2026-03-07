@@ -1,23 +1,43 @@
-import Swal from 'sweetalert2';
-import 'sweetalert2/src/sweetalert2.scss';
-import withReactContent from 'sweetalert2-react-content';
+import { DynamicIcon } from 'lucide-react/dynamic';
 import FiltersComponent from './FiltersForm';
+import { useTranslation } from 'react-i18next';
 
-const FiltersModal = (title: string) => {
-  withReactContent(Swal).fire({
-    position:'top-right',
-    customClass: {
-      container: '!p-0',
-      htmlContainer: '!flex !flex-col !flex-1 !h-screen',
-      popup: '!w-full !h-screen !flex !flex-col !flex-1 !rounded-none md:!w-auto',
-      title: '!text-left !text-2xl',
-      closeButton: '!absolute !right-0'
-    },
-    title: title,
-    html: <FiltersComponent />,
-    showCloseButton: true,
-    showConfirmButton: false,
-  });
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const FiltersModal = ({ isOpen, onClose }: Props) => {
+  const { t } = useTranslation('post');
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex flex-col h-screen items-end justify-start bg-black/60 backdrop-blur-sm p-0">
+      <div className="bg-white w-full max-w-lg flex flex-1 flex-col shadow-2xl overflow-hidden">
+        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+          <h2 className="text-2xl font-semibold text-gray-800">{t('filtersPostModal.title')}</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-700 transition-colors"
+          >
+            <DynamicIcon name="x" size={24} />
+          </button>
+        </div>
+
+        <div className="p-6 overflow-y-auto max-h-[80vh]">
+          <FiltersComponent />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default FiltersModal;
+// customClass: {
+//       container: '!p-0',
+//       htmlContainer: '!flex !flex-col !flex-1 !h-screen',
+//       popup: '!w-full !h-screen !flex !flex-col !flex-1 !rounded-none md:!w-auto',
+//       title: '!text-left !text-2xl',
+//       closeButton: '!absolute !right-0'
+//     },

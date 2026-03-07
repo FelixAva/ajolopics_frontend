@@ -51,18 +51,21 @@
     },
     "tagsInput": {
       "name": "Etiquetas",
+      "placeholder": "Filtra por etiquetas",
       "errors": {
         "maxLength": "Solo puedes elegir hasta 5 etiquetas"
       }
     },
     "aspectInput": {
       "name": "Relación de Aspecto",
+      "placeholder": "Filtra por aspecto",
       "errors": {
         "maxLength": "Solo puedes elegir hasta 5 etiquetas"
       }
     },
     "authorInput": {
       "name": "Autor",
+      "placeholder": "Filtra por autor",
       "errors": {
         "maxLength": "Solo puedes elegir hasta 5 etiquetas"
       }

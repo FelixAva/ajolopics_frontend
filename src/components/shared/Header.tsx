@@ -9,7 +9,8 @@ import clsx from 'clsx';
 const Header = () => {
   const location = useLocation();
   const [isNavigationOpen, setIsNavigationOpen] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState<boolean>(false);
+  const [isFiltersModalOpen, setIsFiltersModalOpen] = useState<boolean>(false);
   const { t } = useTranslation('header');
 
   const hiddenRoutes = ['/auth', '/auth/register'];
@@ -85,21 +86,26 @@ const Header = () => {
           <>
             <Button
               title={t('filters')}
-              action={ () => FiltersModal(t('filters')) }
+              action={ () =>  setIsFiltersModalOpen(true)}
               icon='sliders-horizontal'
               variant='ghost'
             />
 
             <Button
               title={t('createPost')}
-              action={ () => setIsModalOpen(true) }
+              action={ () => setIsCreatePostModalOpen(true) }
               icon='plus'
               variant='ghost'
             />
 
             <CreatePostModal
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
+              isOpen={isCreatePostModalOpen}
+              onClose={() => setIsCreatePostModalOpen(false)}
+            />
+
+            <FiltersModal
+              isOpen={isFiltersModalOpen}
+              onClose={() => setIsFiltersModalOpen(false)}
             />
           </>
         )}

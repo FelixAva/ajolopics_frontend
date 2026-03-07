@@ -1,70 +1,160 @@
-import { useState } from 'react';
-import { Input, Badge, Button } from '..';
+import usePost from '../../features/post/usePost.ts';
+import useTag from '../../features/tag/useTag.ts';
+import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
+import { Input, Button, SelectInput } from '..';
 import { useTranslation } from 'react-i18next';
+import type { IGetFeedFiltersFormInput } from '../../features/post/post.forms.types.ts';
 
-const filterTags = [
-  {id: 1, title: 'Abstract'},
-  {id: 2, title: 'B/W'},
-  {id: 3, title: 'Nature'},
-  {id: 4, title: 'B/W'},
-  {id: 5, title: 'Nature'},
-  {id: 6, title: 'B/W'},
-  {id: 7, title: 'Nature'},
-  {id: 8, title: 'B/W'},
-  {id: 9, title: 'Nature'},
-]
+interface Props {
+  onClose?: () => void;
+}
 
-const FiltersComponent = () => {
+const FiltersComponent = ({ onClose }: Props) => {
   const { t } = useTranslation('post');
-  const [selectedTags, setSelectedTags] = useState<number[]>([]);
 
-  const toggleTag = (id: number) => {
-    setSelectedTags(prev =>
-      prev.includes(id)
-        ? prev.filter(t => t !== id)
-        : [...prev, id]
-    )
-  };
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors }
+  } = useForm<IGetFeedFiltersFormInput>({
+    defaultValues: {
+      search: null,
+      tags: null,
+      aspectRatio: null,
+      authors: null
+    }
+  });
+
+  const { getPostFeed } = usePost();
+  const { getTags } = useTag();
+
+  const aspectRatioOptions = [
+  { value: "SQUARE", label: "SQUARE" }, // El value es para el backend, el label para el usuario
+  { value: "LANDSCAPE", label: "LANDSCAPE" },
+  { value: "PORTRAIT", label: "PORTRAIT" },
+  ];
+
+  const tagOptions = getTags.data?.map(tag => ({
+    value: tag.id.toString(),
+    label: tag.name,
+  })) || []; // Repeat it with authors
+
+  const onSubmit: SubmitHandler<IGetFeedFiltersFormInput> = async(data) => {
+    const tagIds = data.tags ?  data.tags.map(tag => Number(tag.value)): null;
+    const aspect = data.aspectRatio ? [data.aspectRatio.value] : null;
+    const author = data.authors ? data.authors.map(author => author.value) : null;
+
+    debugger;
+
+    const dataFormat = {
+      page: 1,
+      size: 20,
+      filters: {
+        tagIds: tagIds,
+        aspectRatio: aspect,
+        authorIds: author
+      }
+    };
+
+    getPostFeed.mutate(dataFormat)
+
+    // const newData: GetFeedRequestDTO = {
+    //   filters: {
+    //     tagIds: tagIds,
+    //     aspectRatio: data.aspectRatio.label,
+    //     authorIds: data.authors
+    //   }
+    // }
+  }
 
   return (
-    <form className='flex flex-col flex-1 justify-between'>
-      <div className='flex flex-col gap-5 text-left'>
-        <div>
-          <Input
-            label={t('filtersPostForm.searchInput.name')}
-            placeholder={t('filtersPostForm.searchInput.placeholder')}
-            type='text'
-          />
-        </div>
+    <form
+      className='flex flex-col gap-5'
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <Input
+        label={t('filtersPostForm.searchInput.name')}
+        type='text'
+        placeholder={t('filtersPostForm.searchInput.placeholder')}
+        {...register('search', {
+          maxLength: {
+            value: 255,
+            message: t('filtersPostForm.searchInput.errors.maxLength')
+          }
+        })}
+        error={ errors.search?.message }
+      />
 
-        <div>
-          <p className='text-lg'>{t('filtersPostForm.tagsInput.name')}</p>
-
-          <div className='max-w-113.75 h-auto pt-1.5 flex flex-wrap gap-2'>
-            {
-              filterTags.map((tag: {id: number, title: string}) => (
-                <Badge
-                  key={tag.id}
-                  id={tag.id}
-                  title={tag.title}
-                  checked={selectedTags.includes(tag.id)}
-                  onChange={toggleTag}
-                />
-              ))
+      <Controller
+        name='tags'
+        control={control}
+        rules={{
+          validate: (value) => {
+            if(value && value.length > 5) {
+              return t('filtersPostForm.tagsInput.errors.maxLength');
             }
-          </div>
-        </div>
+          }
+        }}
+        render={({ field }) => (
+          <SelectInput
+            {...field}
+            label={t('filtersPostForm.tagsInput.name')}
+            isMulti
+            placeholder={t('filtersPostForm.tagsInput.placeholder')}
+            options={tagOptions}
+            value={field.value}
+            onChange={field.onChange}
+            isLoading={getTags.isLoading}
+            isDisabled={getTags.isLoading || getTags.isError}
+            error={ errors.tags?.message }
+          />
+        )}
+      />
 
-        <div className='flex gap-3'>
-          <Input
-            label={t('filtersPostForm.aspectInput.name')}
-            type='text'
-          />
-          <Input
-            label={t('filtersPostForm.authorInput.name')}
-            type='text'
-          />
-        </div>
+      <div className='flex gap-3'>
+        <Controller
+          name='aspectRatio'
+          control={control}
+          render={({ field }) => (
+            <SelectInput
+              {...field}
+              label={t('filtersPostForm.aspectInput.name')}
+              placeholder={t('filtersPostForm.aspectInput.placeholder')}
+              options={aspectRatioOptions}
+              value={field.value}
+              onChange={field.onChange}
+              isLoading={getTags.isLoading}
+              isDisabled={getTags.isLoading || getTags.isError}
+              error={ errors.aspectRatio?.message }
+            />
+          )}
+        />
+        <Controller
+          name='authors'
+          control={control}
+          rules={{
+            validate: (value) => {
+              if(value && value.length > 5) {
+                return t('filtersPostForm.authorInput.errors.maxLength');
+              }
+            }
+          }}
+          render={({ field }) => (
+            <SelectInput
+              {...field}
+              label={t('filtersPostForm.authorInput.name')}
+              isMulti
+              placeholder={t('filtersPostForm.authorInput.placeholder')}
+              options={tagOptions}
+              value={field.value}
+              onChange={field.onChange}
+              isLoading={getTags.isLoading}
+              isDisabled={getTags.isLoading || getTags.isError}
+              error={ errors.authors?.message }
+            />
+          )}
+        />
       </div>
 
       <div className='flex flex-col gap-2.5'>
@@ -72,14 +162,13 @@ const FiltersComponent = () => {
           title={t('filtersPostForm.clearButton.titleDefault')}
           icon='x'
           type='reset'
-          action={() => setSelectedTags([])}
+          action={() => console.log('hola')}
           variant='inverted'
         />
         <Button
           title={t('filtersPostForm.submitButton.titleDefault')}
           icon='search'
           type='submit'
-          action={() => setSelectedTags([])}
         />
       </div>
     </form>

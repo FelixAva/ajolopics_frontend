@@ -2,7 +2,7 @@ import usePost from '../../features/post/usePost';
 import useTag from '../../features/tag/useTag';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { Input, Button, SelectInput, InputFile, InputArea } from '../';
-import type { ICreatePostFormInput } from '../../features/post/form.createPost.types';
+import type { ICreatePostFormInput } from '../../features/post/post.forms.types';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
@@ -135,7 +135,6 @@ const CreatePostForm = ({ onClose }: Props) => {
           />
         )}
       />
-
 
       <div className="pt-2">
         <Button
