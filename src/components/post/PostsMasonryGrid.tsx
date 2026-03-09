@@ -14,7 +14,7 @@ const PostsMasonryGrid = () => {
     filters: {
       tagIds: tags ? tags.split(',').map(Number) : undefined,
       authorIds:authors ? authors.split(',') : undefined,
-      aspectRatio: aspectRatio ? [aspectRatio]: undefined,
+      aspectRatio: aspectRatio ? aspectRatio : undefined,
     }
   }
 

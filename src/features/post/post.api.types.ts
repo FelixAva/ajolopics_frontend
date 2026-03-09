@@ -9,7 +9,7 @@ export interface GetFeedRequestDTO {
 
 export interface FiltersSet {
   tagIds: number[] | undefined;
-  aspectRatio: string[] | undefined;
+  aspectRatio: string[] | undefined | string;
   authorIds: string[] | undefined;
 }
 
