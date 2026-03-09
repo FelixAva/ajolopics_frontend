@@ -19,7 +19,7 @@ const Header = () => {
   const onMenuClick = () => setIsNavigationOpen(!isNavigationOpen);
 
   return (
-    <div className="w-full h-auto px-5 py-3 items-center md:w-auto md:h-auto md:flex md:justify-between lg:px-10">
+    <div className="sticky top-0 z-20 bg-beige/70 backdrop-blur-md w-full h-auto px-5 py-3 items-center md:w-auto md:h-auto md:flex md:justify-between lg:px-10">
       <div className='w-full h-auto flex items-center justify-between md:w-auto md:inline'>
         <div>
           <Link to="/" className="[&.active]:font-bold] text-xl" preload="intent">

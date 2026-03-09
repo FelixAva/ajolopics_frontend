@@ -5,10 +5,10 @@ import { Header } from '../components';
 
 const RootComponent = () => {
   return (
-    <div className='flex flex-col w-auto h-screen'>
+    <div className='flex flex-col flex-1 w-auto h-screen'>
       <Header />
 
-      <hr />
+      <hr className='text-gray-300' />
 
       <div className='px-5 flex flex-1 lg:px-10'>
         <Outlet />

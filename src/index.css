@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  background-color: #f7f9eb;
+}
+
 @theme {
   /* -------------------------------- Fonts -------------------------------- */
   --font-poppins: Poppins, sans-serif;

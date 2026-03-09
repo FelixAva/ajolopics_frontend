@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { DynamicIcon } from 'lucide-react/dynamic';
 import FiltersForm from './FiltersForm';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +16,7 @@ const FiltersModal = ({
 
   if (!isOpen) return null;
 
-  return (
+  const modalContent = (
     <div className="fixed inset-0 z-50 flex flex-col h-screen items-end justify-start bg-black/60 backdrop-blur-sm p-0">
       <div className="bg-white w-full max-w-lg flex flex-1 flex-col shadow-2xl overflow-hidden">
         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
@@ -35,7 +36,9 @@ const FiltersModal = ({
         </div>
       </div>
     </div>
-  )
+  );
+
+  return createPortal(modalContent, document.body);
 }
 
 export default FiltersModal;

@@ -4,6 +4,7 @@ import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { Input, Button, SelectInput, InputFile, InputArea } from '../';
 import type { ICreatePostFormInput } from '../../features/post/post.forms.types';
 import { useTranslation } from 'react-i18next';
+import { useMemo } from 'react';
 
 interface Props {
   onClose?: () => void;
@@ -30,10 +31,12 @@ const CreatePostForm = ({ onClose }: Props) => {
   const { getTags } = useTag();
 
   // Get tags query
-  const tagOptions = getTags.data?.map(tag => ({
-    value: tag.id.toString(),
-    label: tag.name
-  })) || [];
+  const tagOptions = useMemo(() => {
+    return getTags.data?.map(tag => ({
+     value: tag.id.toString(),
+     label: tag.name
+   })) || [];
+  }, [getTags.data]);
 
   const onSubmit: SubmitHandler<ICreatePostFormInput> = async(data) => {
     const tagIds = data.tags.map(tag => Number(tag.value));
