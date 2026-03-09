@@ -17,7 +17,7 @@ const CreatePostForm = ({ onClose }: Props) => {
     register,
     handleSubmit,
     control,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<ICreatePostFormInput>({
     defaultValues: {
       media: [],
@@ -142,7 +142,7 @@ const CreatePostForm = ({ onClose }: Props) => {
           type='submit'
           icon={createPost.isPending ? 'loader-2' : 'upload'}
           className="w-full bg-[#4A6E5A] hover:bg-[#3D5B4A] text-white disabled:opacity-50"
-          isDisabled={createPost.isPending || !isValid}
+          isDisabled={createPost.isPending}
         />
       </div>
     </form>
