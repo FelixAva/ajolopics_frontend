@@ -1,0 +1,86 @@
+{
+  "createPostForm": {
+    "filesInput": {
+      "name": "Photos",
+      "errors": {
+        "minLength": "You must upload at least one photo",
+        "maxLength": "You can only upload up to 10 photos"
+      }
+    },
+    "titleInput": {
+      "name": "Title",
+      "placeholder": "Sunset in Cozumel...",
+      "errors": {
+        "required": "Title is required",
+        "minLength": "Minimum length is 1",
+        "maxLength": "Maximum length is 255"
+      }
+    },
+    "descriptionInput": {
+      "name": "Description",
+      "placeholder": "What inspired you...",
+      "errors": {
+        "maxLength": "Maximum length is 5,000"
+      }
+    },
+    "tagsInput": {
+      "name": "Tags",
+      "placeholder": "Tag your post",
+      "errors": {
+        "maxLength": "You can only choose up to 5 tags"
+      }
+    },
+    "submitButton": {
+      "titleUploading": "Publishing...",
+      "titleDefault": "Publish to Gallery"
+    }
+  },
+  "createPostModal": {
+    "title": "Create Post"
+  },
+  "filtersPostModal": {
+    "title": "Filters"
+  },
+  "filtersPostForm": {
+    "aspectOptions": {
+      "landscape": "LANDSCAPE",
+      "portrait": "PORTRAIT",
+      "square": "SQUARE"
+    },
+    "searchInput": {
+      "name": "Search",
+      "placeholder": "Title, author, tag...",
+      "errors": {
+        "maxLength": "Maximum length is 255"
+      }
+    },
+    "tagsInput": {
+      "name": "Tags",
+      "placeholder": "Filter by tags",
+      "errors": {
+        "maxLength": "You can only choose up to 5 tags"
+      }
+    },
+    "aspectInput": {
+      "name": "Aspect Ratio",
+      "placeholder": "Filter by aspect ratio",
+      "errors": {
+        "maxLength": "You can only choose up to 5 tags"
+      }
+    },
+    "authorInput": {
+      "name": "Author",
+      "placeholder": "Filter by author",
+      "errors": {
+        "maxLength": "You can only choose up to 5 tags"
+      }
+    },
+    "clearButton": {
+      "titleDefault": "Clear Filters"
+    },
+    "submitButton": {
+      "titleSearching": "Searching...",
+      "titleDefault": "Search"
+    }
+  }
+}
