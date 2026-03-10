@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { Button, FiltersModal, CreatePostModal } from '../';
 import clsx from 'clsx';
+import { useAuthStore } from '../../features/auth/useAuthStore';
 
 const Header = () => {
   const location = useLocation();
@@ -12,6 +13,14 @@ const Header = () => {
   const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState<boolean>(false);
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState<boolean>(false);
   const { t } = useTranslation('header');
+
+  const token = useAuthStore((state) => state.token);
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+
+  const isAuthenticated = !!token;
+
+  const canCreatePost = user?.role === 'ADMIN' || user?.role === 'CREATOR';
 
   const hiddenRoutes = ['/auth', '/auth/register'];
   const showButton = !hiddenRoutes.includes(location.pathname);
@@ -91,18 +100,20 @@ const Header = () => {
               variant='ghost'
             />
 
-            <Button
-              title={t('createPost')}
-              action={ () => setIsCreatePostModalOpen(true) }
-              icon='plus'
-              variant='ghost'
-            />
-
-            <CreatePostModal
-              isOpen={isCreatePostModalOpen}
-              onClose={() => setIsCreatePostModalOpen(false)}
-            />
-
+            {isAuthenticated && canCreatePost && (
+              <Button
+                title={t('createPost')}
+                action={ () => setIsCreatePostModalOpen(true) }
+                icon='plus'
+                variant='ghost'
+              />
+            )}
+            {isAuthenticated && canCreatePost && (
+              <CreatePostModal
+                isOpen={isCreatePostModalOpen}
+                onClose={() => setIsCreatePostModalOpen(false)}
+              />
+            )}
             <FiltersModal
               isOpen={isFiltersModalOpen}
               onClose={() => setIsFiltersModalOpen(false)}
@@ -110,16 +121,26 @@ const Header = () => {
           </>
         )}
 
-        <Link
-          to="/auth"
-          className="[&.active]:font-bold] w-auto h-min px-3.5 py-2 rounded-lg text-deep-teal transition-colors duration-200 select-none hover:cursor-pointer hover:bg-deep-teal-100 hover:border-deep-teal-100 sm:text-lg"
-          preload="intent"
-        >
-          <div className="flex items-center justify-center gap-3 text-center">
-            <DynamicIcon name='log-in' size={22} />
-            <p>{t('loginButton')}</p>
-          </div>
-        </Link>
+        {isAuthenticated ? (
+          <Button
+            action={logout}
+            title={t('logoutButton')}
+            icon='log-in'
+            variant='ghost'
+          />
+        ) : (
+          <Link
+            to="/auth"
+            className="[&.active]:font-bold] w-auto h-min px-3.5 py-2 rounded-lg text-deep-teal transition-colors duration-200 select-none hover:cursor-pointer hover:bg-deep-teal-100 hover:border-deep-teal-100 sm:text-lg"
+            preload="intent"
+          >
+            <div className="flex items-center justify-center gap-3 text-center">
+              <DynamicIcon name='log-in' size={22} />
+              <p>{t('loginButton')}</p>
+            </div>
+          </Link>
+        )}
+
       </nav>
     </div>
   )
