@@ -11,6 +11,7 @@ import type {
   RegisterDTO,
   RegisterResponseDTO
 } from './auth.api.types';
+import { queryClient } from '../../lib/queryClient';
 
 const useAuth = () => {
   // Get the setToken function from Zustand
@@ -22,6 +23,8 @@ const useAuth = () => {
     onSuccess: (data) => {
       // Set the user token with Zustand
       setToken(data.token);
+
+      queryClient.invalidateQueries({ queryKey: ['userVerify'] });
 
       // Redirect to the Home page
       navigate({to: '/'});
