@@ -61,13 +61,13 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
     <div className="fixed inset-0 z-50 flex flex-col flex-1 items-center justify-center bg-black/70 backdrop-blur-md md:p-4">
       {/* Contenedor Principal: Transición suave de ancho y altura fija */}
       <div
-        className="bg-white rounded-2xl w-full md:w-auto flex flex-col md:flex-row shadow-2xl overflow-hidden relative transition-all duration-500 ease-in-out"
+        className="bg-white rounded-2xl w-full h-full md:w-auto md:h-auto flex flex-col md:flex-row shadow-2xl overflow-hidden relative transition-all duration-500 ease-in-out"
         style={{ maxWidth: `${modalMaxWidth}px`}}
       >
 
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 text-gray-400 hover:text-black transition-colors bg-white/80"
+          className="absolute top-4 right-4 z-10 text-gray-400 hover:text-black transition-colors bg-white/80 rounded-full p-1"
         >
           <DynamicIcon name="x" size={24} />
         </button>
@@ -89,7 +89,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
                 <img
                   src={currentVariant.url}
                   alt={post.title}
-                  className="w-full h-full object-contain p-4 md:p-0"
+                  className="w-full h-full object-contain"
                 />
               )}
 
@@ -116,7 +116,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
             </div>
 
             {/* LADO DERECHO: Detalles (Ancho restante, scroll interno si rebasa los 818px) */}
-            <div className="md:w-120 h-full py-4 px-6 md:p-8 flex flex-col gap-6 overflow-y-auto bg-white">
+            <div className="md:w-120 h-full px-6 md:p-8 flex flex-col gap-6 overflow-y-auto bg-white">
 
               <div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-1">{post.title}</h2>
