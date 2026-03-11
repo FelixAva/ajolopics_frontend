@@ -32,7 +32,7 @@ const FiltersForm = ({ onClose }: Props) => {
   });
 
   const { getTags } = useTag();
-  const { getUser } = useUser();
+  const { getUsers } = useUser();
 
   const aspectRatioOptions = [
     { value: "LANDSCAPE", label: t('filtersPostForm.aspectOptions.landscape') },
@@ -45,9 +45,7 @@ const FiltersForm = ({ onClose }: Props) => {
     label: tag.name,
   })) || []; // Repeat it with authors
 
-  const userList = getUser.data?.filter((user: User) => user.role === "CREATOR");
-
-  const creatorOptions = userList?.map((user: User) => ({
+  const creatorOptions = getUsers.data?.map((user: User) => ({
     value: user.id,
     label: user.name
   })) || [];
@@ -151,8 +149,8 @@ const FiltersForm = ({ onClose }: Props) => {
             options={creatorOptions}
             value={field.value}
             onChange={field.onChange}
-            isLoading={getUser.isLoading}
-            isDisabled={getUser.isLoading || getUser.isError}
+            isLoading={getUsers.isLoading}
+            isDisabled={getUsers.isLoading || getUsers.isError}
             error={ errors.authors?.message }
           />
         )}
