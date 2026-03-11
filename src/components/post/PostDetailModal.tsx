@@ -43,12 +43,12 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
   const isMultiple = post && post.assets.length > 1;
 
   // Lógica de dimensiones dinámicas
-  const imageWidth = currentVariant?.width || 0;
-  const imageHeight = currentVariant?.height || 0;
-  const isHorizontal = imageWidth >= imageHeight;
+  // const imageWidth = currentVariant?.width || 0;
+  // const imageHeight = currentVariant?.height || 0;
+  // const isHorizontal = imageWidth >= imageHeight;
 
   // Asignamos las medidas de Figma dependiendo de la orientación
-  const modalMaxWidth = isHorizontal ? 1118 : 1026;
+  // const modalMaxWidth = isHorizontal ? 1118 : 1026;
 
   const getAspectText = (w?: number, h?: number) => {
     if (!w || !h) return '-';
@@ -61,10 +61,8 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
     <div className="fixed inset-0 z-50 flex flex-col flex-1 items-center justify-center bg-black/70 backdrop-blur-md md:p-4">
       {/* Contenedor Principal: Transición suave de ancho y altura fija */}
       <div
-        className="bg-white rounded-2xl w-full h-full md:w-auto md:h-auto flex flex-col md:flex-row shadow-2xl overflow-hidden relative transition-all duration-500 ease-in-out"
-        style={{ maxWidth: `${modalMaxWidth}px`}}
+        className="max-w-152 bg-white rounded-2xl h-full lg:max-w-none md:w-auto lg:max-h-198 gap-4 lg:gap-0 flex flex-col lg:flex-row shadow-2xl overflow-hidden relative transition-all duration-500 ease-in-out"
       >
-
         <button
           onClick={onClose}
           className="absolute top-4 right-4 z-10 text-gray-400 hover:text-black transition-colors bg-white/80 rounded-full p-1"
@@ -83,7 +81,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
         ) : (
           <>
             {/* LADO IZQUIERDO: Visor de Imagen */}
-            <div className="h-[60%] md:h-auto bg-[#F0F0F0] relative flex items-center justify-center">
+            <div className="max-h-[50%] md:h-auto md:max-h-none bg-[#F0F0F0] relative flex items-center justify-center">
 
               {currentVariant && (
                 <img
@@ -116,7 +114,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
             </div>
 
             {/* LADO DERECHO: Detalles (Ancho restante, scroll interno si rebasa los 818px) */}
-            <div className="md:w-120 h-full px-6 md:p-8 flex flex-col gap-6 overflow-y-auto bg-white">
+            <div className="lg:w-120 h-full px-6 md:p-8 lg:px-4 flex flex-col gap-6 overflow-y-auto bg-white">
 
               <div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-1">{post.title}</h2>
