@@ -3,9 +3,13 @@ import Masonry from 'react-masonry-css';
 import PostPreviewCard from './PostPreviewCard';
 import type { GetFeedRequestDTO } from '../../features/post/post.api.types';
 import { Route } from '../../routes/index';
+import { useState } from 'react';
+import PostDetailModal from './PostDetailModal';
 
 const PostsMasonryGrid = () => {
   const { tags, authors, search, aspectRatio } = Route.useSearch();
+
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
 
   const feedParams: GetFeedRequestDTO = {
     page: 1,
@@ -38,9 +42,18 @@ const PostsMasonryGrid = () => {
           <p>Cargando galería...</p> // ! Translation
         ) :
         getPostFeed.data?.items.map(post => (
-          <PostPreviewCard key={`${post.author}-${post.id}`} {...post} />
-        ))
-      }
+          <PostPreviewCard
+            key={`${post.author}-${post.id}`}
+            post={post}
+            onClick={(id) => setSelectedPostId(id)}
+          />
+      ))}
+
+      <PostDetailModal
+        postId={selectedPostId}
+        isOpen={!!selectedPostId}
+        onClose={() => setSelectedPostId(null)}
+      />
     </Masonry>
   );
 };

@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { AuthService } from '../../features/auth/auth.service';
 import { useAuthStore } from './useAuthStore';
 import { router } from '../../lib/router';
+import { useNavigate } from '@tanstack/react-router';
 import type { AxiosError } from 'axios';
 import type { ErrorDTO } from '../../types/api.types';
 import type {
@@ -14,6 +15,7 @@ import type {
 const useAuth = () => {
   // Get the setToken function from Zustand
   const setToken = useAuthStore(state => state.setToken);
+  const navigate = useNavigate({ from: '/auth/' });
 
   const login = useMutation<LoginResponseDTO, AxiosError<ErrorDTO>, LoginDTO>({
     mutationFn: (data) => AuthService.login(data),
@@ -22,7 +24,8 @@ const useAuth = () => {
       setToken(data.token);
 
       // Redirect to the Home page
-      router.navigate({ to: '/' })
+      navigate({to: '/'});
+
     },
     onError: (error) => {
       // Error cathching. The error is also render with a span in /src/routes/auth/index.tsx

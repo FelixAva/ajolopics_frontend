@@ -35,5 +35,10 @@ export const PostService = {
   async getFeed(data: GetFeedRequestDTO) {
     const response = await api.post<PaginatedResponseDTO<Post>>('/posts/feed', data);
     return response.data;
+  },
+
+  async getSinglePost(id: string) {
+    const response = await api.get<Post>(`/posts/single/${id}`);
+    return response.data;
   }
 }
