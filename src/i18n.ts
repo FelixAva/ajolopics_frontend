@@ -32,7 +32,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'en',
+    lng: 'es',
     fallbackLng: 'en',
     ns: ['auth', 'components', 'header', 'post'],
     interpolation: {

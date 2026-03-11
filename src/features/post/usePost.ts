@@ -7,7 +7,7 @@ import type { Post } from './post.types';
 import type { CreatePostRequestDTO, GetFeedRequestDTO } from './post.api.types';
 import { queryClient } from '../../lib/queryClient';
 
-const usePost = (feedBodyParameters: GetFeedRequestDTO) => {
+const usePost = (feedBodyParameters?: GetFeedRequestDTO, postId?: string) => {
   const createPost = useMutation<Post, AxiosError<ErrorDTO>, CreatePostRequestDTO>({
     mutationFn: (data: CreatePostRequestDTO) => PostService.createPost(data),
     onSuccess: () => {
@@ -21,12 +21,26 @@ const usePost = (feedBodyParameters: GetFeedRequestDTO) => {
 
   const getPostFeed = useQuery<PaginatedResponseDTO<Post>, AxiosError<ErrorDTO>>({
     queryKey: ['feed', feedBodyParameters],
-    queryFn: () => PostService.getFeed(feedBodyParameters),
+    queryFn: () => {
+      if (!feedBodyParameters) throw new Error ('Post ID is required');
+      return PostService.getFeed(feedBodyParameters);
+    },
+    enabled: !!feedBodyParameters,
   });
+
+  const getSinglePost = useQuery<Post, AxiosError<ErrorDTO>>({
+    queryKey: ['singlePost', postId],
+    queryFn: () => {
+      if (!postId) throw new Error ('Post ID is required');
+      return PostService.getSinglePost(postId);
+    },
+    enabled: !!postId,
+  })
 
   return {
     createPost,
-    getPostFeed
+    getPostFeed,
+    getSinglePost
   };
 };
 

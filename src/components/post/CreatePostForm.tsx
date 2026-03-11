@@ -27,7 +27,7 @@ const CreatePostForm = ({ onClose }: Props) => {
       description: ''
     }
   });
-  const { createPost } = usePost({});
+  const { createPost } = usePost();
   const { getTags } = useTag();
 
   // Get tags query
