@@ -11,24 +11,32 @@ import type {
   RegisterDTO,
   RegisterResponseDTO
 } from './auth.api.types';
+import { UserService } from '../user/user.service';
 import { queryClient } from '../../lib/queryClient';
 
 const useAuth = () => {
   // Get the setToken function from Zustand
   const setToken = useAuthStore(state => state.setToken);
+  const setUser = useAuthStore(state => state.setUser);
   const navigate = useNavigate({ from: '/auth/' });
 
   const login = useMutation<LoginResponseDTO, AxiosError<ErrorDTO>, LoginDTO>({
     mutationFn: (data) => AuthService.login(data),
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       // Set the user token with Zustand
       setToken(data.token);
+      try {
+        const user = await queryClient.fetchQuery({
+          queryKey: ['userVerify'],
+          queryFn: () => UserService.getUserVerify()
+        });
+        setUser(user);
 
-      queryClient.invalidateQueries({ queryKey: ['userVerify'] });
-
-      // Redirect to the Home page
-      navigate({to: '/'});
-
+        navigate({to: '/'});
+      } catch (error) {
+        console.error('Error al verificar tras login', error);
+        useAuthStore.getState().logout();
+      }
     },
     onError: (error) => {
       // Error cathching. The error is also render with a span in /src/routes/auth/index.tsx

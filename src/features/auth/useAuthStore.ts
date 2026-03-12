@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { AUTH_TOKEN_KEY } from '../../constants/auth.constants';
 import type { User } from '../user/user.types';
+import { queryClient } from '../../lib/queryClient';
 
 type AuthState = {
   token: string | null;
@@ -20,7 +21,10 @@ export const useAuthStore = create<AuthState>()(
 
       setToken: (token) => set({ token }),
       setUser: (user) => set({ user }),
-      logout: () => set({ token: null, user: null }),
+      logout: () => {
+        set({ token: null, user: null });
+        queryClient.removeQueries({ queryKey:['userVerify'] });
+      },
       isAuthenticated: () => !!get().token,
     }),
     {
