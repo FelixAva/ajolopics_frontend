@@ -28,11 +28,26 @@ const resources = {
   },
 }
 
+let initialLng = 'en'; // Fallback por si es la primera vez que el usuario entra
+
+try {
+  const storedData = localStorage.getItem('language-storage');
+  if (storedData) {
+    const parsedData = JSON.parse(storedData);
+    // Zustand guarda el estado dentro de la propiedad 'state'
+    if (parsedData?.state?.language) {
+      initialLng = parsedData.state.language;
+    }
+  }
+} catch (error) {
+  console.error("Error leyendo el idioma de localStorage", error);
+}
+
 i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'es',
+    lng: initialLng,
     fallbackLng: 'en',
     ns: ['auth', 'components', 'header', 'post'],
     interpolation: {

@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../';
+import { useLanguageStore } from '../../features/language/useLanguageStore';
 
 const LanguageModal = () => {
   const { i18n } = useTranslation('components');
-
   const [isOpen, setIsOpen] = useState(false);
+
+  const { language, setLanguage } = useLanguageStore();
 
   const handleLanguageChange = (lng: string) => {
     i18n.changeLanguage(lng);
+    setLanguage(lng);
     setIsOpen(false);
   };
 
@@ -19,9 +22,8 @@ const LanguageModal = () => {
 
   return (
     <div className="relative inline-block text-left">
-
       <Button
-        title={i18n.language.toUpperCase()}
+        title={language.toUpperCase()}
         icon='globe'
         action={() => setIsOpen(!isOpen)}
         variant='none'
@@ -35,7 +37,7 @@ const LanguageModal = () => {
                 <button
                   onClick={() => handleLanguageChange(lang.code)}
                   className={`w-full text-left px-4 py-2 hover:bg-deep-teal-100 transition-colors ${
-                    i18n.language === lang.code
+                    language === lang.code
                       ? 'bg-deep-teal-300 text-deep-teal-700 font-bold' // Resalta el idioma activo
                       : 'text-gray-700'
                   }`}
@@ -47,7 +49,6 @@ const LanguageModal = () => {
           </ul>
         </div>
       )}
-
     </div>
   );
 };
