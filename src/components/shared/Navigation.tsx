@@ -38,13 +38,6 @@ const Navigation = ({ isOpen }: Props) => {
             : "max-h-0 opacity-0 md:opacity-100 md:overflow-auto md:max-h-80"
         )}
       >
-        <Button
-          icon='globe'
-          action={() => alert('Choose language')}
-          variant='none'
-          className='hidden md:inline'
-        />
-
         { showButton && (
           <>
             <Button

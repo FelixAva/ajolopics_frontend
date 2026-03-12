@@ -7,7 +7,7 @@ interface Props {
 
 const BurgerButton = ({ isOpen, onClick }: Props) => {
   return (
-    <div className='flex gap-2 items-center'>
+    <div className='flex gap-2 items-center md:sr-only'>
       <button
         onClick={onClick}
         className="w-12.5 h-12.5 flex items-center justify-center bg-deep-teal-100 rounded-lg md:hidden"
