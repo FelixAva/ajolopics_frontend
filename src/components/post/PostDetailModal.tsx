@@ -20,6 +20,11 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
   const token = useAuthStore((state) => state.token);
   const isUserAuthenticated = !!token;
 
+  const onModalClose = () => {
+    setCurrentImageIndex(0);
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   const { data: post, isLoading, isError } = getSinglePost;
@@ -55,7 +60,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
         className="max-w-152 bg-white rounded-2xl h-full lg:max-w-none md:w-auto lg:max-h-198 gap-4 lg:gap-0 flex flex-col lg:flex-row shadow-2xl overflow-hidden relative transition-all duration-500 ease-in-out"
       >
         <button
-          onClick={onClose}
+          onClick={onModalClose}
           className="absolute top-4 right-4 z-10 text-gray-400 hover:text-black transition-colors bg-white/80 rounded-full p-1"
         >
           <DynamicIcon name="x" size={24} />
