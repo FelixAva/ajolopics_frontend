@@ -17,7 +17,7 @@ import Spinner from './shared/Spinner';
 import Header from './shared/Header';
 import BurgerButton from './shared/BurgerButton';
 import LanguageModal from './shared/LanguageModal';
-import { imageCompressor } from './shared/imageCompressor.canvas';
+import { imageCompressor } from './post/imageCompressor.canvas';
 
 // Import Modals components
 import FiltersModal from './post/FiltersModal'
