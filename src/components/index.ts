@@ -15,6 +15,7 @@ import Button from './shared/Button';
 import Badge from './shared/Badge';
 import Spinner from './shared/Spinner';
 import Header from './shared/Header';
+import BurgerButton from './shared/BurgerButton';
 import { imageCompressor } from './shared/imageCompressor.canvas';
 
 // Import Modals components
@@ -34,6 +35,7 @@ export {
   Spinner,
   Header,
   imageCompressor,
+  BurgerButton,
 
   // Export Form components
   Input,
