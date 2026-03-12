@@ -1,11 +1,20 @@
 {
-  "inputFile": {
+  "fileUpload": {
     "placeholder": "Drag and drop or click to upload",
     "processError": "Error processing",
     "remove": "Click to remove",
-    "addMoreFiles": "+ Click here to add more photos"
+    "addMore": "+ Click here to add more photos"
   },
-  "inputPwd": {
+  "links": {
     "forgotPassword": "Forgot your password?"
+  },
+  "validation": {
+    "required": "{{field}} is required",
+    "minLength": "Minimum length is {{min}}",
+    "maxLength": "Maximum length is {{max}}",
+    "emailPattern": "Invalid email format",
+    "passwordPattern": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+    "passwordsMatch": "Passwords must match",
+    "invalidFormat": "Invalid format"
   }
 }

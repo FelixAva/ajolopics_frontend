@@ -11,7 +11,7 @@ interface Props {
 }
 
 const CreatePostForm = ({ onClose }: Props) => {
-  const { t } = useTranslation('post');
+  const { t } = useTranslation(['post', 'components']);
 
   // Custom hooks
   const {
@@ -66,15 +66,15 @@ const CreatePostForm = ({ onClose }: Props) => {
         rules={{
           validate: (value) =>{
             if (value.length === 0) {
-              return t('createPostForm.filesInput.errors.minLength');
+              return t('post:validation.minPhotos');
             } else if (value.length > 3) {
-              return t('createPostForm.filesInput.errors.maxLength')
+              return t('post:validation.maxPhotos')
             }
           }
         }}
         render={({ field }) => (
           <InputFile
-            label={t('createPostForm.filesInput.name')}
+            label={t('post:fields.photos')}
             accept="image/*"
             multiple
             error={errors.media?.message}
@@ -85,30 +85,30 @@ const CreatePostForm = ({ onClose }: Props) => {
       />
 
       <Input
-        label={t('createPostForm.titleInput.name')}
+        label={t('post:fields.title')}
         type='text'
-        placeholder={t('createPostForm.titleInput.placeholder')}
+        placeholder={t('post:fields.titlePlaceholder')}
         {...register('title', {
-          required: t('createPostForm.titleInput.errors.required'),
+          required: t('components:validation.required', { field: t('post:fields.title') }),
           minLength: {
             value: 1,
-            message: t('createPostForm.titleInput.errors.minLength')
+            message: t('components:validation.minLength', { min: 1 })
           },
           maxLength: {
             value: 255,
-            message: t('createPostForm.titleInput.errors.maxLength')
+            message: t('components:validation.maxLength', { max: 255 })
           },
         })}
         error={ errors.title?.message }
       />
 
       <InputArea
-        label={t('createPostForm.descriptionInput.name')}
-        placeholder={t('createPostForm.descriptionInput.placeholder')}
+        label={t('post:fields.description')}
+        placeholder={t('post:fields.descriptionPlaceholder')}
         {...register('description', {
           maxLength: {
             value: 5000,
-            message: t('createPostForm.descriptionInput.errors.maxLength')
+            message: t('components:validation.maxLength', { max: 5000 })
           }
         })}
       />
@@ -119,16 +119,16 @@ const CreatePostForm = ({ onClose }: Props) => {
         rules={{
           validate: (value) => {
             if(value && value.length > 5) {
-              return t('createPostForm.tagsInput.errors.maxLength');
+              return t('post:validation.maxTags');
             }
           }
         }}
         render={({ field }) => (
           <SelectInput
             {...field}
-            label={t('createPostForm.tagsInput.name')}
+            label={t('post:fields.tags')}
             isMulti
-            placeholder={t('createPostForm.tagsInput.placeholder')}
+            placeholder={t('post:fields.tagsPlaceholder')}
             options={tagOptions}
             value={field.value}
             onChange={field.onChange}
@@ -147,7 +147,7 @@ const CreatePostForm = ({ onClose }: Props) => {
 
       <div className="pt-2">
         <Button
-          title={createPost.isPending ? t('createPostForm.submitButton.titleUploading') : t('createPostForm.submitButton.titleDefault')}
+          title={createPost.isPending ? t('post:create.submitting') : t('post:create.submit')}
           type='submit'
           icon={createPost.isPending ? 'loader-2' : 'upload'}
           className="w-full bg-[#4A6E5A] hover:bg-[#3D5B4A] text-white disabled:opacity-50"

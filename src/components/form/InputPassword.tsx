@@ -27,7 +27,7 @@ const InputPassword = forwardRef<HTMLInputElement, Props> (function Input (
       {
         pwdRecovery && (
           <div className='absolute right-0'>
-            <span>{t('inputPwd.forgotPassword')}</span>
+            <span>{t('links.forgotPassword')}</span>
           </div>
         )
       }

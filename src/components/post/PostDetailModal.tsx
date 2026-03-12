@@ -37,24 +37,15 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
   };
 
   const currentAsset = post?.assets[currentImageIndex];
-  console.log(currentAsset);
   // Usamos el índice 0 de variants porque usualmente contiene la resolución original/más alta de ese asset
   const currentVariant = currentAsset?.variants[1];
   const isMultiple = post && post.assets.length > 1;
 
-  // Lógica de dimensiones dinámicas
-  // const imageWidth = currentVariant?.width || 0;
-  // const imageHeight = currentVariant?.height || 0;
-  // const isHorizontal = imageWidth >= imageHeight;
-
-  // Asignamos las medidas de Figma dependiendo de la orientación
-  // const modalMaxWidth = isHorizontal ? 1118 : 1026;
-
   const getAspectText = (w?: number, h?: number) => {
     if (!w || !h) return '-';
-    if (w > h) return t('filtersPostForm.aspectOptions.landscape', 'Horizontal');
-    if (w < h) return t('filtersPostForm.aspectOptions.portrait', 'Vertical');
-    return t('filtersPostForm.aspectOptions.square', 'Cuadrado');
+    if (w > h) return t('aspectOptions.landscape');
+    if (w < h) return t('aspectOptions.portrait');
+    return t('filtersPostForm.aspectOptions.square');
   };
 
   const modalContent = (
@@ -118,11 +109,11 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
 
               <div>
                 <h2 className="text-2xl font-bold text-gray-800 mb-1">{post.title}</h2>
-                <p className="text-gray-600 font-medium">By {post.author.name}</p>
+                <p className="text-gray-600 font-medium">{t('detail.by')} {post.author.name}</p>
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold text-gray-500 mb-1">Description</h3>
+                <h3 className="text-sm font-semibold text-gray-500 mb-1">{t('fields.description')}</h3>
                 <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap">
                   {post.description || 'Sin descripción.'}
                 </p>
@@ -131,7 +122,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
               {/* Implementación de Custom Badge */}
               {post.tags && post.tags.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-500 mb-3">Tags</h3>
+                  <h3 className="text-sm font-semibold text-gray-500 mb-3">{t('fields.tags')}</h3>
                   <div className="flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
                       <Badge
@@ -149,13 +140,13 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-500 mb-1">Aspect</h3>
+                  <h3 className="text-sm font-semibold text-gray-500 mb-1">{t('fields.aspectRatio')}</h3>
                   <div className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 text-center bg-transparent">
                     {getAspectText(currentVariant?.width, currentVariant?.height)}
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-500 mb-1">Resolution</h3>
+                  <h3 className="text-sm font-semibold text-gray-500 mb-1">{t('fields.resolution')}</h3>
                   <div className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 text-center bg-transparent">
                     {currentVariant ? `${currentVariant.width} x ${currentVariant.height}` : '-'}
                   </div>
@@ -166,7 +157,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
               <Button
                 action={() => alert('download')}
                 icon='download'
-                title={isUserAuthenticated ? 'Download' : 'Login to Download'}
+                title={isUserAuthenticated ? t('post:detail.download', 'Download') : t('post:detail.loginToDownload')}
                 isDisabled={!isUserAuthenticated} // Corrección lógica aquí
                 className="w-full mt-2 disabled:opacity-50" // Usamos w-full a través del prop className
               />

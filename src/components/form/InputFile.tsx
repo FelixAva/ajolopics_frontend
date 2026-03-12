@@ -33,7 +33,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
       // Emitimos el nuevo valor al componente padre
       onChange([...value, ...processed]);
     } catch (error) {
-      console.error(t('inputFile.processError'), error);
+      console.error(t('fileUpload.processError'), error);
     } finally {
       setIsProcessing(false);
     }
@@ -101,7 +101,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
         ) : value.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-6 text-dusty-olive">
             <DynamicIcon name="upload" size={32} className={`mb-3 transition-transform ${isDragging ? 'scale-110 text-deep-teal' : ''}`} />
-            <p className="text-lg font-medium">{t('inputFile.placeholder')}</p>
+            <p className="text-lg font-medium">{t('fileUpload.placeholder')}</p>
           </div>
         ) : (
           <div className="w-full flex flex-col items-center gap-4">
@@ -111,7 +111,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
                   key={index}
                   data-index={index}
                   className="relative aspect-square rounded-lg overflow-hidden group border border-gray-200 shadow-sm cursor-pointer bg-gray-100"
-                  title={t('inputFile.remove')}
+                  title={t('fileUpload.remove')}
                 >
                   <img src={fileObj.previewUrl} alt={`preview-${index}`} className="w-full h-full object-cover pointer-events-none" />
                   <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/40 flex items-center justify-center transition-all pointer-events-none">
@@ -120,7 +120,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
                 </div>
               ))}
             </div>
-            <p className="text-sm font-medium text-dusty-olive hover:text-deep-teal transition-colors">{t('inputFile.addMoreFiles')}</p>
+            <p className="text-sm font-medium text-dusty-olive hover:text-deep-teal transition-colors">{t('fileUpload.addMore')}</p>
           </div>
         )}
 

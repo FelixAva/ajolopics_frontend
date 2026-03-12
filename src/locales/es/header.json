@@ -2,6 +2,6 @@
   "subTitle": "Galería Virtual",
   "filters": "Filtros",
   "createPost": "Crear Publicación",
-  "loginButton": "Inicio de Sesión",
-  "logoutButton": "Cerrar sesión"
+  "login": "Iniciar Sesión",
+  "logout": "Cerrar Sesión"
 }

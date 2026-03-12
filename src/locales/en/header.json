@@ -2,6 +2,6 @@
   "subTitle": "Virtual Gallery",
   "filters": "Filters",
   "createPost": "Create Post",
-  "loginButton": "Log In",
-  "logoutButton": "Log Out"
+  "login": "Log In",
+  "logout": "Log Out"
 }

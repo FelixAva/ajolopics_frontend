@@ -13,7 +13,8 @@ interface Props {
 }
 
 const FiltersForm = ({ onClose }: Props) => {
-  const { t } = useTranslation('post');
+  // Importamos 'post' para etiquetas/placeholders y 'components' para errores
+  const { t } = useTranslation(['post', 'components']);
   const navigate = useNavigate({ from: Route.fullPath });
 
   const {
@@ -35,9 +36,9 @@ const FiltersForm = ({ onClose }: Props) => {
   const { getUsers } = useUser();
 
   const aspectRatioOptions = [
-    { value: "LANDSCAPE", label: t('filtersPostForm.aspectOptions.landscape') },
-    { value: "PORTRAIT", label: t('filtersPostForm.aspectOptions.portrait') },
-    { value: "SQUARE", label: t('filtersPostForm.aspectOptions.square') }
+    { value: "LANDSCAPE", label: t('post:aspectOptions.landscape') },
+    { value: "PORTRAIT", label: t('post:aspectOptions.portrait') },
+    { value: "SQUARE", label: t('post:aspectOptions.square') }
   ];
 
   const tagOptions = getTags.data?.map(tag => ({
@@ -92,13 +93,13 @@ const FiltersForm = ({ onClose }: Props) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input
-        label={t('filtersPostForm.searchInput.name')}
+        label={t('post:fields.search')}
         type='text'
-        placeholder={t('filtersPostForm.searchInput.placeholder')}
+        placeholder={t('post:fields.searchPlaceholder')}
         {...register('search', {
           maxLength: {
             value: 255,
-            message: t('filtersPostForm.searchInput.errors.maxLength')
+            message: t('components:validation.maxLength', { max: 255 })
           }
         })}
         error={ errors.search?.message }
@@ -110,16 +111,18 @@ const FiltersForm = ({ onClose }: Props) => {
         rules={{
           validate: (value) => {
             if(value && value.length > 10) {
-              return t('filtersPostForm.tagsInput.errors.maxLength');
+              // Si tienes esta validación en el viejo JSON, puedes crearla en components.json
+              // o reusar un texto. Asumiremos que tienes algo similar a maxTags pero genérico
+              return t('components:validation.maxLength', { max: 10 });
             }
           }
         }}
         render={({ field }) => (
           <SelectInput
             {...field}
-            label={t('filtersPostForm.tagsInput.name')}
+            label={t('post:fields.tags')}
             isMulti
-            placeholder={t('filtersPostForm.tagsInput.placeholder')}
+            placeholder={t('post:fields.tagsPlaceholder')}
             options={tagOptions}
             value={field.value}
             onChange={field.onChange}
@@ -136,16 +139,16 @@ const FiltersForm = ({ onClose }: Props) => {
         rules={{
           validate: (value) => {
             if(value && value.length > 5) {
-              return t('filtersPostForm.authorInput.errors.maxLength');
+              return t('components:validation.maxLength', { max: 5 });
             }
           }
         }}
         render={({ field }) => (
           <SelectInput
             {...field}
-            label={t('filtersPostForm.authorInput.name')}
+            label={t('post:fields.author')}
             isMulti
-            placeholder={t('filtersPostForm.authorInput.placeholder')}
+            placeholder={t('post:fields.authorPlaceholder')}
             options={creatorOptions}
             value={field.value}
             onChange={field.onChange}
@@ -162,8 +165,8 @@ const FiltersForm = ({ onClose }: Props) => {
         render={({ field }) => (
           <SelectInput
             {...field}
-            label={t('filtersPostForm.aspectInput.name')}
-            placeholder={t('filtersPostForm.aspectInput.placeholder')}
+            label={t('post:fields.aspectRatio')}
+            placeholder={t('post:fields.aspectRatio')}
             options={aspectRatioOptions}
             value={field.value}
             onChange={field.onChange}
@@ -174,14 +177,14 @@ const FiltersForm = ({ onClose }: Props) => {
 
       <div className='flex flex-col gap-2.5'>
         <Button
-          title={t('filtersPostForm.clearButton.titleDefault')}
+          title={t('post:filters.clear')}
           icon='x'
           type='button'
           action={handleClear}
           variant='inverted'
         />
         <Button
-          title={t('filtersPostForm.submitButton.titleDefault')}
+          title={t('post:filters.submit')}
           icon='search'
           type='submit'
         />

@@ -1,86 +1,43 @@
 {
-  "createPostForm": {
-    "filesInput": {
-      "name": "Fotografías",
-      "errors": {
-        "minLength": "Debes subir al menos una fotografía",
-        "maxLength": "Solo puedes subir hasta 3 fotografías"
-      }
-    },
-    "titleInput": {
-      "name": "Título",
-      "placeholder": "Atardecer en cosumel...",
-      "errors": {
-        "required": "El título es obligatorio",
-        "minLength": "El tamaño minimo es de 1",
-        "maxLength": "El tamaño maximo es de 255"
-      }
-    },
-    "descriptionInput": {
-      "name": "Descripción",
-      "placeholder": "Qué te inspiró...",
-      "errors": {
-        "maxLength": "El tamaño maximo es de 5,000"
-      }
-    },
-    "tagsInput": {
-      "name": "Etiquetas",
-      "placeholder": "Etiqueta tu post",
-      "errors": {
-        "maxLength": "Solo puedes elegir hasta 5 etiquetas"
-      }
-    },
-    "submitButton": {
-      "titleUploading": "Publicando...",
-      "titleDefault": "Publicar en Galería"
-    }
+  "create": {
+    "title": "Crear Publicación",
+    "submit": "Publicar en la Galería",
+    "submitting": "Publicando..."
   },
-  "createPostModal": {
-    "title": "Crear Publicación"
+  "filters": {
+    "title": "Filtros",
+    "submit": "Buscar",
+    "submitting": "Buscando...",
+    "clear": "Limpiar Filtros"
   },
-  "filtersPostModal": {
-    "title": "Filtros"
+  "fields": {
+    "photos": "Fotos",
+    "title": "Título",
+    "titlePlaceholder": "Atardecer en Cozumel...",
+    "description": "Descripción",
+    "descriptionPlaceholder": "Qué te inspiró...",
+    "tags": "Etiquetas",
+    "tagsPlaceholder": "Etiqueta tu publicación",
+    "search": "Buscar",
+    "searchPlaceholder": "Título, autor, etiqueta...",
+    "aspectRatio": "Relación de aspecto",
+    "resolution": "Resolución",
+    "author": "Autor",
+    "authorPlaceholder": "Filtrar por autor"
   },
-  "filtersPostForm": {
-    "aspectOptions": {
-      "landscape": "HORIZONTAL",
-      "portrait": "VERTICAL",
-      "square": "CUADRADO"
-    },
-    "searchInput": {
-      "name": "Buscar",
-      "placeholder": "Título, autor, etiqueta...",
-      "errors": {
-        "maxLength": "El tamaño maximo es de 255"
-      }
-    },
-    "tagsInput": {
-      "name": "Etiquetas",
-      "placeholder": "Filtra por etiquetas",
-      "errors": {
-        "maxLength": "Solo puedes elegir hasta 5 etiquetas"
-      }
-    },
-    "aspectInput": {
-      "name": "Relación de Aspecto",
-      "placeholder": "Filtra por aspecto",
-      "errors": {
-        "maxLength": "Solo puedes elegir hasta 5 etiquetas"
-      }
-    },
-    "authorInput": {
-      "name": "Autor",
-      "placeholder": "Filtra por autor",
-      "errors": {
-        "maxLength": "Solo puedes elegir hasta 5 etiquetas"
-      }
-    },
-    "clearButton": {
-      "titleDefault": "Limpiar Filtros"
-    },
-    "submitButton": {
-      "titleSearching": "Buscando...",
-      "titleDefault": "Buscar"
-    }
+  "detail": {
+    "by": "Por",
+    "download": "Descargar",
+    "loginToDownload": "Inicia sesión para descargar"
+  },
+  "aspectOptions": {
+    "landscape": "HORIZONTAL",
+    "portrait": "VERTICAL",
+    "square": "CUADRADO"
+  },
+  "validation": {
+    "minPhotos": "Debes subir al menos una foto",
+    "maxPhotos": "Solo puedes subir hasta 3 fotos",
+    "maxTags": "Solo puedes elegir hasta 5 etiquetas"
   }
 }

@@ -1,11 +1,20 @@
 {
-  "inputFile": {
-    "placeholder": "Arrastra y suelta o presiona para subir",
+  "fileUpload": {
+    "placeholder": "Arrastra y suelta o haz clic para subir",
     "processError": "Error al procesar",
-    "remove": "Presiona para elminiar",
-    "addMoreFiles": "+ Presiona aquí para añadir más fotografías"
+    "remove": "Haz clic para eliminar",
+    "addMore": "+ Haz clic aquí para añadir más fotos"
   },
-  "inputPwd": {
+  "links": {
     "forgotPassword": "¿Olvidaste tu contraseña?"
+  },
+  "validation": {
+    "required": "{{field}} es obligatorio",
+    "minLength": "La longitud mínima es {{min}}",
+    "maxLength": "La longitud máxima es {{max}}",
+    "emailPattern": "Formato de correo inválido",
+    "passwordPattern": "La contraseña debe contener al menos una letra mayúscula, una minúscula y un número",
+    "passwordsMatch": "Las contraseñas deben coincidir",
+    "invalidFormat": "Formato inválido"
   }
 }

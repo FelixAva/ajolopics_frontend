@@ -18,7 +18,7 @@ export const Route = createFileRoute('/auth/')({
 })
 
 function RouteComponent() {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation(['auth', 'components']);
 
   const {
     register,
@@ -36,8 +36,8 @@ function RouteComponent() {
     <div className='flex flex-1 justify-center items-center text-center'>
       <div className='w-full md:w-auto flex flex-col gap-2'>
         <div>
-          <h1 className='text-2xl'>{t('login.title')}</h1>
-          <h2 className='text-lg font-thin'>{t('login.subTitle')}</h2>
+          <h1 className='text-2xl'>{t('auth:login.title')}</h1>
+          <h2 className='text-lg font-thin'>{t('auth:login.subTitle')}</h2>
         </div>
 
         <form
@@ -45,31 +45,31 @@ function RouteComponent() {
           className='md:w-sm flex flex-col gap-3'
         >
           <Input
-            label={t('login.form.emailInput.name')}
+            label={t('auth:fields.email')}
             type='index'
-            placeholder={t('login.form.emailInput.placeholder')}
+            placeholder={t('auth:fields.emailPlaceholder')}
             {...register('email', {
-              required: t('login.form.emailInput.errors.required'),
+              required: t('components:validation.required', { field: t('auth:fields.email') }),
               maxLength: {
                 value: 255,
-                message: t('login.form.emailInput.maxLength')
+                message: t('components:validation.maxLength', { max: 255 })
               },
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: t('login.form.emailInput.errors.pattern')
+                message: t('components:validation.emailPattern')
               }
             })}
             error={ errors.email?.message }
           />
           <InputPassword
-            label={t('login.form.pwdInput.name')}
+            label={t('auth:fields.password')}
             pwdRecovery
             {...register("password",
               {
-                required: t('login.form.pwdInput.errors.required'),
+                required: t('components:validation.required', { field: t('auth:fields.password') }),
                 minLength: {
                   value: 8,
-                  message: t('login.form.pwdInput.errors.minLength')
+                  message: t('components:validation.minLength', { min: 8 })
                 },
             })}
             error={ errors.password?.message }
@@ -77,7 +77,7 @@ function RouteComponent() {
 
           {
             login.isError && (
-                <span className='text-sm text-red-400'>{login.error.response?.data.message}</span>
+                <span className='text-sm text-red-400'>{t(`auth:backendErrors.${login.error.response?.data.error}`)}</span>
               )
           }
 
@@ -90,7 +90,7 @@ function RouteComponent() {
               )
               : (
                 <Button
-                  title={t('login.form.submitButton.title')}
+                  title={t('auth:login.submit')}
                   type='submit'
                 />
               )
@@ -98,7 +98,7 @@ function RouteComponent() {
         </form>
 
         <Link to="/auth/register" className="[&.active]:font-bold]" preload="intent">
-          {t('login.registerLink.text')} <span className='text-deep-teal underline'>{t('login.registerLink.path')}</span>
+          {t('auth:login.registerPrompt')} <span className='text-deep-teal underline'>{t('auth:login.registerLink')}</span>
         </Link>
       </div>
     </div>

@@ -71,7 +71,7 @@ const Navigation = ({ isOpen }: Props) => {
         {isAuthenticated ? (
           <Button
             action={logout}
-            title={t('logoutButton')}
+            title={t('logout')}
             icon='log-in'
             variant='ghost'
           />
@@ -83,7 +83,7 @@ const Navigation = ({ isOpen }: Props) => {
           >
             <div className="flex items-center justify-center gap-3 text-center">
               <DynamicIcon name='log-in' size={22} />
-              <p>{t('loginButton')}</p>
+              <p>{t('login')}</p>
             </div>
           </Link>
         )}

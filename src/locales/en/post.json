@@ -1,86 +1,43 @@
 {
-  "createPostForm": {
-    "filesInput": {
-      "name": "Photos",
-      "errors": {
-        "minLength": "You must upload at least one photo",
-        "maxLength": "You can only upload up to 3 photos"
-      }
-    },
-    "titleInput": {
-      "name": "Title",
-      "placeholder": "Sunset in Cozumel...",
-      "errors": {
-        "required": "Title is required",
-        "minLength": "Minimum length is 1",
-        "maxLength": "Maximum length is 255"
-      }
-    },
-    "descriptionInput": {
-      "name": "Description",
-      "placeholder": "What inspired you...",
-      "errors": {
-        "maxLength": "Maximum length is 5,000"
-      }
-    },
-    "tagsInput": {
-      "name": "Tags",
-      "placeholder": "Tag your post",
-      "errors": {
-        "maxLength": "You can only choose up to 5 tags"
-      }
-    },
-    "submitButton": {
-      "titleUploading": "Publishing...",
-      "titleDefault": "Publish to Gallery"
-    }
+  "create": {
+    "title": "Create Post",
+    "submit": "Publish to Gallery",
+    "submitting": "Publishing..."
   },
-  "createPostModal": {
-    "title": "Create Post"
+  "filters": {
+    "title": "Filters",
+    "submit": "Search",
+    "submitting": "Searching...",
+    "clear": "Clear Filters"
   },
-  "filtersPostModal": {
-    "title": "Filters"
+  "fields": {
+    "photos": "Photos",
+    "title": "Title",
+    "titlePlaceholder": "Sunset in Cozumel...",
+    "description": "Description",
+    "descriptionPlaceholder": "What inspired you...",
+    "tags": "Tags",
+    "tagsPlaceholder": "Tag your post",
+    "search": "Search",
+    "searchPlaceholder": "Title, author, tag...",
+    "aspectRatio": "Aspect Ratio",
+    "resolution": "Resolution",
+    "author": "Author",
+    "authorPlaceholder": "Filter by author"
   },
-  "filtersPostForm": {
-    "aspectOptions": {
-      "landscape": "LANDSCAPE",
-      "portrait": "PORTRAIT",
-      "square": "SQUARE"
-    },
-    "searchInput": {
-      "name": "Search",
-      "placeholder": "Title, author, tag...",
-      "errors": {
-        "maxLength": "Maximum length is 255"
-      }
-    },
-    "tagsInput": {
-      "name": "Tags",
-      "placeholder": "Filter by tags",
-      "errors": {
-        "maxLength": "You can only choose up to 5 tags"
-      }
-    },
-    "aspectInput": {
-      "name": "Aspect Ratio",
-      "placeholder": "Filter by aspect ratio",
-      "errors": {
-        "maxLength": "You can only choose up to 5 tags"
-      }
-    },
-    "authorInput": {
-      "name": "Author",
-      "placeholder": "Filter by author",
-      "errors": {
-        "maxLength": "You can only choose up to 5 tags"
-      }
-    },
-    "clearButton": {
-      "titleDefault": "Clear Filters"
-    },
-    "submitButton": {
-      "titleSearching": "Searching...",
-      "titleDefault": "Search"
-    }
+  "detail": {
+    "by": "By",
+    "download": "Download",
+    "loginToDownload": "Login To Download"
+  },
+  "aspectOptions": {
+    "landscape": "LANDSCAPE",
+    "portrait": "PORTRAIT",
+    "square": "SQUARE"
+  },
+  "validation": {
+    "minPhotos": "You must upload at least one photo",
+    "maxPhotos": "You can only upload up to 3 photos",
+    "maxTags": "You can only choose up to 5 tags"
   }
 }
