@@ -139,6 +139,12 @@ const CreatePostForm = ({ onClose }: Props) => {
         )}
       />
 
+      {
+        createPost.isError && (
+          <span className='text-sm text-red-400 text-center'>{createPost.error.response?.data.message}</span>
+        )
+      }
+
       <div className="pt-2">
         <Button
           title={createPost.isPending ? t('createPostForm.submitButton.titleUploading') : t('createPostForm.submitButton.titleDefault')}
