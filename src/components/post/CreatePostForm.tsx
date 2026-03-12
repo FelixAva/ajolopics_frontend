@@ -67,7 +67,7 @@ const CreatePostForm = ({ onClose }: Props) => {
           validate: (value) =>{
             if (value.length === 0) {
               return t('createPostForm.filesInput.errors.minLength');
-            } else if (value.length > 10) {
+            } else if (value.length > 3) {
               return t('createPostForm.filesInput.errors.maxLength')
             }
           }

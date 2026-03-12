@@ -4,7 +4,7 @@
       "name": "Fotografías",
       "errors": {
         "minLength": "Debes subir al menos una fotografía",
-        "maxLength": "Solo puedes subir hasta 10 fotografías"
+        "maxLength": "Solo puedes subir hasta 3 fotografías"
       }
     },
     "titleInput": {

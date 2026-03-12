@@ -4,7 +4,7 @@
       "name": "Photos",
       "errors": {
         "minLength": "You must upload at least one photo",
-        "maxLength": "You can only upload up to 10 photos"
+        "maxLength": "You can only upload up to 3 photos"
       }
     },
     "titleInput": {
