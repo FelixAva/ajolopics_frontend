@@ -2,6 +2,7 @@ import { createPortal } from 'react-dom';
 import { DynamicIcon } from 'lucide-react/dynamic';
 import FiltersForm from './FiltersForm';
 import { useTranslation } from 'react-i18next';
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 
 interface Props {
   isOpen: boolean;
@@ -13,6 +14,8 @@ const FiltersModal = ({
   onClose,
 }: Props) => {
   const { t } = useTranslation('post');
+  
+  useLockBodyScroll(isOpen);
 
   if (!isOpen) return null;
 

@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import usePost from '../../features/post/usePost';
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import HorizontalPostComponent from './HorizontalPostComponent';
 import ChangeImageComponent from './ChangeImageComponent';
+import VerticalPostComponent from './VerticalPostComponent';
+import type { AspectRatioType } from '../../features/post/post.types';
 
 interface Props {
   postId: string | null;
@@ -16,6 +19,8 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
   const { getSinglePost } = usePost(undefined, postId || undefined);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useLockBodyScroll(isOpen);
 
   if (!isOpen) return null;
 
@@ -34,9 +39,17 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
   };
 
   const currentAsset = post?.assets[currentImageIndex];
-  // Usamos el índice 0 de variants porque usualmente contiene la resolución original/más alta de ese asset
   const currentVariant = currentAsset?.variants[1];
   const isMultiple = post && post.assets.length > 1;
+
+  const width = currentVariant?.width;
+  const height = currentVariant?.height;
+
+  let aspectType: AspectRatioType = 'SQUARE'; // Valor por defecto
+  if (width && height) {
+    if (width > height) aspectType = 'LANDSCAPE';
+    else if (width < height) aspectType = 'PORTRAIT';
+  }
 
   const getAspectText = (w?: number, h?: number) => {
     if (!w || !h) return '-';
@@ -52,22 +65,43 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
 
   const modalContent = (
     <div className="fixed inset-0 z-50 flex flex-col flex-1 items-center justify-center bg-black/70 backdrop-blur-md">
-      <HorizontalPostComponent
-        post={post}
-        currentVariant={currentVariant}
-        isLoading={isLoading}
-        isError={isError }
-        onClose={onModalClose}
-        getAspectText={getAspectText}
-      />
 
-      <ChangeImageComponent
-        currentImageIndex={currentImageIndex}
-        assetLength={post?.assets.length}
-        isShown={isMultiple}
-        prevImage={prevImage}
-        nextImage={nextImage}
-      />
+      {aspectType === 'LANDSCAPE' ? (
+        <HorizontalPostComponent
+          post={post}
+          currentVariant={currentVariant}
+          isLoading={isLoading}
+          isError={isError}
+          onClose={onModalClose}
+          getAspectText={getAspectText}
+        >
+          <ChangeImageComponent
+            currentImageIndex={currentImageIndex}
+            assetLength={post?.assets.length}
+            isShown={isMultiple}
+            prevImage={prevImage}
+            nextImage={nextImage}
+          />
+        </HorizontalPostComponent>
+      ) : (
+        <VerticalPostComponent
+          post={post}
+          currentVariant={currentVariant}
+          isLoading={isLoading}
+          isError={isError}
+          onClose={onModalClose}
+          getAspectText={getAspectText}
+        >
+          <ChangeImageComponent
+            currentImageIndex={currentImageIndex}
+            assetLength={post?.assets.length}
+            isShown={isMultiple}
+            prevImage={prevImage}
+            nextImage={nextImage}
+          />
+        </VerticalPostComponent>
+      )}
+
     </div>
   );
 

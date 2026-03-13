@@ -1,7 +1,8 @@
 import { createPortal } from 'react-dom';
 import { DynamicIcon } from 'lucide-react/dynamic';
-import CreatePostForm from './CreatePostForm'; // Ajusta la ruta si es necesario
+import CreatePostForm from './CreatePostForm';
 import { useTranslation } from 'react-i18next'
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 
 interface Props {
   isOpen: boolean;
@@ -10,6 +11,8 @@ interface Props {
 
 const CreatePostModal = ({ isOpen, onClose }: Props) => {
   const { t } = useTranslation('post');
+
+  useLockBodyScroll(isOpen);
 
   if (!isOpen) return null;
 
@@ -26,7 +29,6 @@ const CreatePostModal = ({ isOpen, onClose }: Props) => {
           </button>
         </div>
 
-        {/* Cuerpo (Formulario) */}
         <div className="p-6 overflow-y-auto max-h-[80vh]">
           <CreatePostForm />
         </div>
