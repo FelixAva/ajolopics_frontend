@@ -3,10 +3,8 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Header } from '../components';
 
-import useUser from '../features/user/useUser';
-
 const RootComponent = () => {
-  useUser();
+
   return (
     <div className='flex flex-col flex-1 w-auto h-screen'>
       <Header />
