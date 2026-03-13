@@ -27,7 +27,7 @@ const Badge = ({
 
       <label
         htmlFor={`badge-${id}`}
-        className="w-auto h-auto text-md py-1 px-2.5 rounded-3xl text-deep-teal cursor-pointer border bg-transparent border-deep-teal select-none peer-checked:bg-deep-teal peer-checked:text-white"
+        className={`w-auto h-auto text-md py-1 px-2.5 rounded-3xl text-deep-teal ${isDisable || 'cursor-pointer'} border bg-transparent border-deep-teal select-none peer-checked:bg-deep-teal peer-checked:text-white`}
       >
         {title}
       </label>

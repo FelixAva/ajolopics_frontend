@@ -11,7 +11,7 @@ const PostPreviewCard = ({ post, onClick }: Props) => {
       <img
         onClick={() => onClick(post.id)}
         src={post.assets[0].variants[0].url}
-        alt={post.id.toString()}
+        alt={post.title}
         className="w-full rounded-xl object-cover bg-gray-200" // bg-gray-200 sirve de placeholder mientras carga
         loading="lazy"
       />
