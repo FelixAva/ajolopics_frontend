@@ -6,12 +6,12 @@ import { Header } from '../components';
 const RootComponent = () => {
 
   return (
-    <div className='flex flex-col flex-1 w-auto h-screen bg-gray-50'>
+    <div className='flex flex-col flex-1 w-auto min-h-screen'>
       <Header />
 
       <hr className='text-gray-300' />
 
-      <div className='px-5 flex flex-1 lg:px-10'>
+      <div className='px-5 flex flex-col flex-1 lg:px-10'>
         <Outlet />
       </div>
       <TanStackRouterDevtools />
