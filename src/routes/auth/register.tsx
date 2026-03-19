@@ -22,6 +22,7 @@ function RouteComponent() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<IRegisterFormInput>();
 
@@ -98,7 +99,9 @@ function RouteComponent() {
             {...register("confPassword",
               {
                 required: t('components:validation.required', { field: t('auth:fields.confirmPassword') }),
-                // ! Same as pwd
+                deps: ['password'],
+                validate: (value) =>
+                  value === getValues('password') || t('components:validation.passwordsMatch')
             })}
             error={ errors.confPassword?.message }
           />
