@@ -53,10 +53,7 @@ const HorizontalPostComponent = ({
                 className="w-130 sm:h-75 sm:object-cover lg:h-110 lg:w-auto xl:h-auto xl:w-186 2xl:w-250"
               />
             )}
-
-            {
-              children
-            }
+            {children}
           </div>
           <div
             className="h-full px-6 py-4 flex flex-col justify-start gap-4 overflow-y-auto bg-white lg:w-80 lg:py-4 xl:p-8"

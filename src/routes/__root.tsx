@@ -6,7 +6,7 @@ import { Header } from '../components';
 const RootComponent = () => {
 
   return (
-    <div className='flex flex-col flex-1 w-auto h-screen'>
+    <div className='flex flex-col flex-1 w-auto h-screen bg-gray-50'>
       <Header />
 
       <hr className='text-gray-300' />

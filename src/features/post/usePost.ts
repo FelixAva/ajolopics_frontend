@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { PostService } from './post.service';
 import type { AxiosError } from 'axios';
 import type { ErrorDTO } from '../../types/api.types'
@@ -19,11 +19,18 @@ const usePost = (feedBodyParameters?: GetFeedRequestDTO, postId?: string) => {
     }
   });
 
-  const getPostFeed = useQuery<PaginatedResponseDTO<Post>, AxiosError<ErrorDTO>>({
-    queryKey: ['feed', feedBodyParameters],
-    queryFn: () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { page: _, ...queryKeyParams } = feedBodyParameters || {};
+
+  const getPostFeed = useInfiniteQuery<PaginatedResponseDTO<Post>, AxiosError<ErrorDTO>>({
+    queryKey: ['feed', queryKeyParams],
+    queryFn: ({ pageParam }) => {
       if (!feedBodyParameters) throw new Error ('Post ID is required');
-      return PostService.getFeed(feedBodyParameters);
+      return PostService.getFeed({ ...feedBodyParameters, page: pageParam as number });
+    },
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage.hasNextPage ? lastPage.page + 1 : undefined;
     },
     enabled: !!feedBodyParameters,
   });

@@ -26,6 +26,7 @@
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.71.2",
     "react-i18next": "^16.5.5",
+    "react-intersection-observer": "^10.0.3",
     "react-masonry-css": "^1.0.16",
     "react-select": "^5.10.2",
     "sweetalert2": "^11.26.20",
