@@ -46,14 +46,13 @@ const VerticalPostComponent = ({
               <img
                 src={currentVariant.url}
                 alt={post.title}
-                // 👇 Clases específicas para tu imagen vertical
                 className="w-87 sm:object-cover md:w-100 lg:w-110 2xl:w-120"
               />
             )}
             {children}
           </div>
 
-          {/* LADO DERECHO: Usamos el Slot mediante Composición */}
+          {/* LADO DERECHO: Slot mediante Composición */}
           <div
             className="h-full px-6 flex flex-col py-4 gap-4 overflow-y-auto bg-white sm:py-4 sm:justify-start sm:gap-4 md:w-75 lg:w-90"
           >
