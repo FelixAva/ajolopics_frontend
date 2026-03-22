@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '../../../components';
+import Button from '@/components/ui/Button';
 import { useLanguageStore } from '../store/useLanguageStore';
 
 const LanguageModal = () => {

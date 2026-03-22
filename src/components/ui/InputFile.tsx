@@ -1,9 +1,10 @@
 import { forwardRef, useState } from 'react';
-import { DynamicIcon } from 'lucide-react/dynamic';
-import { imageCompressor } from '..';
-import type { InputHTMLAttributes, ChangeEvent, DragEvent, MouseEvent } from 'react';
-import type { FileWithPreview } from '../../features/post/types/post.types';
 import { useTranslation } from 'react-i18next';
+import { DynamicIcon } from 'lucide-react/dynamic';
+
+import { imageCompressor } from '@/features/post/utils/imageCompressor.canvas';
+import type { InputHTMLAttributes, ChangeEvent, DragEvent, MouseEvent } from 'react';
+import type { FileWithPreview } from '@/features/post/types/post.types';
 
 interface Props extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'> {
   label?: string;

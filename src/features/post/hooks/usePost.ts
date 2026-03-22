@@ -1,12 +1,12 @@
 import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { PostService } from '../services/post.service';
 import type { AxiosError } from 'axios';
-import type { ErrorDTO } from '../../../types/api.types'
-import type { PaginatedResponseDTO } from '../../../types/api.paginated.response.types';
+import type { ErrorDTO } from '@/types/api.types'
+import type { PaginatedResponseDTO } from '@/types/api.paginated.response.types';
 import type { Post } from '../types/post.types';
 import type { CreatePostRequestDTO, GetFeedRequestDTO } from '../types/post.api.types';
-import { queryClient } from '../../../app/queryClient';
-import { showAjolopicsToast } from '../../../components/ui/Toast';
+import { queryClient } from '@/app/queryClient';
+import { showAjolopicsToast } from '@/components/ui/Toast';
 
 const usePost = (feedBodyParameters?: GetFeedRequestDTO, postId?: string) => {
   const createPost = useMutation<Post, AxiosError<ErrorDTO>, CreatePostRequestDTO>({

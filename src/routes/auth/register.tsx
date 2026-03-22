@@ -4,14 +4,17 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 // Hooks imports
-import useAuth from '../../features/auth/hooks/useAuth';
+import useAuth from '@/features/auth/hooks/useAuth';
 
 // Types and Interfaces imports
 import type { SubmitHandler } from 'react-hook-form';
-import type { IRegisterFormInput } from '../../features/auth/types/auth.form.types';
+import type { IRegisterFormInput } from '@/features/auth/types/auth.form.types';
 
 // Components imports
-import { Input, Button, Spinner, InputPassword } from '../../components';
+import Input from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
+import Spinner from '@/components/ui/Spinner';
+import InputPassword from '@/components/ui/InputPassword';
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,

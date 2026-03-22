@@ -1,7 +1,8 @@
 // PostSidebar.tsx
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '../../auth/store/useAuthStore';
-import { Button, Badge } from '../../../components';
+import { useAuthStore } from '@/features/auth/store/useAuthStore';
+import Button from '@/components/ui/Button';
+import Badge from '@/components/ui/Badge';
 import type { MediaVariant, Post } from '../types/post.types';
 
 interface PostSidebarProps {

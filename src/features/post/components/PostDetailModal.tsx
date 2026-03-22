@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import usePost from '../hooks/usePost';
-import { useLockBodyScroll } from '../../../hooks/useLockBodyScroll';
+import usePost from '@/features/post/hooks/usePost';
+import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import HorizontalPostComponent from './PostHorizontalCard';
 import ChangeImageComponent from './ChangeImageComponent';
 import VerticalPostComponent from './PostVerticalCard';

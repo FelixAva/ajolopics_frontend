@@ -1,12 +1,15 @@
-import useTag from '../../tag/hooks/useTag.ts';
-import useUser from '../../user/hooks/useUser.ts';
-import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
-import { Input, Button, SelectInput } from '../../../components/index.ts';
 import { useTranslation } from 'react-i18next';
-import type { IGetFeedFiltersFormInput } from '../types/post.forms.types.ts';
-import type { User } from '../../user/types/user.types.ts';
 import { useNavigate } from '@tanstack/react-router';
-import { Route } from '../../../routes/index';
+import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
+
+import { Route } from '@/routes/index';
+import useTag from '@/features/tag/hooks/useTag.ts';
+import useUser from '@/features/user/hooks/useUser.ts';
+import Input from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
+import SelectInput from '@/components/ui/SelectInput';
+import type { IGetFeedFiltersFormInput } from '../types/post.forms.types.ts';
+import type { User } from '@/features/user/types/user.types.ts';
 
 interface Props {
   onClose?: () => void;
@@ -16,6 +19,7 @@ const FiltersForm = ({ onClose }: Props) => {
   // Importamos 'post' para etiquetas/placeholders y 'components' para errores
   const { t } = useTranslation(['post', 'components']);
   const navigate = useNavigate({ from: Route.fullPath });
+
 
   const {
     register,

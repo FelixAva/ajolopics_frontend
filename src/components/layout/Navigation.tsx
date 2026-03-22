@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
 import clsx from 'clsx';
-import Button from '../ui/Button';
-import { FiltersModal, CreatePostModal } from '../';
 import { DynamicIcon } from 'lucide-react/dynamic';
 import { useTranslation } from 'react-i18next';
 
-import { useAuthStore } from '../../features/auth/store/useAuthStore';
-import { useState } from 'react';
+import Button from '@/components/ui/Button';
+import FiltersModal from '@/features/post/components/FiltersModal';
+import CreatePostModal from '@/features/post/components/CreatePostModal';
+import { useAuthStore } from '@/features/auth/store/useAuthStore';
 
 interface Props {
   isOpen: boolean;

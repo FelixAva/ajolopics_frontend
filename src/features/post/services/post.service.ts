@@ -1,5 +1,5 @@
-import { api } from '../../../api/axios';
-import type { PaginatedResponseDTO } from '../../../types/api.paginated.response.types';
+import { api } from '@/api/axios';
+import type { PaginatedResponseDTO } from '@/types/api.paginated.response.types';
 import type { CreatePostRequestDTO, GetFeedRequestDTO } from '../types/post.api.types';
 import type { Post } from '../types/post.types';
 

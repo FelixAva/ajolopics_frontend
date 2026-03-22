@@ -1,10 +1,16 @@
-import usePost from '../hooks/usePost';
-import useTag from '../../tag/hooks/useTag';
-import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
-import { Input, Button, SelectInput, InputFile, InputArea } from '../../../components';
-import type { ICreatePostFormInput } from '../types/post.forms.types';
-import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
+import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
+import usePost from '@/features/post/hooks/usePost';
+import useTag from '@/features/tag/hooks/useTag';
+
+import Input from '@/components/ui/Input';
+import Button from '@/components/ui/Button';
+import SelectInput from '@/components/ui/SelectInput';
+import InputFile from '@/components/ui/InputFile';
+import InputArea from '@/components/ui/InputArea';
+import type { ICreatePostFormInput } from '../types/post.forms.types';
 
 interface Props {
   onClose?: () => void;

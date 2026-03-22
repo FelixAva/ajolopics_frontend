@@ -1,7 +1,9 @@
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LanguageModal, BurgerButton } from '../';
+
+import BurgerButton from '@/components/ui/BurgerButton';
+import LanguageModal from '@/features/language/components/LanguageModal';
 import Navigation from './Navigation';
 
 const Header = () => {

@@ -1,5 +1,5 @@
-import type { User } from '../../user/types/user.types';
-import type { Tag } from '../../tag/types/tag.type';
+import type { User } from '@/features/user/types/user.types';
+import type { Tag } from '@/features/tag/types/tag.type';
 
 export type AspectRatioType = "SQUARE" | "LANDSCAPE" | "PORTRAIT";
 

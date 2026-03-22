@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 
 import usePost from '../hooks/usePost';
 import type { GetFeedRequestDTO } from '../types/post.api.types';
-import { Route } from '../../../routes/index';
+import { Route } from '@/routes/index';
 
 import PostPreviewCard from './PostPreviewCard';
 import PostDetailModal from './PostDetailModal';
