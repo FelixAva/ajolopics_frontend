@@ -1,28 +1,26 @@
 // Import form components
-import Input from './form/Input';
-import InputPassword from './form/InputPassword';
-import SelectInput from './form/SelectInput';
-import InputFile from './form/InputFile';
-import InputArea from './form/InputArea';
+import Input from './ui/Input';
+import InputPassword from './ui/InputPassword';
+import SelectInput from './ui/SelectInput';
+import InputFile from './ui/InputFile';
+import InputArea from './ui/InputArea';
 
 // Import Post components
-import PostsMasonryGrid from './post/PostsMasonryGrid';
-import PostPreviewCard from './post/PostPreviewCard';
-import CreatePostModal from './post/CreatePostModal';
+import PostsMasonryGrid from '../features/post/components/PostsMasonryGrid';
+import PostPreviewCard from '../features/post/components/PostPreviewCard';
+import CreatePostModal from '../features/post/components/CreatePostModal';
 
 // Import Shared components
-import Button from './shared/Button';
-import Badge from './shared/Badge';
-import Spinner from './shared/Spinner';
-import Header from './shared/Header';
-import BurgerButton from './shared/BurgerButton';
-import LanguageModal from './shared/LanguageModal';
-import { imageCompressor } from './post/imageCompressor.canvas';
+import Button from './ui/Button';
+import Badge from './ui/Badge';
+import Spinner from './ui/Spinner';
+import BurgerButton from './ui/BurgerButton';
+import LanguageModal from '../features/language/components/LanguageModal';
+import { imageCompressor } from '../features/post/utils/imageCompressor.canvas';
 
 // Import Modals components
-import FiltersModal from './post/FiltersModal'
-import FiltersForm from './post/FiltersForm'
-import AdviceModal from './modals/AdviceModal';
+import FiltersModal from '../features/post/components/FiltersModal'
+import FiltersForm from '../features/post/components/FiltersForm'
 
 export {
   // Export Post components
@@ -34,7 +32,6 @@ export {
   Button,
   Badge,
   Spinner,
-  Header,
   imageCompressor,
   BurgerButton,
   LanguageModal,
@@ -49,5 +46,4 @@ export {
   // Modals
   FiltersModal,
   FiltersForm as FiltersComponent,
-  AdviceModal,
 }
