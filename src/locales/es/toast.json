@@ -1,0 +1,5 @@
+{
+  "register": "Usuario registrado correctamente",
+  "postSuccess": "Publicado correctamente",
+  "postFailed": "Error al publicar"
+}

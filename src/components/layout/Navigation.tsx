@@ -5,6 +5,7 @@ import { DynamicIcon } from 'lucide-react/dynamic';
 import { useTranslation } from 'react-i18next';
 
 import Button from '@/components/ui/Button';
+import LogoutButton from '@/components/ui/LogoutButton';
 import FiltersModal from '@/features/post/components/FiltersModal';
 import CreatePostModal from '@/features/post/components/CreatePostModal';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
@@ -21,7 +22,6 @@ const Navigation = ({ isOpen }: Props) => {
 
     const token = useAuthStore((state) => state.token);
     const user = useAuthStore((state) => state.user);
-    const logout = useAuthStore((state) => state.logout);
 
     const isAuthenticated = !!token;
 
@@ -70,12 +70,7 @@ const Navigation = ({ isOpen }: Props) => {
         )}
 
         {isAuthenticated ? (
-          <Button
-            action={logout}
-            title={t('logout')}
-            icon='log-in'
-            variant='ghost'
-          />
+          <LogoutButton />
         ) : (
           <Link
             to="/auth"

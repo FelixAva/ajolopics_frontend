@@ -6,25 +6,29 @@ import enAuth from '../locales/en/auth.json';
 import enComponents from '../locales/en/components.json';
 import enHeader from '../locales/en/header.json';
 import enPost from '../locales/en/post.json';
+import enToast from '../locales/en/toast.json';
 
 // Importaciones de archivos en Español (ES)
 import esAuth from '../locales/es/auth.json';
 import esComponents from '../locales/es/components.json';
 import esHeader from '../locales/es/header.json';
 import esPost from '../locales/es/post.json';
+import esToast from '../locales/es/toast.json';
 
 const resources = {
   en: {
     auth: enAuth,
     components: enComponents,
     header: enHeader,
-    post: enPost
+    post: enPost,
+    toast: enToast
   },
   es: {
     auth: esAuth,
     components: esComponents,
     header: esHeader,
-    post: esPost
+    post: esPost,
+    toast: esToast
   },
 }
 

@@ -1,6 +1,5 @@
 import Swal from 'sweetalert2';
 
-// Definimos los tipos permitidos
 type ToastType = 'success' | 'error' | 'info';
 
 export const showAjolopicsToast = (type: ToastType, title: string) => {
@@ -16,8 +15,8 @@ export const showAjolopicsToast = (type: ToastType, title: string) => {
       iconColor: '!smoky-rose-700',
     },
     info: {
-      popup: '!bg-purple-50 !border-purple-200 !text-purple-700 !shadow-purple-100',
-      timerProgressBar: '!bg-purple-500',
+      popup: '!bg-blue-50 !border-blue-200 !text-blue-700 !shadow-blue-100',
+      timerProgressBar: '!bg-blue-500',
       iconColor: '#a855f7',
     },
   };

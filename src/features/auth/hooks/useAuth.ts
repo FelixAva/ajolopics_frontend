@@ -1,21 +1,25 @@
 import { useMutation } from '@tanstack/react-query';
-import { AuthService } from '../services/auth.service';
-import { useAuthStore } from '../store/useAuthStore';
-import { router } from '../../../app/router';
 import { useNavigate } from '@tanstack/react-router';
 import type { AxiosError } from 'axios';
-import type { ErrorDTO } from '../../../types/api.types';
+import { useTranslation } from 'react-i18next';
+
+import { AuthService } from '../services/auth.service';
+import { useAuthStore } from '../store/useAuthStore';
+import { router } from '@/app/router';
+import { UserService } from '@/features/user/services/user.service';
+import { queryClient } from '@/app/queryClient';
+import { showAjolopicsToast } from '@/components/ui/Alerts';
+import type { ErrorDTO } from '@/types/api.types';
 import type {
   LoginDTO,
   LoginResponseDTO,
   RegisterDTO,
   RegisterResponseDTO
 } from '../types/auth.api.types';
-import { UserService } from '../../user/services/user.service';
-import { queryClient } from '../../../app/queryClient';
-import { showAjolopicsToast } from '@/components/ui/Toast';
 
 const useAuth = () => {
+  const { t } = useTranslation('toast');
+
   // Get the setToken function from Zustand
   const setToken = useAuthStore(state => state.setToken);
   const setUser = useAuthStore(state => state.setUser);
@@ -48,7 +52,7 @@ const useAuth = () => {
   const register = useMutation<RegisterResponseDTO, AxiosError<ErrorDTO>, RegisterDTO>({
     mutationFn: (data) => AuthService.register(data),
     onSuccess: () => {
-      showAjolopicsToast('success', 'User register successfully');
+      showAjolopicsToast('success', t('register'));
 
       // Redirect to the Login page
       router.navigate({ to: '/auth' });
