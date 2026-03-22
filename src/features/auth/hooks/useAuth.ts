@@ -13,6 +13,7 @@ import type {
 } from '../types/auth.api.types';
 import { UserService } from '../../user/services/user.service';
 import { queryClient } from '../../../app/queryClient';
+import { showAjolopicsToast } from '@/components/ui/Toast';
 
 const useAuth = () => {
   // Get the setToken function from Zustand
@@ -47,13 +48,12 @@ const useAuth = () => {
   const register = useMutation<RegisterResponseDTO, AxiosError<ErrorDTO>, RegisterDTO>({
     mutationFn: (data) => AuthService.register(data),
     onSuccess: () => {
-      alert('Registered successfully'); // ! Replace with a toast
+      showAjolopicsToast('success', 'User register successfully');
 
       // Redirect to the Login page
       router.navigate({ to: '/auth' });
     },
     onError: (error) => {
-      // Error cathching. The error is also render with a span in /src/routes/auth/register.tsx
       console.error(error.response?.data.message);
     }
   })
