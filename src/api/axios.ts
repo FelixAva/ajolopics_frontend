@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useAuthStore } from '../features/auth/useAuthStore';
-import { router } from '../lib/router';
+import { useAuthStore } from '../features/auth/store/useAuthStore';
+import { router } from '../app/router';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 

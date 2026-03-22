@@ -1,10 +1,9 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Header } from '../components';
+import Header from '../components/layout/Header';
 
 const RootComponent = () => {
-
   return (
     <div className='flex flex-col flex-1 w-auto min-h-screen'>
       <Header />

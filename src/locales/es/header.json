@@ -3,5 +3,8 @@
   "filters": "Filtros",
   "createPost": "Crear Publicación",
   "login": "Iniciar Sesión",
-  "logout": "Cerrar Sesión"
+  "logout": "Cerrar Sesión",
+  "logoutConfirm": "¿Estás seguro?",
+  "accept": "Si, salir",
+  "cancel": "Cancelar"
 }

@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { PostsMasonryGrid } from '../components';
+import PostsMasonryGrid from '@/features/post/components/PostsMasonryGrid';
 // import { useTranslation } from 'react-i18next';
-import type { AspectRatioType } from '../features/post/post.types';
+import type { AspectRatioType } from '../features/post/types/post.types';
 
 type FeedSearch = {
   tags?: string;

@@ -3,5 +3,8 @@
   "filters": "Filters",
   "createPost": "Create Post",
   "login": "Log In",
-  "logout": "Log Out"
+  "logout": "Log Out",
+  "logoutConfirm": "Are you sure?",
+  "accept": "Yes, leave",
+  "cancel": "Cancel"
 }
