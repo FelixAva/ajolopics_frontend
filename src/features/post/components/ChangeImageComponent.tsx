@@ -21,13 +21,13 @@ const ChangeImageComponent = ({
     <>
       <button
         onClick={prevImage}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-md transition-all"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-md transition-all cursor-pointer"
       >
         <DynamicIcon name="chevron-left" size={24} />
       </button>
       <button
         onClick={nextImage}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-md transition-all"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-md transition-all cursor-pointer"
       >
         <DynamicIcon name="chevron-right" size={24} />
       </button>
