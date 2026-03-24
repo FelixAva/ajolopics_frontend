@@ -1,50 +1,63 @@
-import { DynamicIcon } from 'lucide-react/dynamic';
-import type { IconName } from 'lucide-react/dynamic';
-import { clsx } from 'clsx';
+import type { ButtonHTMLAttributes, ReactNode, FC } from 'react';
+import { type IconName, DynamicIcon } from 'lucide-react/dynamic';
 
-interface Props {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title?: string;
   icon?: IconName;
-  variant?: 'default' | 'inverted' | 'ghost' | 'none' ;
-  type?: 'button' | 'submit' | 'reset';
-  action?: () => void;
-  className?: string;
-  isDisabled?: boolean;
+  variant?: 'primary' | 'secondary' | 'danger' | 'outline' | 'ghost' | 'none';
+  size?: 'sm' | 'md' | 'lg' | 'none';
+  isSelected?: boolean;
+  children?: ReactNode;
 }
 
-const Button = ({
+const Button: FC<ButtonProps> = ({
   title,
   icon,
-  variant='default',
-  type='button',
-  action,
-  className,
-  isDisabled
-}: Props ) => {
+  variant = 'primary',
+  size = 'md',
+  isSelected = false,
+  type = 'button',
+  children,
+  className = '',
+  ...props
+}) => {
+  const baseStyles = "inline-flex items-center justify-center font-medium rounded-lg transition-colors duration-200 select-none hover:cursor-pointer focus-visible:outline-none w-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
+
+  const variantStyles = {
+    primary: "bg-deep-teal text-white border border-transparent hover:bg-deep-teal-700 focus-visible:ring-deep-teal-500",
+    secondary: "bg-deep-teal-100 text-deep-teal-900 border border-transparent hover:bg-deep-teal-200",
+    danger: "bg-smoky-rose-600 text-white border border-transparent hover:bg-smoky-rose-700 focus-visible:ring-smoky-rose-500",
+    outline: "bg-transparent text-deep-teal border border-deep-teal hover:bg-deep-teal-50 hover:border-deep-teal-100 focus-visible:ring-deep-teal-500",
+    ghost: "bg-transparent text-deep-teal border border-transparent hover:bg-deep-teal-50 focus-visible:ring-deep-teal-500",
+    none: "bg-transparent text-deep-teal border-transparent rounded-full focus-visible:ring-transparent rounded-full"
+  };
+
+  const sizeStyles = {
+    sm: "h-9 px-3.5 py-1.5 text-sm gap-1.5",
+    md: "h-min px-4 py-2 md:text-lg gap-2",
+    lg: "h-11 px-8 py-3 text-lg gap-2.5",
+    none: "p-0"
+  };
+
+  const selectedStyles = isSelected
+    ? "ring-2 ring-offset-2 ring-deep-teal-500"
+    : "";
+
+  const finalClassName = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${selectedStyles} ${className}`;
+
   return (
     <button
-      onClick={action}
-      className={clsx(
-        `w-auto h-min px-3.5 py-2 rounded-lg md:text-lg transition-colors duration-200 select-none hover:cursor-pointer ${className}`,
-        {
-          'bg-deep-teal text-white border-transparent hover:bg-deep-teal-700 hover:border-deep-teal-700': variant === 'default',
-          'bg-transparent text-deep-teal border border-deep-teal hover:bg-deep-teal-100 hover:border-deep-teal-100': variant === 'inverted',
-          'bg-transparent text-deep-teal border-deep-teal hover:bg-deep-teal-100 hover:border-deep-teal-100': variant === 'ghost',
-          'border-transparent rounded-none': variant === 'none'
-        },
-      )}
+      className={finalClassName}
       type={type}
-      disabled={isDisabled}
+      {...props}
     >
-      {(
-        <div className="flex items-center justify-center gap-3 text-center">
-          {
-            icon && <DynamicIcon name={icon} size={22} />
-          }
-          {
-            title && <p className='w-fill'>{ title }</p>
-          }
-        </div>
+      {icon || title ? (
+        <>
+          {icon && <DynamicIcon name={icon} size={22} />}
+          {title && <span>{title}</span>}
+        </>
+      ) : (
+        children
       )}
     </button>
   );
