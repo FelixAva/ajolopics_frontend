@@ -8,7 +8,7 @@ interface CustomSelectProps extends Omit<SelectProps<Option, boolean, GroupBase<
   error?: string;
 }
 
-const SelectInput = ({
+const InputSelect = ({
   label,
   name,
   options,
@@ -64,4 +64,4 @@ const SelectInput = ({
   );
 };
 
-export default SelectInput;
+export default InputSelect;

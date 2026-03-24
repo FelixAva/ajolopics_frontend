@@ -7,7 +7,7 @@ import useTag from '@/features/tag/hooks/useTag';
 
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
-import SelectInput from '@/components/ui/SelectInput';
+import InputSelect from '@/components/ui/InputSelect';
 import InputFile from '@/components/ui/InputFile';
 import InputArea from '@/components/ui/InputArea';
 import type { ICreatePostFormInput } from '../types/post.forms.types';
@@ -130,7 +130,7 @@ const CreatePostForm = ({ onClose }: Props) => {
           }
         }}
         render={({ field }) => (
-          <SelectInput
+          <InputSelect
             {...field}
             label={t('post:fields.tags')}
             isMulti

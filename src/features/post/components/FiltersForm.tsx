@@ -7,7 +7,7 @@ import useTag from '@/features/tag/hooks/useTag.ts';
 import useUser from '@/features/user/hooks/useUser.ts';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
-import SelectInput from '@/components/ui/SelectInput';
+import InputSelect from '@/components/ui/InputSelect.tsx';
 import type { IGetFeedFiltersFormInput } from '../types/post.forms.types.ts';
 import type { User } from '@/features/user/types/user.types.ts';
 
@@ -122,7 +122,7 @@ const FiltersForm = ({ onClose }: Props) => {
           }
         }}
         render={({ field }) => (
-          <SelectInput
+          <InputSelect
             {...field}
             label={t('post:fields.tags')}
             isMulti
@@ -148,7 +148,7 @@ const FiltersForm = ({ onClose }: Props) => {
           }
         }}
         render={({ field }) => (
-          <SelectInput
+          <InputSelect
             {...field}
             label={t('post:fields.author')}
             isMulti
@@ -167,7 +167,7 @@ const FiltersForm = ({ onClose }: Props) => {
         name='aspectRatio'
         control={control}
         render={({ field }) => (
-          <SelectInput
+          <InputSelect
             {...field}
             label={t('post:fields.aspectRatio')}
             placeholder={t('post:fields.aspectRatio')}
