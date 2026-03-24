@@ -2,6 +2,7 @@ import { DynamicIcon } from 'lucide-react/dynamic';
 import type { MediaVariant, Post } from '../types/post.types';
 import type { ReactNode } from 'react';
 import PostSidebar from './PostSidebar'; // <-- Importamos nuestra pieza de Lego
+import Button from '@/components/ui/Button';
 
 interface Props {
   post: Post | undefined;
@@ -26,9 +27,12 @@ const VerticalPostComponent = ({
     <div
       className="h-full w-full relative flex flex-col md:w-auto md:h-auto bg-white shadow-2xl overflow-hidden transition-all duration-500 ease-in-out md:rounded-2xl md:flex-row"
     >
-      <button onClick={onClose} className="absolute top-4 right-4 z-10 text-gray-400 hover:text-black transition-colors bg-white/80 rounded-full p-1">
-        <DynamicIcon name="x" size={24} />
-      </button>
+      <Button
+        onClick={onClose}
+        variant='none'
+        icon='x'
+        className="absolute top-4 right-4 z-10 hover:text-black! bg-white/80 rounded-full! p-1!"
+      />
 
       {isLoading ? (
         <div className="w-full h-full flex justify-center items-center">

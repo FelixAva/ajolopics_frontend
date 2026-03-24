@@ -1,8 +1,8 @@
 import { createPortal } from 'react-dom';
-import { DynamicIcon } from 'lucide-react/dynamic';
 import CreatePostForm from './CreatePostForm';
 import { useTranslation } from 'react-i18next'
 import { useLockBodyScroll } from '../../../hooks/useLockBodyScroll';
+import Button from '@/components/ui/Button';
 
 interface Props {
   isOpen: boolean;
@@ -21,12 +21,12 @@ const CreatePostModal = ({ isOpen, onClose }: Props) => {
       <div className="bg-white rounded-2xl w-full max-w-2xl flex flex-col shadow-2xl overflow-hidden">
         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
           <h2 className="text-2xl font-semibold text-gray-800">{t('create.title')}</h2>
-          <button
+          <Button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-700 transition-colors"
-          >
-            <DynamicIcon name="x" size={24} />
-          </button>
+            variant='none'
+            icon='x'
+            className="hover:text-black! p-0!"
+          />
         </div>
 
         <div className="p-6 overflow-y-auto max-h-[80vh]">

@@ -30,6 +30,7 @@ const LanguageModal = () => {
   return (
     <div className="relative inline-block text-left">
       <Button
+        size='sm'
         title={currentLanguageDisplay}
         icon='globe'
         onClick={() => setIsOpen(!isOpen)}

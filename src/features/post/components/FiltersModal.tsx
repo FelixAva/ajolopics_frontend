@@ -1,8 +1,8 @@
 import { createPortal } from 'react-dom';
-import { DynamicIcon } from 'lucide-react/dynamic';
 import FiltersForm from './FiltersForm';
 import { useTranslation } from 'react-i18next';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
+import Button from '@/components/ui/Button';
 
 interface Props {
   isOpen: boolean;
@@ -24,12 +24,12 @@ const FiltersModal = ({
       <div className="bg-white w-full max-w-lg flex flex-1 flex-col shadow-2xl overflow-hidden">
         <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
           <h2 className="text-2xl font-semibold text-gray-800">{t('filters.title')}</h2>
-          <button
+          <Button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-700 transition-colors"
-          >
-            <DynamicIcon name="x" size={24} />
-          </button>
+            variant='none'
+            icon='x'
+            className="hover:text-black! p-0!"
+          />
         </div>
 
         <div className="p-6 overflow-y-auto max-h-[80vh]">

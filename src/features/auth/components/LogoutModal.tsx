@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
 import { useAuthStore } from '@/features/auth/store/useAuthStore'; // Ajusta tu ruta
-import { router } from '@/app/router'; // Ajusta tu ruta
 import Button from '@/components/ui/Button';
 
 interface Props {
@@ -16,8 +15,6 @@ const LogoutModal = ({ onClose, isOpen }: Props) => {
   const handleConfirmLogout = () => {
     logout();
     onClose();
-
-    router.navigate({ to: '/auth' });
   };
 
   if (!isOpen) return null;

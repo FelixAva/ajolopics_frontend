@@ -64,11 +64,11 @@ const PostSidebar = ({ post, currentVariant, getAspectText }: PostSidebarProps) 
       </div>
 
       <Button
-        action={() => alert('download')}
+        onClick={() => alert('download')}
         icon='download'
         title={isUserAuthenticated ? t('post:detail.download', 'Download') : t('post:detail.loginToDownload')}
-        isDisabled={!isUserAuthenticated}
-        className="w-full mt-2 disabled:opacity-50"
+        disabled={!isUserAuthenticated}
+        className="w-full"
       />
     </>
   );

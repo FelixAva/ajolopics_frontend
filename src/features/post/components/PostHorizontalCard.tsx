@@ -1,8 +1,8 @@
-
 import { DynamicIcon } from 'lucide-react/dynamic';
 import type { MediaVariant, Post } from '../types/post.types';
 import type { ReactNode } from 'react';
 import PostSidebar from './PostSidebar';
+import Button from '@/components/ui/Button';
 
 interface Props {
   post: Post | undefined;
@@ -27,12 +27,12 @@ const HorizontalPostComponent = ({
     <div
       className="h-full w-full relative flex flex-col bg-white shadow-2xl overflow-hidden transition-all duration-500 ease-in-out sm:max-h-min sm:rounded-2xl sm:w-auto lg:max-h-none lg:h-auto xl:h-auto lg:flex-row"
     >
-      <button
+      <Button
         onClick={onClose}
-        className="absolute top-4 right-4 z-10 text-gray-400 hover:text-black transition-colors bg-white/80 rounded-full p-1"
-      >
-        <DynamicIcon name="x" size={24} />
-      </button>
+        variant='none'
+        icon='x'
+        className="absolute top-4 right-4 z-10 hover:text-black! bg-white/80 rounded-full! p-1!"
+      />
 
       {isLoading ? (
         <div className="w-full h-full flex justify-center items-center">
