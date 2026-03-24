@@ -41,11 +41,10 @@ const InputPassword = forwardRef<HTMLInputElement, Props> (function Input (
       />
 
       <Button
-        type='button'
         className='absolute right-0 top-7'
         icon={isVisible ? 'eye-off' : 'eye'}
         variant='none'
-        action={changeVisible}
+        onClick={changeVisible}
       />
 
       {

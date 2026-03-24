@@ -1,32 +1,59 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import type { InputHTMLAttributes } from 'react';
+import Button from './Button';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, Props> (function Input (
-  { label, error, className, ...rest },
-  ref
-) {
-  return (
-    <div className='w-auto flex flex-col text-left'>
-      <p className='text-lg'>{ label }</p>
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ label, error, className = '', id, name, type, ...rest }, ref) => {
+    const [showPassword, setShowPassword] = useState(false);
 
-      <input
-        ref={ref}
-        {...rest}
-        className={`w-full border border-dusty-olive rounded-lg px-2.5 py-1.5 focus:outline-dusty-olive-700 ${className ?? ''}`}
-      />
+    const inputId = id || name;
 
-      {
-        error && (
-          <span className='text-sm text-red-400'>{error}</span>
-        )
-      }
-    </div>
-  );
-});
+    const inputType = type === 'password'
+      ? (showPassword ? 'text' : 'password')
+      : type;
+
+    return (
+      <div className="flex flex-col text-left w-full">
+        <label htmlFor={inputId} className="block text-lg text-gray-700">
+          {label}
+        </label>
+
+        <div className="relative">
+          <input
+            id={inputId}
+            name={name}
+            ref={ref}
+            type={inputType}
+            className={`block w-full border border-dusty-olive rounded-lg px-2.5 py-1.5 focus:outline-dusty-olive-700 ${className}`}
+            {...rest}
+          />
+
+          {/* Lógica y posicionamiento CSS del Componente 1 */}
+          {type === 'password' && (
+            <Button
+              type="button"
+              className="absolute right-2 top-1/2 -translate-y-1/2"
+              variant="none"
+              size="sm"
+              icon={showPassword ? 'eye-off' : 'eye'}
+              onClick={() => setShowPassword(prev => !prev)}
+            />
+          )}
+        </div>
+
+        {error && (
+          <span className="mt-1 text-sm text-red-400">{error}</span>
+        )}
+      </div>
+    );
+  }
+);
+
+Input.displayName = 'Input';
 
 export default Input;
