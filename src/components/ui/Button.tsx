@@ -26,7 +26,7 @@ const Button: FC<ButtonProps> = ({
   const variantStyles = {
     primary: "bg-deep-teal text-white border border-transparent hover:bg-deep-teal-700 focus-visible:ring-deep-teal-500",
     secondary: "bg-deep-teal-100 text-deep-teal-900 border border-transparent hover:bg-deep-teal-200",
-    danger: "bg-smoky-rose-600 text-white border border-transparent hover:bg-smoky-rose-700 focus-visible:ring-smoky-rose-500",
+    danger: "bg-smoky-rose-100 text-smoky-rose-700 border border-transparent hover:bg-smoky-rose-600 focus-visible:ring-smoky-rose-500",
     outline: "bg-transparent text-deep-teal border border-deep-teal hover:bg-deep-teal-50 hover:border-deep-teal-100 focus-visible:ring-deep-teal-500",
     ghost: "bg-transparent text-deep-teal border border-transparent hover:bg-deep-teal-100 focus-visible:ring-deep-teal-500",
     none: "bg-transparent text-deep-teal border-transparent rounded-full focus-visible:ring-transparent rounded-full"
