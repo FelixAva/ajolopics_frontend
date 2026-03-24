@@ -2,9 +2,10 @@ import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import BurgerButton from '@/components/ui/BurgerButton';
 import LanguageModal from '@/features/language/components/LanguageModal';
 import Navigation from './Navigation';
+import Button from '../ui/Button';
+import clsx from 'clsx';
 
 const Header = () => {
   const [isNavigationOpen, setIsNavigationOpen] = useState<boolean>(false);
@@ -26,10 +27,33 @@ const Header = () => {
           <LanguageModal />
         </div>
 
-        <BurgerButton
-          isOpen={isNavigationOpen}
+        <Button
           onClick={onMenuClick}
-        />
+          variant='secondary'
+          size='sm'
+          className='w-12.5 h-12.5 md:hidden'
+        >
+          <div className="relative w-7 h-7 flex items-center justify-center">
+            <span
+              className={clsx(
+                "absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300",
+                isNavigationOpen ? "rotate-45 translate-y-0" : "-translate-y-2"
+              )}
+            />
+            <span
+              className={clsx(
+                "absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300",
+                isNavigationOpen ? "opacity-0" : "opacity-100"
+              )}
+            />
+            <span
+              className={clsx(
+                "absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300",
+                isNavigationOpen ? "-rotate-45 translate-y-0" : "translate-y-2"
+              )}
+            />
+          </div>
+        </Button>
       </div>
 
       <Navigation isOpen={isNavigationOpen} />
