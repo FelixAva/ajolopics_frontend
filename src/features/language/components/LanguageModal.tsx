@@ -42,11 +42,12 @@ const LanguageModal = () => {
             {languages.map((lang) => (
               <li key={lang.code}>
                 <Button
+                  variant='ghost'
                   onClick={() => handleLanguageChange(lang.code)}
                   title={lang.label}
                   className={`w-full text-left px-4 py-2 hover:bg-deep-teal-100 transition-colors ${
                     i18n.resolvedLanguage === lang.code
-                      ? 'bg-deep-teal-300 text-deep-teal-700 font-bold'
+                      ? '!bg-deep-teal-300 !rounded-none text-deep-teal-700 font-bold'
                       : 'text-gray-700'
                   }`}
                 />

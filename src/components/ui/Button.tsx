@@ -21,14 +21,14 @@ const Button: FC<ButtonProps> = ({
   className = '',
   ...props
 }) => {
-  const baseStyles = "inline-flex items-center justify-center font-medium rounded-lg transition-colors duration-200 select-none hover:cursor-pointer focus-visible:outline-none w-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
+  const baseStyles = "inline-flex items-center justify-center rounded-lg transition-colors duration-200 select-none hover:cursor-pointer focus-visible:outline-none w-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
 
   const variantStyles = {
     primary: "bg-deep-teal text-white border border-transparent hover:bg-deep-teal-700 focus-visible:ring-deep-teal-500",
     secondary: "bg-deep-teal-100 text-deep-teal-900 border border-transparent hover:bg-deep-teal-200",
     danger: "bg-smoky-rose-600 text-white border border-transparent hover:bg-smoky-rose-700 focus-visible:ring-smoky-rose-500",
     outline: "bg-transparent text-deep-teal border border-deep-teal hover:bg-deep-teal-50 hover:border-deep-teal-100 focus-visible:ring-deep-teal-500",
-    ghost: "bg-transparent text-deep-teal border border-transparent hover:bg-deep-teal-50 focus-visible:ring-deep-teal-500",
+    ghost: "bg-transparent text-deep-teal border border-transparent hover:bg-deep-teal-100 focus-visible:ring-deep-teal-500",
     none: "bg-transparent text-deep-teal border-transparent rounded-full focus-visible:ring-transparent rounded-full"
   };
 
