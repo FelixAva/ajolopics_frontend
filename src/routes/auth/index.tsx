@@ -14,7 +14,6 @@ import type { ILoginFormInput } from '@/features/auth/types/auth.form.types';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/ui/Spinner';
-import InputPassword from '@/components/ui/InputPassword';
 
 export const Route = createFileRoute('/auth/')({
   component: RouteComponent,
@@ -64,9 +63,10 @@ function RouteComponent() {
             })}
             error={ errors.email?.message }
           />
-          <InputPassword
+          <Input
             label={t('auth:fields.password')}
-            pwdRecovery
+            type='password'
+            placeholder='••••••••'
             {...register("password",
               {
                 required: t('components:validation.required', { field: t('auth:fields.password') }),

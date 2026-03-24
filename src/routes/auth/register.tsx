@@ -14,7 +14,6 @@ import type { IRegisterFormInput } from '@/features/auth/types/auth.form.types';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/ui/Spinner';
-import InputPassword from '@/components/ui/InputPassword';
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,
@@ -81,7 +80,9 @@ function RouteComponent() {
             })}
             error={ errors.email?.message }
           />
-          <InputPassword
+          <Input
+            type='password'
+            placeholder='••••••••'
             label={t('auth:fields.password')}
             {...register("password",
               {
@@ -97,8 +98,10 @@ function RouteComponent() {
             })}
             error={ errors.password?.message }
           />
-          <InputPassword
+          <Input
+            type='password'
             label={t('auth:fields.confirmPassword')}
+            placeholder='••••••••'
             {...register("confPassword",
               {
                 required: t('components:validation.required', { field: t('auth:fields.confirmPassword') }),
