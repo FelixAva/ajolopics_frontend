@@ -156,8 +156,8 @@ const CreatePostForm = ({ onClose }: Props) => {
           title={createPost.isPending ? t('post:create.submitting') : t('post:create.submit')}
           type='submit'
           icon={createPost.isPending ? 'loader-2' : 'upload'}
-          className="w-full bg-[#4A6E5A] hover:bg-[#3D5B4A] text-white disabled:opacity-50"
-          isDisabled={createPost.isPending}
+          className="w-full"
+          disabled={createPost.isPending}
         />
       </div>
     </form>

@@ -184,7 +184,7 @@ const FiltersForm = ({ onClose }: Props) => {
           title={t('post:filters.clear')}
           icon='x'
           onClick={handleClear}
-          variant='ghost'
+          variant='outline'
         />
         <Button
           title={t('post:filters.submit')}
