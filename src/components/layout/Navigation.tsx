@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Link, useLocation } from '@tanstack/react-router';
+import { useLocation } from '@tanstack/react-router';
 import clsx from 'clsx';
-import { DynamicIcon } from 'lucide-react/dynamic';
+
 import { useTranslation } from 'react-i18next';
 
 import Button from '@/components/ui/Button';
-import LogoutModal from '@/features/auth/components/LogoutModal';
+
 import FiltersModal from '@/features/post/components/FiltersModal';
 import CreatePostModal from '@/features/post/components/CreatePostModal';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
@@ -18,7 +18,6 @@ const Navigation = ({ isOpen }: Props) => {
   const location = useLocation();
     const [isCreatePostModalOpen, setIsCreatePostModalOpen] = useState<boolean>(false);
     const [isFiltersModalOpen, setIsFiltersModalOpen] = useState<boolean>(false);
-    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
     const { t } = useTranslation('header');
 
     const token = useAuthStore((state) => state.token);
@@ -70,34 +69,6 @@ const Navigation = ({ isOpen }: Props) => {
 
           </>
         )}
-
-        {isAuthenticated ? (
-          <div>
-            <Button
-              title={t('logout')}
-              onClick={ () => setIsLogoutModalOpen(true) }
-              icon='log-out'
-              variant='ghost'
-            />
-
-            <LogoutModal
-              isOpen={isLogoutModalOpen}
-              onClose={() => setIsLogoutModalOpen(false)}
-            />
-          </div>
-        ) : (
-          <Link
-            to="/auth"
-            className="[&.active]:font-bold] w-auto h-min px-3.5 py-2 rounded-lg text-deep-teal transition-colors duration-200 select-none hover:cursor-pointer hover:bg-deep-teal-100 hover:border-deep-teal-100 sm:text-lg"
-            preload="intent"
-          >
-            <div className="flex items-center justify-center gap-3 text-center">
-              <DynamicIcon name='log-in' size={22} />
-              <p>{t('login')}</p>
-            </div>
-          </Link>
-        )}
-
       </nav>
   );
 };
