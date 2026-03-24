@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import usePost from '@/features/post/hooks/usePost';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import HorizontalPostComponent from './PostHorizontalCard';
-import ChangeImageComponent from './ChangeImageComponent';
+import CarouselControls from './CarouselControls';
 import VerticalPostComponent from './PostVerticalCard';
 import type { AspectRatioType } from '../types/post.types';
 
@@ -75,7 +75,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
           onClose={onModalClose}
           getAspectText={getAspectText}
         >
-          <ChangeImageComponent
+          <CarouselControls
             currentImageIndex={currentImageIndex}
             assetLength={post?.assets.length}
             isShown={isMultiple}
@@ -92,7 +92,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
           onClose={onModalClose}
           getAspectText={getAspectText}
         >
-          <ChangeImageComponent
+          <CarouselControls
             currentImageIndex={currentImageIndex}
             assetLength={post?.assets.length}
             isShown={isMultiple}
