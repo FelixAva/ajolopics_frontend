@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
 import PostsMasonryGrid from '@/features/post/components/PostsMasonryGrid';
-// import { useTranslation } from 'react-i18next';
 import type { AspectRatioType } from '../features/post/types/post.types';
 
 type FeedSearch = {
@@ -23,7 +22,6 @@ export const Route = createFileRoute('/')({
 })
 
 function RouteComponent() {
-  // const { t } = useTranslation(); // ! Translation
 
   return (
       <div className='flex-1 mt-5 lg:mt-10'>
