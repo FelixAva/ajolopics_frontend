@@ -1,7 +1,7 @@
 import { DynamicIcon } from 'lucide-react/dynamic';
 import type { MediaVariant, Post } from '../types/post.types';
 import type { ReactNode } from 'react';
-import PostSidebar from './PostSidebar';
+import PostSidebar from './PostModalSide';
 import Button from '@/components/ui/Button';
 
 interface Props {

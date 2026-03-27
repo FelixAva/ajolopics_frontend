@@ -5,8 +5,8 @@ import usePost from '../hooks/usePost';
 import type { GetFeedRequestDTO } from '../types/post.api.types';
 import { Route } from '@/routes/index';
 
-import PostPreviewCard from './PostPreviewCard';
-import PostDetailModal from './PostDetailModal';
+import PostPreviewCard from './PostCard';
+import PostDetailModal from './PostModalWrapper';
 // Importamos tu nuevo componente
 import MasonryGrid, { type MasonryElement } from '@/components/layout/MasonryGrid';
 

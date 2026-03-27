@@ -3,9 +3,9 @@ import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import usePost from '@/features/post/hooks/usePost';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
-import HorizontalPostComponent from './PostHorizontalCard';
-import CarouselControls from './CarouselControls';
-import VerticalPostComponent from './PostVerticalCard';
+import HorizontalPostComponent from './PostModalHorizontal';
+import CarouselControls from './PostModalControls';
+import VerticalPostComponent from './PostModalVertical';
 import type { AspectRatioType } from '../types/post.types';
 
 interface Props {
