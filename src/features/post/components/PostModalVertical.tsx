@@ -1,7 +1,7 @@
 import { DynamicIcon } from 'lucide-react/dynamic';
 import type { MediaVariant, Post } from '../types/post.types';
 import type { ReactNode } from 'react';
-import PostSidebar from './PostSidebar'; // <-- Importamos nuestra pieza de Lego
+import PostModalSide from './PostModalSide'; // <-- Importamos nuestra pieza de Lego
 import Button from '@/components/ui/Button';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   children: ReactNode;
 }
 
-const VerticalPostComponent = ({
+const PostModalVertical = ({
   post,
   currentVariant,
   isLoading,
@@ -60,7 +60,7 @@ const VerticalPostComponent = ({
           <div
             className="h-full px-6 flex flex-col py-4 gap-4 overflow-y-auto bg-white sm:py-4 sm:justify-start sm:gap-4 md:w-75 lg:w-90"
           >
-            <PostSidebar
+            <PostModalSide
               post={post}
               currentVariant={currentVariant}
               getAspectText={getAspectText}
@@ -72,4 +72,4 @@ const VerticalPostComponent = ({
   );
 };
 
-export default VerticalPostComponent;
+export default PostModalVertical;

@@ -8,7 +8,7 @@ interface Props {
   nextImage: () => void;
 }
 
-const ChangeImageComponent = ({
+const PostModalControls = ({
   currentImageIndex,
   assetLength,
   isShown,
@@ -39,4 +39,4 @@ const ChangeImageComponent = ({
   )
 }
 
-export default ChangeImageComponent;
+export default PostModalControls;

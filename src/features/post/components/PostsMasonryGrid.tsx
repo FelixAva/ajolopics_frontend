@@ -1,29 +1,48 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import Masonry from 'react-masonry-css';
 import { useInView } from 'react-intersection-observer';
 
 import usePost from '../hooks/usePost';
 import type { GetFeedRequestDTO } from '../types/post.api.types';
-import { Route } from '@/routes/index';
+import PostCard from './PostCard';
+import MasonryGrid, { type MasonryElement } from '@/components/layout/MasonryGrid';
 
-import PostPreviewCard from './PostPreviewCard';
-import PostDetailModal from './PostDetailModal';
+interface PostMasonryGridProps {
+  filters: {
+    tags?: string;
+    authors?: string;
+    search?: string;
+    aspectRatio?: string;
+  };
+  onPostClick: (id: string) => void;
+}
 
-const PostsMasonryGrid = () => {
-  const { tags, authors, search, aspectRatio } = Route.useSearch();
-  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+const PostsMasonryGrid = ({ filters, onPostClick }: PostMasonryGridProps) => {
+  const [columnsNumber, setColumnsNumber] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) setColumnsNumber(4);
+      else if (width >= 768) setColumnsNumber(3);
+      else setColumnsNumber(2);
+    };
+
+    handleResize(); // Ejecución inicial
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const feedParams: GetFeedRequestDTO = useMemo(
     () => ({
       size: 20,
-      search,
+      search: filters.search,
       filters: {
-        tagIds: tags ? tags.split(',').map(Number) : undefined,
-        authorIds: authors ? authors.split(',') : undefined,
-        aspectRatio: aspectRatio || undefined,
+        tagIds: filters.tags ? filters.tags.split(',').map(Number) : undefined,
+        authorIds: filters.authors ? filters.authors.split(',') : undefined,
+        aspectRatio: filters.aspectRatio || undefined,
       },
     }),
-    [tags, authors, search, aspectRatio]
+    [filters]
   );
 
   const { getPostFeed } = usePost(feedParams);
@@ -40,7 +59,6 @@ const PostsMasonryGrid = () => {
     threshold: 0,
     rootMargin: '200px',
   });
-
   const hasStartedTrackingRef = useRef(false);
   const prevInViewRef = useRef(false);
 
@@ -68,40 +86,39 @@ const PostsMasonryGrid = () => {
     prevInViewRef.current = inView;
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  const breakpointColumns = {
-    default: 4,
-    1024: 3,
-    768: 2,
-    640: 2,
-  };
-
   const allPosts = data?.pages.flatMap((page) => page.items) ?? [];
+
+  const masonryElements: MasonryElement[] = useMemo(() => {
+    return allPosts.map((post) => {
+     const thumbnail = post.assets[0]?.variants.find((variant) => variant.variant === 'THUMBNAIL');
+      const estimatedHeight = thumbnail?.height || 250;
+
+      return {
+        id: `${post.author}-${post.id}`,
+        content: (
+          <PostCard
+            post={post}
+            onClick={() => onPostClick(post.id)}
+          />
+        ),
+        height: estimatedHeight,
+      };
+    });
+  }, [allPosts, onPostClick]);
 
   return (
     <>
-      <Masonry
-        breakpointCols={breakpointColumns}
-        className="flex m-auto max-w-7xl w-auto"
-        columnClassName="px-2 bg-clip-padding"
-      >
-        {isLoading ? (
-          <p>Cargando galería...</p>
-        ) : (
-          allPosts.map((post) => (
-            <PostPreviewCard
-              key={`${post.author}-${post.id}`}
-              post={post}
-              onClick={(id) => setSelectedPostId(id)}
-            />
-          ))
-        )}
-      </Masonry>
-
-      <PostDetailModal
-        postId={selectedPostId}
-        isOpen={!!selectedPostId}
-        onClose={() => setSelectedPostId(null)}
-      />
+      {isLoading && masonryElements.length === 0 ? (
+        <p className="text-center py-4">Cargando galería...</p>
+      ) : (
+        <MasonryGrid
+          columns_number={columnsNumber}
+          elements={masonryElements}
+          containerStyle="m-auto max-w-7xl px-2 gap-4"
+          columnStyle="gap-4"
+          threshold={20}
+        />
+      )}
 
       {hasNextPage && (
         <div ref={ref} className="w-full flex justify-center py-4 min-h-10">

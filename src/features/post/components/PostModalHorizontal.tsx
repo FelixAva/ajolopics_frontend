@@ -1,7 +1,7 @@
 import { DynamicIcon } from 'lucide-react/dynamic';
 import type { MediaVariant, Post } from '../types/post.types';
 import type { ReactNode } from 'react';
-import PostSidebar from './PostSidebar';
+import PostModalSide from './PostModalSide';
 import Button from '@/components/ui/Button';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   children: ReactNode;
 }
 
-const HorizontalPostComponent = ({
+const PostModalHorizontal = ({
   post,
   currentVariant,
   isLoading,
@@ -58,7 +58,7 @@ const HorizontalPostComponent = ({
           <div
             className="h-full px-6 py-4 flex flex-col justify-start gap-4 overflow-y-auto bg-white lg:w-80 lg:py-4 xl:p-8"
           >
-            <PostSidebar
+            <PostModalSide
               post={post}
               currentVariant={currentVariant}
               getAspectText={getAspectText}
@@ -70,4 +70,4 @@ const HorizontalPostComponent = ({
   );
 };
 
-export default HorizontalPostComponent;
+export default PostModalHorizontal;

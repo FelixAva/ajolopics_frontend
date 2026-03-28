@@ -5,11 +5,11 @@ interface Props {
   onClick: (postId: string) => void;
 }
 
-const PostPreviewCard = ({ post, onClick }: Props) => {
+const PostCard = ({ post, onClick }: Props) => {
   const mainVariant = post.assets[0]?.variants.find((variant) => variant.variant === 'THUMBNAIL');
 
   return (
-    <div key={post.id} className="break-inside-avoid mb-4 relative group cursor-pointer">
+    <div key={post.id} className="break-inside-avoid relative group cursor-pointer">
       <img
         onClick={() => onClick(post.id)}
         src={mainVariant?.url}
@@ -33,4 +33,4 @@ const PostPreviewCard = ({ post, onClick }: Props) => {
   );
 };
 
-export default PostPreviewCard;
+export default PostCard;
