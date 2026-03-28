@@ -19,7 +19,6 @@ interface Props {
 const CreatePostForm = ({ onClose }: Props) => {
   const { t } = useTranslation(['post', 'components']);
 
-  // Custom hooks
   const {
     register,
     handleSubmit,
