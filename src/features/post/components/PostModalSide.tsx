@@ -11,7 +11,7 @@ interface PostSidebarProps {
   getAspectText: (w?: number, h?: number) => string;
 }
 
-const PostSidebar = ({ post, currentVariant, getAspectText }: PostSidebarProps) => {
+const PostModalSide = ({ post, currentVariant, getAspectText }: PostSidebarProps) => {
   const { t } = useTranslation('post');
   const token = useAuthStore((state) => state.token);
   const isUserAuthenticated = !!token;
@@ -74,4 +74,4 @@ const PostSidebar = ({ post, currentVariant, getAspectText }: PostSidebarProps) 
   );
 };
 
-export default PostSidebar;
+export default PostModalSide;

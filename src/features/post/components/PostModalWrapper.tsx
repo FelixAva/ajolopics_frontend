@@ -3,9 +3,9 @@ import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import usePost from '@/features/post/hooks/usePost';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
-import HorizontalPostComponent from './PostModalHorizontal';
+import PostModalHorizontal from './PostModalHorizontal';
 import CarouselControls from './PostModalControls';
-import VerticalPostComponent from './PostModalVertical';
+import PostModalVertical from './PostModalVertical';
 import type { AspectRatioType } from '../types/post.types';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
   onClose: () => void;
 }
 
-const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
+const PostModalWrapper = ({ postId, isOpen, onClose }: Props) => {
   const { t } = useTranslation('post');
   const { getSinglePost } = usePost(undefined, postId || undefined);
 
@@ -45,7 +45,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
   const width = currentVariant?.width;
   const height = currentVariant?.height;
 
-  let aspectType: AspectRatioType = 'SQUARE'; // Valor por defecto
+  let aspectType: AspectRatioType = 'SQUARE';
   if (width && height) {
     if (width > height) aspectType = 'LANDSCAPE';
     else if (width < height) aspectType = 'PORTRAIT';
@@ -67,7 +67,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
     <div className="fixed inset-0 z-50 flex flex-col flex-1 items-center justify-center bg-black/70 backdrop-blur-md">
 
       {aspectType === 'LANDSCAPE' ? (
-        <HorizontalPostComponent
+        <PostModalHorizontal
           post={post}
           currentVariant={currentVariant}
           isLoading={isLoading}
@@ -82,9 +82,9 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
             prevImage={prevImage}
             nextImage={nextImage}
           />
-        </HorizontalPostComponent>
+        </PostModalHorizontal>
       ) : (
-        <VerticalPostComponent
+        <PostModalVertical
           post={post}
           currentVariant={currentVariant}
           isLoading={isLoading}
@@ -99,7 +99,7 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
             prevImage={prevImage}
             nextImage={nextImage}
           />
-        </VerticalPostComponent>
+        </PostModalVertical>
       )}
 
     </div>
@@ -108,4 +108,4 @@ const PostDetailModal = ({ postId, isOpen, onClose }: Props) => {
   return createPortal(modalContent, document.body);
 };
 
-export default PostDetailModal;
+export default PostModalWrapper;

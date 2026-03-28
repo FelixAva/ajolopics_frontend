@@ -5,7 +5,7 @@ interface Props {
   onClick: (postId: string) => void;
 }
 
-const PostPreviewCard = ({ post, onClick }: Props) => {
+const PostCard = ({ post, onClick }: Props) => {
   const mainVariant = post.assets[0]?.variants.find((variant) => variant.variant === 'THUMBNAIL');
 
   return (
@@ -33,4 +33,4 @@ const PostPreviewCard = ({ post, onClick }: Props) => {
   );
 };
 
-export default PostPreviewCard;
+export default PostCard;

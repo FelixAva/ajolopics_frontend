@@ -5,8 +5,8 @@ import usePost from '../hooks/usePost';
 import type { GetFeedRequestDTO } from '../types/post.api.types';
 import { Route } from '@/routes/index';
 
-import PostPreviewCard from './PostCard';
-import PostDetailModal from './PostModalWrapper';
+import PostCard from './PostCard';
+import PostModalWrapper from './PostModalWrapper';
 // Importamos tu nuevo componente
 import MasonryGrid, { type MasonryElement } from '@/components/layout/MasonryGrid';
 
@@ -106,7 +106,7 @@ const PostsMasonryGrid = () => {
       return {
         id: `${post.author}-${post.id}`,
         content: (
-          <PostPreviewCard
+          <PostCard
             post={post}
             onClick={(id) => setSelectedPostId(id)}
           />
@@ -131,7 +131,7 @@ const PostsMasonryGrid = () => {
         />
       )}
 
-      <PostDetailModal
+      <PostModalWrapper
         postId={selectedPostId}
         isOpen={!!selectedPostId}
         onClose={() => setSelectedPostId(null)}
