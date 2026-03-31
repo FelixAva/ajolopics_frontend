@@ -27,7 +27,7 @@ const PostsMasonryGrid = ({ filters, onPostClick }: PostMasonryGridProps) => {
       else setColumnsNumber(2);
     };
 
-    handleResize(); // Ejecución inicial
+    handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
