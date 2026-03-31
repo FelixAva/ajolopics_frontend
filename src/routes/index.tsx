@@ -29,12 +29,29 @@ function RouteComponent() {
   const navigate = useNavigate({ from: Route.fullPath });
 
   const handleOpenPost = (id: string) => {
-    navigate({ search: (prev) => ({ ...prev, postId: id }) });
-  }
+    navigate({
+      to: '.',
+      search: (prev) => ({ ...prev, postId: id }),
+      mask: {
+        to: '/posts/$postId', // La "máscara" visual en la barra de direcciones
+        params: { postId: id }, // Los parámetros a usar en la mascara
+        unmaskOnReload: true, // Permite desenmascarar al recargar
+      }
+    });
+  };
 
   const handleClosePost = () => {
-    navigate({ search: (prev) => ({ ...prev, postId: undefined }) });
-  }
+    navigate({
+      to: '.',
+      search: (prev) => {
+        // Copia de los parámetros y eliminamos el postId y evitar borrar los filtros
+        const newSearch = { ...prev }
+        delete newSearch.postId;
+        return newSearch;
+      },
+      replace: true, // Evita que "cerrar el modal" sea un paso extra en el botón "Atrás" del navegador
+    });
+  };
 
   return (
       <div className='flex-1 my-5 lg:my-10'>
