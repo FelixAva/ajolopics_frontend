@@ -35,7 +35,7 @@ const InputSelect = ({
           control: ({ isFocused }) => `
             flex w-full border rounded-lg px-1.5 py-0.5 transition-all
             ${isFocused ? 'border-dusty-olive-700 ring-1 ring-dusty-olive-700' : 'border-dusty-olive'}
-            bg-white
+            bg-transparent
           `,
           multiValue: () => 'bg-deep-teal text-white rounded-3xl px-2 py-0.5 m-0.5 flex items-center',
           multiValueLabel: () => 'text-sm font-medium text-white',
@@ -50,7 +50,7 @@ const InputSelect = ({
           option: ({ isFocused, isSelected }) => `
             px-3 py-2 cursor-pointer transition-colors
             ${isSelected ? 'bg-deep-teal text-white' : ''}
-            ${isFocused && !isSelected ? 'bg-dusty-olive/20 text-dusty-olive-900' : ''}
+            ${isFocused && !isSelected ? 'bg-deep-teal-200 text-dusty-olive-900' : ''}
           `,
           placeholder: () => 'text-gray-400',
           noOptionsMessage: () => 'p-2 text-gray-500',
