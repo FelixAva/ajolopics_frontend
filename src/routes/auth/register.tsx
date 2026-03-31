@@ -65,7 +65,7 @@ function RouteComponent() {
           />
           <Input
             label={t('auth:fields.email')}
-            type='text'
+            type='email'
             placeholder={t('auth:fields.emailPlaceholder')}
             {...register('email', {
               required: t('components:validation.required', { field: t('auth:fields.email') }),

@@ -16,6 +16,8 @@ const PostModalSide = ({ post, currentVariant, getAspectText }: PostSidebarProps
   const token = useAuthStore((state) => state.token);
   const isUserAuthenticated = !!token;
 
+  // const originalVariant = post.assets[0]?.variants.find((variant) => variant.variant === 'ORIGINAL');
+
   return (
     <>
       <div>
