@@ -3,6 +3,8 @@ import type { MediaVariant, Post } from '../types/post.types';
 import type { ReactNode } from 'react';
 import PostModalSide from './PostModalSide';
 import Button from '@/components/ui/Button';
+import { useTranslation } from 'react-i18next';
+import { useAuthStore } from '@/features/auth/store/useAuthStore';
 
 interface Props {
   post: Post | undefined;
@@ -23,6 +25,11 @@ const PostModalHorizontal = ({
   getAspectText,
   children
 }: Props ) => {
+  const { t } = useTranslation('post');
+    const token = useAuthStore((state) => state.token);
+    const isUserAuthenticated = !!token;
+    // const originalVariant = post.assets[0]?.variants.find((variant) => variant.variant === 'ORIGINAL');
+
   return (
     <div
       className="h-full w-full relative flex flex-col bg-white shadow-2xl overflow-hidden transition-all duration-500 ease-in-out sm:max-h-min sm:rounded-2xl sm:w-auto lg:max-h-none lg:h-auto xl:h-auto lg:flex-row"
@@ -55,14 +62,28 @@ const PostModalHorizontal = ({
             )}
             {children}
           </div>
-          <div
-            className="h-full px-6 py-4 flex flex-col justify-start gap-4 overflow-y-auto bg-white lg:w-80 lg:py-4 xl:p-8"
-          >
-            <PostModalSide
-              post={post}
-              currentVariant={currentVariant}
-              getAspectText={getAspectText}
-            />
+
+          {/* LADO DERECHO: Slot mediante Composición */}
+          <div className='px-6 flex flex-col'>
+            <div
+              className="h-full py-4 flex flex-col justify-start gap-4 overflow-y-auto bg-white lg:w-80 lg:py-4 xl:p-8"
+            >
+              <PostModalSide
+                post={post}
+                currentVariant={currentVariant}
+                getAspectText={getAspectText}
+              />
+            </div>
+            <div className='py-2 sm:py-4'>
+                <Button
+                  onClick={() => alert('download')}
+                  icon='download'
+                  title={isUserAuthenticated ? t('post:detail.download', 'Download') : t('post:detail.loginToDownload')}
+                  disabled={!isUserAuthenticated}
+                  className="w-full"
+                />
+              </div>
+
           </div>
         </>
       )}
