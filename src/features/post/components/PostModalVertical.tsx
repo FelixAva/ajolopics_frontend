@@ -32,7 +32,7 @@ const PostModalVertical = ({
 
   return (
     <div
-      className="h-full w-full relative flex flex-col md:w-auto md:h-auto bg-white shadow-2xl overflow-hidden transition-all duration-500 ease-in-out md:rounded-2xl md:flex-row"
+      className="h-full w-full relative flex flex-col md:w-auto md:h-auto bg-beige shadow-2xl overflow-hidden transition-all duration-500 ease-in-out md:max-w-[85%] md:max-h-[75%] md:rounded-2xl md:flex-row lg:max-h-[85%] 2xl:max-h-[80%]"
     >
       <Button
         onClick={onClose}
@@ -52,21 +52,21 @@ const PostModalVertical = ({
       ) : (
         <>
           {/* LADO IZQUIERDO: Contenedor específico para imágenes verticales */}
-          <div className="max-h-[60%] md:max-h-none bg-gray-100 relative flex items-center justify-center">
+          <div className="max-h-[60%] md:max-h-none bg-black relative flex items-center justify-center">
             {currentVariant && (
               <img
                 src={currentVariant.url}
                 alt={post.title}
-                className="h-full sm:object-cover md:w-100 lg:w-110 2xl:w-120"
+                className="h-full sm:object-cover"
               />
             )}
             {children}
           </div>
 
           {/* LADO DERECHO: Slot mediante Composición */}
-          <div className='max-h-[40%] md:max-h-none px-6 flex flex-col'>
+          <div className='max-h-[40%] px-6 flex flex-col md:max-h-none md:w-80 lg:w-100'>
             <div
-              className="h-full relative flex flex-col py-4 gap-4 overflow-y-auto bg-white sm:py-4 sm:justify-start sm:gap-4 md:w-75 lg:w-90"
+              className="h-full relative flex flex-col py-4 gap-4 overflow-y-auto sm:justify-start sm:gap-4"
             >
               <PostModalSide
                 post={post}
