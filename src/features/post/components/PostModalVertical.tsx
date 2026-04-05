@@ -64,7 +64,7 @@ const PostModalVertical = ({
           </div>
 
           {/* LADO DERECHO: Slot mediante Composición */}
-          <div className='max-h-[40%] px-6 flex flex-col md:max-h-none md:w-80 lg:w-100'>
+          <div className='max-h-[40%] px-6 flex flex-col md:max-h-none md:w-80 lg:w-90'>
             <div
               className="h-full relative flex flex-col py-4 gap-4 overflow-y-auto sm:justify-start sm:gap-4"
             >
