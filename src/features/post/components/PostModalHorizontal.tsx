@@ -32,7 +32,7 @@ const PostModalHorizontal = ({
 
   return (
     <div
-      className="h-full w-full relative flex flex-col bg-white shadow-2xl overflow-hidden transition-all duration-500 ease-in-out sm:max-h-min sm:rounded-2xl sm:w-auto lg:max-w-[85%] lg:max-h-none lg:h-auto xl:max-w-[75%] xl:h-auto lg:flex-row"
+      className="h-full w-full relative flex flex-col bg-beige shadow-2xl overflow-hidden transition-all duration-500 ease-in-out sm:max-h-min sm:rounded-2xl sm:w-auto lg:max-w-[85%] lg:max-h-none lg:h-auto xl:max-w-[75%] xl:h-auto lg:flex-row"
     >
       <Button
         onClick={onClose}
@@ -52,7 +52,7 @@ const PostModalHorizontal = ({
       ) : (
         <>
           {/* LADO IZQUIERDO: Visor de Imagen */}
-          <div className="bg-gray-100 relative flex sm:flex-1 items-center justify-center">
+          <div className="bg-black relative flex sm:flex-1 items-center justify-center">
             {currentVariant && (
               <img
                 src={currentVariant.url}
@@ -66,7 +66,7 @@ const PostModalHorizontal = ({
           {/* LADO DERECHO: Slot mediante Composición */}
           <div className='px-6 flex flex-col lg:max-w-[40%] xl:max-w-[50%] 2xl:w-[29%]'>
             <div
-              className="h-full py-4 flex flex-col justify-start gap-4 overflow-y-auto bg-white lg:py-4"
+              className="h-full py-4 flex flex-col justify-start gap-4 overflow-y-auto lg:py-4"
             >
               <PostModalSide
                 post={post}
