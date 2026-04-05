@@ -39,7 +39,7 @@ const PostModalWrapper = ({ postId, isOpen, onClose }: Props) => {
   };
 
   const currentAsset = post?.assets[currentImageIndex];
-  const currentVariant = currentAsset?.variants[1];
+  const currentVariant = currentAsset?.variants.find((variant) => variant.variant === 'MEDIUM');
   const isMultiple = post && post.assets.length > 1;
 
   const width = currentVariant?.width;
