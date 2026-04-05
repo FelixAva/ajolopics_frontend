@@ -45,12 +45,12 @@ const PostModalVertical = ({
       ) : (
         <>
           {/* LADO IZQUIERDO: Contenedor específico para imágenes verticales */}
-          <div className="bg-gray-100 relative flex items-center justify-center">
+          <div className="max-h-[60%] md:max-h-none bg-gray-100 relative flex items-center justify-center">
             {currentVariant && (
               <img
                 src={currentVariant.url}
                 alt={post.title}
-                className="w-87 sm:object-cover md:w-100 lg:w-110 2xl:w-120"
+                className="h-full sm:object-cover md:w-100 lg:w-110 2xl:w-120"
               />
             )}
             {children}
