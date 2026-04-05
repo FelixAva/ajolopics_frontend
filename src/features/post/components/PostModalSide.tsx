@@ -1,7 +1,5 @@
-// PostSidebar.tsx
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '@/features/auth/store/useAuthStore';
-import Button from '@/components/ui/Button';
+
 import Badge from '@/components/ui/Badge';
 import type { MediaVariant, Post } from '../types/post.types';
 
@@ -13,10 +11,8 @@ interface PostSidebarProps {
 
 const PostModalSide = ({ post, currentVariant, getAspectText }: PostSidebarProps) => {
   const { t } = useTranslation('post');
-  const token = useAuthStore((state) => state.token);
-  const isUserAuthenticated = !!token;
 
-  // const originalVariant = post.assets[0]?.variants.find((variant) => variant.variant === 'ORIGINAL');
+
 
   return (
     <>
@@ -64,14 +60,6 @@ const PostModalSide = ({ post, currentVariant, getAspectText }: PostSidebarProps
           </div>
         </div>
       </div>
-
-      <Button
-        onClick={() => alert('download')}
-        icon='download'
-        title={isUserAuthenticated ? t('post:detail.download', 'Download') : t('post:detail.loginToDownload')}
-        disabled={!isUserAuthenticated}
-        className="w-full"
-      />
     </>
   );
 };
