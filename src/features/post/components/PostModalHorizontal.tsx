@@ -64,7 +64,7 @@ const PostModalHorizontal = ({
       ) : (
         <>
           {/* LADO IZQUIERDO: Visor de Imagen */}
-          <div className="bg-black relative flex sm:flex-1 items-center justify-center">
+          <div className="bg-black relative flex items-center justify-center sm:flex-1">
             {currentVariant && (
               <img
                 src={currentVariant.url}

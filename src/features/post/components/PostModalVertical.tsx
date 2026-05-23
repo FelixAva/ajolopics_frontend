@@ -44,7 +44,7 @@ const PostModalVertical = ({
 
   return (
     <div
-      className="h-full w-full relative flex flex-col md:w-auto md:h-auto bg-beige shadow-2xl overflow-hidden transition-all duration-500 ease-in-out md:max-w-[85%] md:max-h-[75%] md:rounded-2xl md:flex-row lg:max-h-[85%] 2xl:max-h-[80%]"
+      className="h-full w-full relative flex flex-col bg-beige shadow-2xl overflow-hidden transition-all duration-500 ease-in-out md:w-auto md:h-auto md:max-w-[85%] md:max-h-[75%] md:rounded-2xl md:flex-row lg:max-h-[85%] 2xl:max-h-[80%]"
     >
       <Button
         onClick={onClose}
@@ -64,7 +64,7 @@ const PostModalVertical = ({
       ) : (
         <>
           {/* LADO IZQUIERDO: Contenedor específico para imágenes verticales */}
-          <div className="max-h-[60%] md:max-h-none bg-black relative flex items-center justify-center">
+          <div className="max-h-[60%] relative flex items-center justify-center md:max-h-none">
             {currentVariant && (
               <img
                 src={currentVariant.url}
