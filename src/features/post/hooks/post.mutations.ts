@@ -3,12 +3,12 @@ import { useTranslation } from 'react-i18next';
 import type { AxiosError } from 'axios';
 
 import { PostService } from '../services/post.service';
-import { downloadPostImage } from '../utils/downloadPostImage';
 import type { ErrorDTO } from '@/types/api.types';
 import type { MediaVariant, Post } from '../types/post.types';
 import type { CreatePostRequestDTO } from '../types/post.api.types';
 import { queryClient } from '@/app/queryClient';
 import { showAjolopicsToast } from '@/components/ui/Alerts';
+import { downloadPostImage } from '../utils/downloadPostImage';
 
 interface DownloadPostImageVariables {
   post: Post;
@@ -33,9 +33,11 @@ const usePostMutations =  () => {
     }
   });
 
-  const downloadPost = useMutation<void, Error, DownloadPostImageVariables>({
-    mutationFn: ({ post, variant }) => downloadPostImage(post, variant),
-    onSuccess: () => {
+  const downloadPost = useMutation<Blob, Error, DownloadPostImageVariables>({
+    mutationFn: ({ variant }) => PostService.downloadPostImage(variant),
+    onSuccess: (blob, { post, variant }) => {
+      downloadPostImage(post, variant, blob);
+
       showAjolopicsToast('success', t('postDownloadSuccess'));
     },
     onError: (error) => {
