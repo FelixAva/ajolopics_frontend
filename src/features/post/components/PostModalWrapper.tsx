@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
-import usePost from '@/features/post/hooks/usePost';
+import usePostQueries from '@/features/post/hooks/post.queries';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import PostModalHorizontal from './PostModalHorizontal';
 import CarouselControls from './PostModalControls';
@@ -16,7 +16,7 @@ interface Props {
 
 const PostModalWrapper = ({ postId, isOpen, onClose }: Props) => {
   const { t } = useTranslation('post');
-  const { getSinglePost } = usePost(undefined, postId || undefined);
+  const { getSinglePost } = usePostQueries(undefined, postId || undefined);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
