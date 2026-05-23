@@ -1,7 +1,7 @@
 import { api } from '@/api/axios';
 import type { PaginatedResponseDTO } from '@/types/api.types';
 import type { CreatePostRequestDTO, GetFeedRequestDTO } from '../types/post.api.types';
-import type { Post } from '../types/post.types';
+import type { MediaVariant, Post } from '../types/post.types';
 
 export const PostService = {
   async createPost(data: CreatePostRequestDTO) {
@@ -39,6 +39,17 @@ export const PostService = {
 
   async getSinglePost(id: string) {
     const response = await api.get<Post>(`/posts/single/${id}`);
+    return response.data;
+  },
+
+  async downloadPostImage(variant: MediaVariant) {
+    const response = await api.get<Blob>(variant.url, {
+      responseType: 'blob',
+      headers: {
+        Accept: variant.mimeType || 'image/*',
+      },
+    });
+
     return response.data;
   }
 }
