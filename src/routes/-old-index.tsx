@@ -11,7 +11,7 @@ type FeedSearch = {
   postId?: string;
 }
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute('/-old-index')({
   component: RouteComponent,
   validateSearch: (search: Record<string, unknown>): FeedSearch => {
     return {
