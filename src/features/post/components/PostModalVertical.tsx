@@ -5,10 +5,12 @@ import PostModalSide from './PostModalSide'; // <-- Importamos nuestra pieza de 
 import Button from '@/components/ui/Button';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import { useTranslation } from 'react-i18next';
+import usePostMutations from '../hooks/post.mutations';
 
 interface Props {
   post: Post | undefined;
   currentVariant: MediaVariant | undefined;
+  originalVariant: MediaVariant | undefined;
   isLoading: boolean;
   isError: boolean;
   onClose: () => void;
@@ -19,6 +21,7 @@ interface Props {
 const PostModalVertical = ({
   post,
   currentVariant,
+  originalVariant,
   isLoading,
   isError,
   onClose,
@@ -28,7 +31,16 @@ const PostModalVertical = ({
   const { t } = useTranslation('post');
   const token = useAuthStore((state) => state.token);
   const isUserAuthenticated = !!token;
-  // const originalVariant = post.assets[0]?.variants.find((variant) => variant.variant === 'ORIGINAL');
+  const { downloadPost } = usePostMutations();
+
+  const handleDownload = () => {
+    if (!post || !originalVariant) return;
+
+    downloadPost.mutate({
+      post,
+      variant: originalVariant,
+    });
+  };
 
   return (
     <div
@@ -77,10 +89,10 @@ const PostModalVertical = ({
 
             <div className='py-2 md:py-4'>
               <Button
-                onClick={() => alert('download')}
-                icon='download'
+                onClick={handleDownload}
+                icon={downloadPost.isPending ? 'loader-2' : 'download'}
                 title={isUserAuthenticated ? t('post:detail.download', 'Download') : t('post:detail.loginToDownload')}
-                disabled={!isUserAuthenticated}
+                disabled={!isUserAuthenticated || !originalVariant || downloadPost.isPending}
                 className="w-full"
               />
             </div>
