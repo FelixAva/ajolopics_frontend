@@ -3,8 +3,7 @@ import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 
 import { PostService } from '../services/post.service';
-import type { ErrorDTO } from '@/types/api.types'
-import type { PaginatedResponseDTO } from '@/types/api.paginated.response.types';
+import type { ErrorDTO, PaginatedResponseDTO } from '@/types/api.types'
 import type { Post } from '../types/post.types';
 import type { CreatePostRequestDTO, GetFeedRequestDTO } from '../types/post.api.types';
 import { queryClient } from '@/app/queryClient';
