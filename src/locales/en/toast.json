@@ -1,5 +1,7 @@
 {
   "register": "User register successfully",
   "postSuccess": "Post created successfully",
-  "postFailed": "Failed to create post"
+  "postFailed": "Failed to create post",
+  "postDownloadSuccess": "Image downloaded successfully",
+  "postDownloadFailed": "Failed to download image"
 }
