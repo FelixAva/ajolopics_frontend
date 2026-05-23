@@ -40,6 +40,7 @@ const PostModalWrapper = ({ postId, isOpen, onClose }: Props) => {
 
   const currentAsset = post?.assets[currentImageIndex];
   const currentVariant = currentAsset?.variants.find((variant) => variant.variant === 'MEDIUM');
+  const originalVariant = currentAsset?.variants.find((variant) => variant.variant === 'ORIGINAL');
   const isMultiple = post && post.assets.length > 1;
 
   const width = currentVariant?.width;
@@ -70,6 +71,7 @@ const PostModalWrapper = ({ postId, isOpen, onClose }: Props) => {
         <PostModalHorizontal
           post={post}
           currentVariant={currentVariant}
+          originalVariant={originalVariant}
           isLoading={isLoading}
           isError={isError}
           onClose={onModalClose}
@@ -87,6 +89,7 @@ const PostModalWrapper = ({ postId, isOpen, onClose }: Props) => {
         <PostModalVertical
           post={post}
           currentVariant={currentVariant}
+          originalVariant={originalVariant}
           isLoading={isLoading}
           isError={isError}
           onClose={onModalClose}
