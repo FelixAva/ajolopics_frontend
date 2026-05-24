@@ -1,6 +1,7 @@
-import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { Outlet, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import type { QueryClient } from '@tanstack/react-query';
 import Header from '../components/layout/Header';
 
 const RootComponent = () => {
@@ -19,4 +20,10 @@ const RootComponent = () => {
   );
 };
 
-export const Route = createRootRoute({ component: RootComponent });
+type RouterContext = {
+  queryClient: QueryClient;
+};
+
+export const Route = createRootRouteWithContext<RouterContext>()({
+  component: RootComponent
+});
