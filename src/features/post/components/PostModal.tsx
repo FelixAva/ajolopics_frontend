@@ -73,11 +73,9 @@ const PostModal = ({ post, isLoading, isError }: Props) => {
 
   const width = currentVariant?.width;
   const height = currentVariant?.height;
-  const originalW = originalVariant?.width;
-  const originalH = originalVariant?.height;
-
   const aspectType = getAspectType(width, height);
   const aspectLabel = width && height ? t(`aspectOptions.${aspectType.toLowerCase()}`) : '-';
+  const resolutionLabel = originalVariant ? `${originalVariant.width} x ${originalVariant.height}` : '-';
 
   const token = useAuthStore((state) => state.token);
   const isUserAuthenticated = !!token;
@@ -122,8 +120,7 @@ const PostModal = ({ post, isLoading, isError }: Props) => {
                 <PostModalSide
                   post={post}
                   aspectLabel={aspectLabel}
-                  originalH={originalH}
-                  originalW={originalW}
+                  resolutionLabel={resolutionLabel}
                 />
               </div>
 

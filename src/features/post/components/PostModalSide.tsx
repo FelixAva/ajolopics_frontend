@@ -1,16 +1,15 @@
 import { useTranslation } from 'react-i18next';
 
 import Badge from '@/components/ui/Badge';
-import type { MediaVariant, Post } from '../types/post.types';
+import type { Post } from '../types/post.types';
 
 interface PostSidebarProps {
   post: Post;
   aspectLabel: string;
-  originalW?: number;
-  originalH?: number;
+  resolutionLabel: string;
 }
 
-const PostModalSide = ({ post, originalH, originalW, aspectLabel }: PostSidebarProps) => {
+const PostModalSide = ({ post, aspectLabel, resolutionLabel }: PostSidebarProps) => {
   const { t } = useTranslation('post');
 
 
@@ -57,7 +56,7 @@ const PostModalSide = ({ post, originalH, originalW, aspectLabel }: PostSidebarP
         <div>
           <h3 className="text-sm font-semibold text-gray-500 mb-1">{t('fields.resolution')}</h3>
           <div className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 text-center bg-transparent">
-            {originalW && originalH ? `${originalW} x ${originalH}` : '-'}
+            {resolutionLabel}
           </div>
         </div>
       </div>
