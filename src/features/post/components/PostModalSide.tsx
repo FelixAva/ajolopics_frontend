@@ -5,11 +5,12 @@ import type { MediaVariant, Post } from '../types/post.types';
 
 interface PostSidebarProps {
   post: Post;
-  currentVariant: MediaVariant | undefined;
-  getAspectText: (w?: number, h?: number) => string;
+  aspectLabel: string;
+  originalW?: number;
+  originalH?: number;
 }
 
-const PostModalSide = ({ post, currentVariant, getAspectText }: PostSidebarProps) => {
+const PostModalSide = ({ post, originalH, originalW, aspectLabel }: PostSidebarProps) => {
   const { t } = useTranslation('post');
 
 
@@ -50,13 +51,13 @@ const PostModalSide = ({ post, currentVariant, getAspectText }: PostSidebarProps
         <div>
           <h3 className="text-sm font-semibold text-gray-500 mb-1">{t('fields.aspectRatio')}</h3>
           <div className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 text-center bg-transparent">
-            {getAspectText(currentVariant?.width, currentVariant?.height)}
+            {aspectLabel}
           </div>
         </div>
         <div>
           <h3 className="text-sm font-semibold text-gray-500 mb-1">{t('fields.resolution')}</h3>
           <div className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 text-center bg-transparent">
-            {currentVariant ? `${currentVariant.width} x ${currentVariant.height}` : '-'}
+            {originalW && originalH ? `${originalW} x ${originalH}` : '-'}
           </div>
         </div>
       </div>
