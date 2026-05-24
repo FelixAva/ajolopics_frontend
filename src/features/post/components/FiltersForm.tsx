@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from '@tanstack/react-router';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 
-import { Route } from '@/routes/_feed/route.tsx';
+import { Route } from '@/routes/index';
 import useTag from '@/features/tag/hooks/useTag.ts';
 import useUser from '@/features/user/hooks/useUser.ts';
 import Input from '@/components/ui/Input';

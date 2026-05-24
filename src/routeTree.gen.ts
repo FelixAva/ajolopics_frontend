@@ -9,30 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as FeedRouteRouteImport } from './routes/_feed/route'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
-import { Route as FeedIndexRouteImport } from './routes/_feed/index'
 import { Route as ProfileUserIdRouteImport } from './routes/profile.$userId'
-import { Route as PostsPostIdRouteImport } from './routes/posts/$postId'
+import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
 import { Route as ProfileUserIdEditRouteImport } from './routes/profile.$userId.edit'
-import { Route as PostsPostIdEditRouteImport } from './routes/posts/$postId.edit'
-import { Route as FeedPostsNewRouteImport } from './routes/_feed/posts.new'
-import { Route as FeedPostsPostIdModalRouteImport } from './routes/_feed/posts.$postId.modal'
+import { Route as PostsPostIdEditRouteImport } from './routes/posts.$postId.edit'
 
-const FeedRouteRoute = FeedRouteRouteImport.update({
-  id: '/_feed',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthIndexRoute = AuthIndexRouteImport.update({
   id: '/auth/',
   path: '/auth/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const FeedIndexRoute = FeedIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => FeedRouteRoute,
 } as any)
 const ProfileUserIdRoute = ProfileUserIdRouteImport.update({
   id: '/profile/$userId',
@@ -59,51 +52,34 @@ const PostsPostIdEditRoute = PostsPostIdEditRouteImport.update({
   path: '/edit',
   getParentRoute: () => PostsPostIdRoute,
 } as any)
-const FeedPostsNewRoute = FeedPostsNewRouteImport.update({
-  id: '/posts/new',
-  path: '/posts/new',
-  getParentRoute: () => FeedRouteRoute,
-} as any)
-const FeedPostsPostIdModalRoute = FeedPostsPostIdModalRouteImport.update({
-  id: '/posts/$postId/modal',
-  path: '/posts/$postId/modal',
-  getParentRoute: () => FeedRouteRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof FeedIndexRoute
+  '/': typeof IndexRoute
   '/auth/register': typeof AuthRegisterRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/profile/$userId': typeof ProfileUserIdRouteWithChildren
   '/auth/': typeof AuthIndexRoute
-  '/posts/new': typeof FeedPostsNewRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/profile/$userId/edit': typeof ProfileUserIdEditRoute
-  '/posts/$postId/modal': typeof FeedPostsPostIdModalRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/auth/register': typeof AuthRegisterRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/profile/$userId': typeof ProfileUserIdRouteWithChildren
-  '/': typeof FeedIndexRoute
   '/auth': typeof AuthIndexRoute
-  '/posts/new': typeof FeedPostsNewRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/profile/$userId/edit': typeof ProfileUserIdEditRoute
-  '/posts/$postId/modal': typeof FeedPostsPostIdModalRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_feed': typeof FeedRouteRouteWithChildren
+  '/': typeof IndexRoute
   '/auth/register': typeof AuthRegisterRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
   '/profile/$userId': typeof ProfileUserIdRouteWithChildren
-  '/_feed/': typeof FeedIndexRoute
   '/auth/': typeof AuthIndexRoute
-  '/_feed/posts/new': typeof FeedPostsNewRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
   '/profile/$userId/edit': typeof ProfileUserIdEditRoute
-  '/_feed/posts/$postId/modal': typeof FeedPostsPostIdModalRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -113,37 +89,30 @@ export interface FileRouteTypes {
     | '/posts/$postId'
     | '/profile/$userId'
     | '/auth/'
-    | '/posts/new'
     | '/posts/$postId/edit'
     | '/profile/$userId/edit'
-    | '/posts/$postId/modal'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/'
     | '/auth/register'
     | '/posts/$postId'
     | '/profile/$userId'
-    | '/'
     | '/auth'
-    | '/posts/new'
     | '/posts/$postId/edit'
     | '/profile/$userId/edit'
-    | '/posts/$postId/modal'
   id:
     | '__root__'
-    | '/_feed'
+    | '/'
     | '/auth/register'
     | '/posts/$postId'
     | '/profile/$userId'
-    | '/_feed/'
     | '/auth/'
-    | '/_feed/posts/new'
     | '/posts/$postId/edit'
     | '/profile/$userId/edit'
-    | '/_feed/posts/$postId/modal'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  FeedRouteRoute: typeof FeedRouteRouteWithChildren
+  IndexRoute: typeof IndexRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
   PostsPostIdRoute: typeof PostsPostIdRouteWithChildren
   ProfileUserIdRoute: typeof ProfileUserIdRouteWithChildren
@@ -152,11 +121,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_feed': {
-      id: '/_feed'
-      path: ''
+    '/': {
+      id: '/'
+      path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof FeedRouteRouteImport
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/': {
@@ -165,13 +134,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth/'
       preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/_feed/': {
-      id: '/_feed/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof FeedIndexRouteImport
-      parentRoute: typeof FeedRouteRoute
     }
     '/profile/$userId': {
       id: '/profile/$userId'
@@ -208,38 +170,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsPostIdEditRouteImport
       parentRoute: typeof PostsPostIdRoute
     }
-    '/_feed/posts/new': {
-      id: '/_feed/posts/new'
-      path: '/posts/new'
-      fullPath: '/posts/new'
-      preLoaderRoute: typeof FeedPostsNewRouteImport
-      parentRoute: typeof FeedRouteRoute
-    }
-    '/_feed/posts/$postId/modal': {
-      id: '/_feed/posts/$postId/modal'
-      path: '/posts/$postId/modal'
-      fullPath: '/posts/$postId/modal'
-      preLoaderRoute: typeof FeedPostsPostIdModalRouteImport
-      parentRoute: typeof FeedRouteRoute
-    }
   }
 }
-
-interface FeedRouteRouteChildren {
-  FeedIndexRoute: typeof FeedIndexRoute
-  FeedPostsNewRoute: typeof FeedPostsNewRoute
-  FeedPostsPostIdModalRoute: typeof FeedPostsPostIdModalRoute
-}
-
-const FeedRouteRouteChildren: FeedRouteRouteChildren = {
-  FeedIndexRoute: FeedIndexRoute,
-  FeedPostsNewRoute: FeedPostsNewRoute,
-  FeedPostsPostIdModalRoute: FeedPostsPostIdModalRoute,
-}
-
-const FeedRouteRouteWithChildren = FeedRouteRoute._addFileChildren(
-  FeedRouteRouteChildren,
-)
 
 interface PostsPostIdRouteChildren {
   PostsPostIdEditRoute: typeof PostsPostIdEditRoute
@@ -266,7 +198,7 @@ const ProfileUserIdRouteWithChildren = ProfileUserIdRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
-  FeedRouteRoute: FeedRouteRouteWithChildren,
+  IndexRoute: IndexRoute,
   AuthRegisterRoute: AuthRegisterRoute,
   PostsPostIdRoute: PostsPostIdRouteWithChildren,
   ProfileUserIdRoute: ProfileUserIdRouteWithChildren,

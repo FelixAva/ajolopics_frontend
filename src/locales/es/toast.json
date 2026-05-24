@@ -1,7 +1,5 @@
 {
   "register": "Usuario registrado correctamente",
   "postSuccess": "Publicado correctamente",
-  "postFailed": "Error al publicar",
-  "postDownloadSuccess": "Imagen descargada correctamente",
-  "postDownloadFailed": "Error al descargar la imagen"
+  "postFailed": "Error al publicar"
 }
