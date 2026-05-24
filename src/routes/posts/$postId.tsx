@@ -56,6 +56,7 @@ function RouteComponent() {
   const height = currentVariant?.height;
   const aspectType = getAspectType(width, height);
   const aspectLabel = width && height ? t(`aspectOptions.${aspectType.toLowerCase()}`) : '-';
+  const resolutionLabel = originalVariant ? `${originalVariant.width} x ${originalVariant.height}` : '-';
 
   const handleBack = () => {
     navigate({ to: '/' });
@@ -130,8 +131,8 @@ function RouteComponent() {
             <div className="flex flex-col gap-4 overflow-y-auto p-5">
               <PostModalSide
                 post={post}
-                currentVariant={currentVariant}
                 aspectLabel={aspectLabel}
+                resolutionLabel={resolutionLabel}
               />
             </div>
 
