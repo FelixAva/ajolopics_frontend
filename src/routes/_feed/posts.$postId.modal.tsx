@@ -1,9 +1,13 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import ModalOverlay from '@/components/ui/ModalOverlay';
 import PostModal from '@/features/post/components/PostModal';
-import usePostQueries from '@/features/post/hooks/post.queries';
+import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const Route = createFileRoute('/_feed/posts/$postId/modal')({
+  loader: async ({ context: { queryClient }, params: { postId } }) => {
+    await queryClient.ensureQueryData(singlePostQueryOptions(postId));
+  },
   component: PostModalRoute,
 })
 
@@ -11,14 +15,16 @@ function PostModalRoute() {
   const { postId } = Route.useParams();
   const navigate = useNavigate();
 
-  const { getSinglePost } = usePostQueries(undefined, postId);
+  const { data: post } = useSuspenseQuery(
+    singlePostQueryOptions(postId),
+  );
 
   const onClose = () => {
     navigate({
       to: '/',
       replace: true,
     })
-  }
+  };
 
   return (
     <ModalOverlay
@@ -26,9 +32,9 @@ function PostModalRoute() {
       onClose={onClose}
     >
       <PostModal
-        post={getSinglePost.data}
-        isLoading={getSinglePost.isLoading}
-        isError={getSinglePost.isError}
+        post={post}
+        isLoading={false}
+        isError={false}
       />
     </ModalOverlay>
   );

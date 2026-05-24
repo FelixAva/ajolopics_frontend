@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import { DynamicIcon } from 'lucide-react/dynamic';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import Button from '@/components/ui/Button';
-import usePostQueries from '@/features/post/hooks/post.queries';
 import usePostMutations from '@/features/post/hooks/post.mutations';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import CarouselControls from '@/features/post/components/PostModalControls';
 import PostModalSide from '@/features/post/components/PostModalSide';
 import type { AspectRatioType } from '@/features/post/types/post.types';
+import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 export const Route = createFileRoute('/posts/$postId')({
+  loader: async ({ context: { queryClient }, params: { postId } }) => {
+    await queryClient.ensureQueryData(singlePostQueryOptions(postId));
+  },
   component: RouteComponent,
 })
 
@@ -19,13 +22,15 @@ function RouteComponent() {
   const { postId } = Route.useParams();
   const { t } = useTranslation('post');
   const navigate = useNavigate({ from: Route.fullPath });
-  const { getSinglePost } = usePostQueries(undefined, postId);
+
+  const { data: post } = useSuspenseQuery(
+    singlePostQueryOptions(postId),
+  );
+
   const { downloadPost } = usePostMutations();
   const token = useAuthStore((state) => state.token);
   const isUserAuthenticated = !!token;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const { data: post, isLoading, isError } = getSinglePost;
 
   const nextImage = () => {
     if (post && post.assets.length > 0) {
@@ -71,24 +76,6 @@ function RouteComponent() {
     });
   };
 
-  if (isLoading) {
-    return (
-      <main className="flex min-h-[calc(100vh-5rem)] flex-1 items-center justify-center">
-        <DynamicIcon name="loader-2" className="animate-spin text-deep-teal" size={40} />
-      </main>
-    );
-  }
-
-  if (isError || !post) {
-    return (
-      <main className="flex min-h-[calc(100vh-5rem)] flex-1 items-center justify-center">
-        <div className="text-center text-lg font-medium text-red-500">
-          Error al cargar la publicacion.
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main className="flex-1 py-5 lg:py-10">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-5">
@@ -127,7 +114,7 @@ function RouteComponent() {
             />
           </div>
 
-          <aside className="flex flex-col rounded-lg border border-deep-teal-100 bg-beige-100/70 shadow-sm lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)]">
+          <aside className="flex flex-col rounded-lg shadow-sm lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)]">
             <div className="flex flex-col gap-4 overflow-y-auto p-5">
               <PostModalSide
                 post={post}
@@ -136,7 +123,7 @@ function RouteComponent() {
               />
             </div>
 
-            <div className="border-t border-deep-teal-100 p-5">
+            <div className="p-5">
               <Button
                 onClick={handleDownload}
                 icon={downloadPost.isPending ? 'loader-2' : 'download'}
