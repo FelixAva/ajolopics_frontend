@@ -9,6 +9,7 @@ import usePostMutations from '@/features/post/hooks/post.mutations';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import CarouselControls from '@/features/post/components/PostModalControls';
 import PostModalSide from '@/features/post/components/PostModalSide';
+import type { AspectRatioType } from '@/features/post/types/post.types';
 
 export const Route = createFileRoute('/posts/$postId')({
   component: RouteComponent,
@@ -45,12 +46,16 @@ function RouteComponent() {
   const originalVariant = currentAsset?.variants.find((variant) => variant.variant === 'ORIGINAL');
   const isMultiple = post && post.assets.length > 1;
 
-  const getAspectText = (w?: number, h?: number) => {
-    if (!w || !h) return '-';
-    if (w > h) return t('aspectOptions.landscape');
-    if (w < h) return t('aspectOptions.portrait');
-    return t('aspectOptions.square');
+  const getAspectType = (w?: number, h?: number): AspectRatioType => {
+    if (w && h && w > h) return 'LANDSCAPE';
+    if (w && h && w < h) return 'PORTRAIT';
+    return 'SQUARE';
   };
+
+  const width = currentVariant?.width;
+  const height = currentVariant?.height;
+  const aspectType = getAspectType(width, height);
+  const aspectLabel = width && height ? t(`aspectOptions.${aspectType.toLowerCase()}`) : '-';
 
   const handleBack = () => {
     navigate({ to: '/' });
@@ -126,7 +131,7 @@ function RouteComponent() {
               <PostModalSide
                 post={post}
                 currentVariant={currentVariant}
-                getAspectText={getAspectText}
+                aspectLabel={aspectLabel}
               />
             </div>
 
