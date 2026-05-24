@@ -1,32 +1,12 @@
 import type { AxiosError } from 'axios';
-import { useMutation, useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 
 import { PostService } from '../services/post.service';
-import type { ErrorDTO } from '@/types/api.types'
-import type { PaginatedResponseDTO } from '@/types/api.paginated.response.types';
+import type { ErrorDTO, PaginatedResponseDTO } from '@/types/api.types'
 import type { Post } from '../types/post.types';
-import type { CreatePostRequestDTO, GetFeedRequestDTO } from '../types/post.api.types';
-import { queryClient } from '@/app/queryClient';
-import { showAjolopicsToast } from '@/components/ui/Alerts';
+import type { GetFeedRequestDTO } from '../types/post.api.types';
 
-const usePost = (feedBodyParameters?: GetFeedRequestDTO, postId?: string) => {
-  const { t } = useTranslation('toast');
-
-  const createPost = useMutation<Post, AxiosError<ErrorDTO>, CreatePostRequestDTO>({
-    mutationFn: (data: CreatePostRequestDTO) => PostService.createPost(data),
-    onSuccess: () => {
-      showAjolopicsToast('success', t('postSuccess'));
-
-      queryClient.invalidateQueries({ queryKey: ['feed'] });
-    },
-    onError: (error) => {
-      console.error(error);
-
-      showAjolopicsToast('error', t('postFailed'));
-    }
-  });
-
+const usePostQueries = (feedBodyParameters?: GetFeedRequestDTO, postId?: string) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { page: _, ...queryKeyParams } = feedBodyParameters || {};
 
@@ -53,10 +33,9 @@ const usePost = (feedBodyParameters?: GetFeedRequestDTO, postId?: string) => {
   })
 
   return {
-    createPost,
     getPostFeed,
     getSinglePost
   };
 };
 
-export default usePost;
+export default usePostQueries;

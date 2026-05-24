@@ -30,7 +30,7 @@ const CreatePostModal = ({ isOpen, onClose }: Props) => {
         </div>
 
         <div className="p-6 overflow-y-auto max-h-[80vh]">
-          <CreatePostForm />
+          <CreatePostForm onClose={onClose} />
         </div>
 
       </div>
