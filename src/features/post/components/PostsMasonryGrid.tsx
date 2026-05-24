@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import usePost from '../hooks/usePost';
+import usePostQueries from '../hooks/post.queries';
 import type { GetFeedRequestDTO } from '../types/post.api.types';
 import PostCard from './PostCard';
 import MasonryGrid, { type MasonryElement } from '@/components/layout/MasonryGrid';
@@ -45,7 +45,7 @@ const PostsMasonryGrid = ({ filters, onPostClick }: PostMasonryGridProps) => {
     [filters]
   );
 
-  const { getPostFeed } = usePost(feedParams);
+  const { getPostFeed } = usePostQueries(feedParams);
 
   const {
     hasNextPage,
