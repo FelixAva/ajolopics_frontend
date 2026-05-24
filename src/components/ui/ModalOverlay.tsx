@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import Button from './Button';
+import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 
 interface ModalOverlayProps {
   children: ReactNode;
@@ -17,6 +18,8 @@ const ModalOverlay = ({
   onClose
 }: ModalOverlayProps) => {
   const widthClass = maxWidth ?? '';
+
+  useLockBodyScroll(true);
 
   if (!showHeader) {
     return (

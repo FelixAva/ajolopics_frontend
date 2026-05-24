@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { DynamicIcon } from 'lucide-react/dynamic';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import { useTranslation } from 'react-i18next';
-import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import CarouselControls from './PostModalControls';
 import type { AspectRatioType, Post } from '../types/post.types';
 import usePostMutations from '../hooks/post.mutations';
@@ -39,8 +38,6 @@ const modalStyles = {
 const PostModal = ({ post, isLoading, isError }: Props) => {
   const { t } = useTranslation('post');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useLockBodyScroll(true);
 
   const nextImage = () => {
     if (post && post.assets.length > 0) {
