@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import usePostMutations from '@/features/post/hooks/post.mutations';
+import usePost from '@/features/post/hooks/usePost';
 import useTag from '@/features/tag/hooks/useTag';
 
 import Input from '@/components/ui/Input';
@@ -32,7 +32,7 @@ const CreatePostForm = ({ onClose }: Props) => {
       description: ''
     }
   });
-  const { createPost } = usePostMutations();
+  const { createPost } = usePost();
   const { getTags } = useTag();
 
   // Get tags query
