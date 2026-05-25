@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
 html {
@@ -6,8 +9,8 @@ html {
 
 @theme {
   /* -------------------------------- Fonts -------------------------------- */
-  --font-poppins: Poppins, sans-serif;
-  --font-lexend: Lexend, sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-lexend: "Lexend", sans-serif;
 
   /* -------------------------------- Colors -------------------------------- */
   --color-midnight-violet: #2B061E;
@@ -73,4 +76,10 @@ html {
   --color-dusty-olive-800: #353b2b;
   --color-dusty-olive-900: #1a1d16;
   --color-dusty-olive-950: #12150f;
+}
+
+@layer base {
+  body {
+    font-family: "Lexend", sans-serif;
+  }
 }

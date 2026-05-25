@@ -6,6 +6,7 @@ import enAuth from '../locales/en/auth.json';
 import enComponents from '../locales/en/components.json';
 import enHeader from '../locales/en/header.json';
 import enPost from '../locales/en/post.json';
+import enSeo from '../locales/en/seo.json';
 import enToast from '../locales/en/toast.json';
 
 // Importaciones de archivos en Español (ES)
@@ -13,6 +14,7 @@ import esAuth from '../locales/es/auth.json';
 import esComponents from '../locales/es/components.json';
 import esHeader from '../locales/es/header.json';
 import esPost from '../locales/es/post.json';
+import esSeo from '../locales/es/seo.json';
 import esToast from '../locales/es/toast.json';
 
 const resources = {
@@ -21,6 +23,7 @@ const resources = {
     components: enComponents,
     header: enHeader,
     post: enPost,
+    seo: enSeo,
     toast: enToast
   },
   es: {
@@ -28,6 +31,7 @@ const resources = {
     components: esComponents,
     header: esHeader,
     post: esPost,
+    seo: esSeo,
     toast: esToast
   },
 }
@@ -53,7 +57,7 @@ i18n
     resources,
     lng: initialLng,
     fallbackLng: 'en',
-    ns: ['auth', 'components', 'header', 'post'],
+    ns: ['auth', 'components', 'header', 'post', 'seo'],
     interpolation: {
       escapeValue: false,
     },
