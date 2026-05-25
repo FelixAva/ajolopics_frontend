@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import Button from '@/components/ui/Button';
 import usePostMutations from '@/features/post/hooks/post.mutations';
@@ -9,12 +10,15 @@ import CarouselControls from '@/features/post/components/PostModalControls';
 import PostModalSide from '@/features/post/components/PostModalSide';
 import type { AspectRatioType } from '@/features/post/types/post.types';
 import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { getFallbackPostHead, getPostHead } from '@/features/post/utils/postSeo';
 
 export const Route = createFileRoute('/posts/$postId')({
   loader: async ({ context: { queryClient }, params: { postId } }) => {
-    await queryClient.ensureQueryData(singlePostQueryOptions(postId));
+    const post = await queryClient.ensureQueryData(singlePostQueryOptions(postId));
+    return { post };
   },
+  head: ({ loaderData, params: { postId } }) =>
+    loaderData?.post ? getPostHead(loaderData.post) : getFallbackPostHead(postId),
   component: RouteComponent,
 })
 

@@ -14,8 +14,16 @@ import type { IRegisterFormInput } from '@/features/auth/types/auth.form.types';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 import Spinner from '@/components/ui/Spinner';
+import { createSeoHead } from '@/utils/seo';
+import { getSeoTranslation } from '@/utils/seoTranslations';
 
 export const Route = createFileRoute('/auth/register')({
+  head: () => createSeoHead({
+    title: getSeoTranslation('auth.registerTitle'),
+    description: getSeoTranslation('auth.registerDescription'),
+    path: '/auth/register',
+    noIndex: true,
+  }),
   component: RouteComponent,
 });
 

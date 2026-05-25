@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /auth
+Disallow: /posts/new
+Disallow: /posts/*/edit
+Disallow: /posts/*/modal
+Disallow: /profile/*/edit
+
+Sitemap: https://ajolopics.com/sitemap.xml

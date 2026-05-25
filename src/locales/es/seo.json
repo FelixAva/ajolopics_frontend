@@ -1,0 +1,28 @@
+{
+  "default": {
+    "description": "Galeria virtual de arte enfocada en exhibir y compartir fotografia."
+  },
+  "home": {
+    "title": "Ajolopics",
+    "description": "Explora fotografia y arte visual compartido por creadores en Ajolopics."
+  },
+  "auth": {
+    "loginTitle": "Iniciar sesion",
+    "loginDescription": "Accede a tu cuenta de Ajolopics.",
+    "registerTitle": "Crear cuenta",
+    "registerDescription": "Crea una cuenta en Ajolopics para compartir y guardar fotografia."
+  },
+  "posts": {
+    "newTitle": "Nueva publicacion",
+    "newDescription": "Crea una nueva publicacion en Ajolopics.",
+    "editTitle": "Editar publicacion",
+    "editDescription": "Edita una publicacion en Ajolopics.",
+    "fallbackDescription": "Fotografia \"{{title}}\" en Ajolopics."
+  },
+  "profile": {
+    "title": "Perfil",
+    "description": "Perfil de creador en Ajolopics.",
+    "editTitle": "Editar perfil",
+    "editDescription": "Edita tu perfil de Ajolopics."
+  }
+}
