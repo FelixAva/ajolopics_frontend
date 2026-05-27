@@ -5,19 +5,19 @@ type ToastType = 'success' | 'error' | 'info';
 export const showAjolopicsToast = (type: ToastType, title: string) => {
   const styles = {
     success: {
-      popup: '!bg-beige-100 !border-deep-teal-200 !text-deep-teal-700 !shadow-deep-teal-100',
-      timerProgressBar: '!bg-deep-teal-500',
-      iconColor: '!deep-teal-700',
+      popup: '!bg-muted !border-primary-soft-hover !text-primary-active !shadow-primary-hover',
+      timerProgressBar: '!bg-primary-ring',
+      iconColor: 'var(--primary-active)',
     },
     error: {
-      popup: '!bg-smoky-rose-50 !border-smoky-rose-200 !text-smoky-rose-700 !shadow-smoky-rose-100',
-      timerProgressBar: '!bg-smoky-rose-500',
-      iconColor: '!smoky-rose-700',
+      popup: '!bg-danger-subtle !border-danger-border !text-danger-foreground !shadow-danger-background',
+      timerProgressBar: '!bg-danger-ring',
+      iconColor: 'var(--danger-foreground)',
     },
     info: {
-      popup: '!bg-blue-50 !border-blue-200 !text-blue-700 !shadow-blue-100',
-      timerProgressBar: '!bg-blue-500',
-      iconColor: '#a855f7',
+      popup: '!bg-info-background !border-info-border !text-info-foreground !shadow-info-shadow',
+      timerProgressBar: '!bg-info-progress',
+      iconColor: 'var(--info-icon)',
     },
   };
 

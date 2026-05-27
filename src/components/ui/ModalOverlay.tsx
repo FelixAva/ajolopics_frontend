@@ -23,7 +23,7 @@ const ModalOverlay = ({
 
   if (!showHeader) {
     return (
-      <div className="fixed inset-0 z-50 flex flex-col flex-1 items-center justify-center bg-black/70 backdrop-blur-md">
+      <div className="fixed inset-0 z-50 flex flex-col flex-1 items-center justify-center bg-overlay/70 backdrop-blur-md">
         <div
           className="absolute inset-0"
           onClick={onClose}
@@ -39,7 +39,7 @@ const ModalOverlay = ({
             variant='none'
             icon='x'
             aria-label='Close'
-            className="absolute top-4 right-4 z-20 hover:text-black! bg-white/80 rounded-full! p-1!"
+            className="absolute top-4 right-4 z-20 hover:text-overlay! bg-card/80 rounded-full! p-1!"
           />
 
           {children}
@@ -49,7 +49,7 @@ const ModalOverlay = ({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col flex-1 items-center justify-center bg-black/70 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex flex-col flex-1 items-center justify-center bg-overlay/70 backdrop-blur-md">
       <div
         className="absolute inset-0"
         onClick={onClose}
@@ -57,17 +57,17 @@ const ModalOverlay = ({
       />
 
       <div
-        className={`relative bg-white rounded-xl shadow-xl w-full ${widthClass} max-h-[90vh] overflow-y-auto`}
+        className={`relative bg-card rounded-xl shadow-xl w-full ${widthClass} max-h-[90vh] overflow-y-auto`}
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-gray-200">
-          {title && <h2 className="text-lg font-semibold text-gray-900">{title}</h2>}
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-surface-border">
+          {title && <h2 className="text-lg font-semibold text-strong-foreground">{title}</h2>}
           <Button
             onClick={onClose}
             variant='none'
             icon='x'
             aria-label='Close'
-            className="hover:text-black! bg-white/80 rounded-full! p-1!"
+            className="hover:text-overlay! bg-card/80 rounded-full! p-1!"
           />
         </div>
 

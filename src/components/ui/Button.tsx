@@ -24,12 +24,12 @@ const Button: FC<ButtonProps> = ({
   const baseStyles = "inline-flex items-center justify-center rounded-lg transition-colors duration-200 select-none hover:cursor-pointer focus-visible:outline-none w-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none";
 
   const variantStyles = {
-    primary: "bg-deep-teal text-white border border-transparent hover:bg-deep-teal-700 focus-visible:ring-deep-teal-500",
-    secondary: "bg-deep-teal-100 text-deep-teal-900 border border-transparent hover:bg-deep-teal-200",
-    danger: "bg-smoky-rose-100 text-smoky-rose-700 border border-transparent hover:bg-smoky-rose-600 focus-visible:ring-smoky-rose-500",
-    outline: "bg-transparent text-deep-teal border border-deep-teal hover:bg-deep-teal-50 hover:border-deep-teal-100 focus-visible:ring-deep-teal-500",
-    ghost: "bg-transparent text-deep-teal border border-transparent hover:bg-deep-teal-100 focus-visible:ring-deep-teal-500",
-    none: "bg-transparent text-deep-teal border-transparent rounded-full focus-visible:ring-transparent rounded-full"
+    primary: "bg-primary text-primary-contrast border border-transparent hover:bg-primary-active focus-visible:ring-primary-ring",
+    secondary: "bg-primary-hover text-primary-soft-foreground border border-transparent hover:bg-primary-soft-hover",
+    danger: "bg-danger-background text-danger-foreground border border-transparent hover:bg-danger-hover focus-visible:ring-danger-ring",
+    outline: "bg-transparent text-primary border border-primary hover:bg-primary-subtle hover:border-primary-hover focus-visible:ring-primary-ring",
+    ghost: "bg-transparent text-primary border border-transparent hover:bg-primary-hover focus-visible:ring-primary-ring",
+    none: "bg-transparent text-primary border-transparent rounded-full focus-visible:ring-transparent rounded-full"
   };
 
   const sizeStyles = {
@@ -40,7 +40,7 @@ const Button: FC<ButtonProps> = ({
   };
 
   const selectedStyles = isSelected
-    ? "ring-2 ring-offset-2 ring-deep-teal-500"
+    ? "ring-2 ring-offset-2 ring-primary-ring"
     : "";
 
   const finalClassName = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${selectedStyles} ${className}`;
