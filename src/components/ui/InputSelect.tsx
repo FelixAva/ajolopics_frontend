@@ -18,7 +18,7 @@ const InputSelect = ({
 }: CustomSelectProps) => {
   return (
     <div className='w-full flex flex-col text-left gap-1'>
-      <p className='text-lg'>{label}</p>
+      <p className='text-lg text-foreground'>{label}</p>
 
       <Select
         {...rest}

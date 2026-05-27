@@ -39,7 +39,7 @@ const ModalOverlay = ({
             variant='none'
             icon='x'
             aria-label='Close'
-            className="absolute top-4 right-4 z-20 hover:text-overlay! bg-card/80 rounded-full! p-1!"
+            className="absolute top-4 right-4 z-20 hover:text-overlay! bg-card/80! rounded-full! p-1!"
           />
 
           {children}
@@ -67,7 +67,7 @@ const ModalOverlay = ({
             variant='none'
             icon='x'
             aria-label='Close'
-            className="hover:text-overlay! bg-card/80 rounded-full! p-1!"
+            className="hover:text-overlay! bg-card/80! rounded-full! p-1!"
           />
         </div>
 

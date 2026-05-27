@@ -46,8 +46,8 @@ function RouteComponent() {
     <div className='flex flex-1 justify-center items-center text-center'>
       <div className='w-full md:w-auto flex flex-col gap-2'>
         <div>
-          <h1 className='text-2xl'>{t('auth:register.title')}</h1>
-          <h2 className='text-lg font-thin'>{t('auth:register.subTitle')}</h2>
+          <h1 className='text-2xl text-foreground'>{t('auth:register.title')}</h1>
+          <h2 className='text-lg font-thin text-foreground'>{t('auth:register.subTitle')}</h2>
         </div>
 
         <form
@@ -142,7 +142,7 @@ function RouteComponent() {
           }
         </form>
 
-        <Link to="/auth" className="[&.active]:font-bold]" preload="intent">
+        <Link to="/auth" className="[&.active]:font-bold] text-foreground" preload="intent">
           {t('auth:register.loginPrompt')} <span className='text-primary underline'>{t('auth:register.loginLink')}</span>
         </Link>
       </div>

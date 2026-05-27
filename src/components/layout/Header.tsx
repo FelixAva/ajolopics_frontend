@@ -71,7 +71,7 @@ const Header = () => {
           <div className='flex md:items-center md:gap-1'>
             <Link to="/" className="[&.active]:font-bold] text-xl flex items-center gap-2" preload="intent">
               <img src='/ajologo_frame.webp' className='w-10' />
-              <h1 className='font-poppins text-2xl tracking-[0.1rem]'>ajolopics</h1>
+              <h1 className='font-poppins text-2xl tracking-[0.1rem] text-foreground'>ajolopics</h1>
             </Link>
           </div>
 

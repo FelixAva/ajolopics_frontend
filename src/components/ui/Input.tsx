@@ -19,7 +19,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className="flex flex-col text-left w-full">
-        <label htmlFor={inputId} className="block text-lg text-label">
+        <label htmlFor={inputId} className="block text-lg text-foreground">
           {label}
         </label>
 

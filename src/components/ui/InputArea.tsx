@@ -12,7 +12,7 @@ const InputArea = forwardRef<HTMLTextAreaElement, Props> (function Input (
 ) {
   return (
     <div className='w-auto flex flex-col text-left'>
-      <p className='text-lg'>{ label }</p>
+      <p className='text-lg text-foreground'>{ label }</p>
 
       <textarea
         ref={ref}

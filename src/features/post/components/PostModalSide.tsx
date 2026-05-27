@@ -17,7 +17,7 @@ const PostModalSide = ({ post, aspectLabel, resolutionLabel }: PostSidebarProps)
   return (
     <>
       <div>
-        <h2 className="text-2xl font-bold text-heading-foreground mb-1">{post.title}</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-1">{post.title}</h2>
         <p className="text-supporting-foreground font-medium">{t('detail.by')} {post.author.name}</p>
       </div>
 
