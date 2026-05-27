@@ -38,7 +38,7 @@ const LanguageModal = () => {
       />
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden">
+        <div className="absolute right-0 mt-2 w-32 bg-background rounded-lg shadow-lg z-50 overflow-hidden">
           <ul className="flex flex-col">
             {languages.map((lang) => (
               <li key={lang.code}>
@@ -46,10 +46,10 @@ const LanguageModal = () => {
                   variant='ghost'
                   onClick={() => handleLanguageChange(lang.code)}
                   title={lang.label}
-                  className={`w-full text-left px-4 py-2 hover:bg-deep-teal-100 transition-colors ${
+                  className={`w-full text-left px-4 py-2 hover:bg-primary-hover transition-colors ${
                     i18n.resolvedLanguage === lang.code
-                      ? 'bg-deep-teal-300! rounded-none! text-deep-teal-700 font-bold'
-                      : 'text-gray-700'
+                      ? 'bg-primary-selected! rounded-none! text-primary-active font-bold'
+                      : 'text-label'
                   }`}
                 />
               </li>

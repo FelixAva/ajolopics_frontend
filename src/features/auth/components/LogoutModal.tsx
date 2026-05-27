@@ -20,8 +20,8 @@ const LogoutModal = ({ onClose, isOpen }: Props) => {
   if (!isOpen) return null;
 
   return (
-    <div className="absolute right-5 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden p-1">
-      <p className="text-xs text-gray-500 font-medium px-3 py-2 pb-1 text-center">
+    <div className="absolute right-5 mt-2 w-40 bg-background rounded-lg shadow-lg z-50 overflow-hidden p-1">
+      <p className="text-xs text-subtle-foreground font-medium px-3 py-2 pb-1 text-center">
         {t('header:logoutConfirm')}
       </p>
       <ul className="flex flex-col gap-1 mt-1">
@@ -31,7 +31,7 @@ const LogoutModal = ({ onClose, isOpen }: Props) => {
             variant='danger'
             size='sm'
             onClick={handleConfirmLogout}
-            className="w-full font-semibold hover:text-white"
+            className="w-full font-semibold hover:text-danger-contrast"
           />
         </li>
         <li>
@@ -40,7 +40,7 @@ const LogoutModal = ({ onClose, isOpen }: Props) => {
             variant='ghost'
             size='sm'
             onClick={onClose}
-            className="w-full text-deep-teal-900 hover:bg-deep-teal-50"
+            className="w-full text-primary-soft-foreground hover:bg-primary-subtle"
           />
         </li>
       </ul>

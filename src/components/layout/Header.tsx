@@ -54,7 +54,7 @@ const Header = () => {
   const loginButton = (
     <Link
       to="/auth"
-      className="[&.active]:font-bold] w-auto h-min px-3.5 py-2 rounded-lg text-deep-teal transition-colors duration-200 select-none hover:cursor-pointer hover:bg-deep-teal-100 hover:border-deep-teal-100 sm:text-lg"
+      className="[&.active]:font-bold] w-auto h-min px-3.5 py-2 rounded-lg text-primary transition-colors duration-200 select-none hover:cursor-pointer hover:bg-primary-hover hover:border-primary-hover sm:text-lg"
       preload="intent"
     >
       <div className="flex items-center justify-center gap-2 text-center">
@@ -65,7 +65,7 @@ const Header = () => {
   );
 
   return (
-    <div className="sticky top-0 z-20 bg-beige/70 backdrop-blur-md w-full h-auto px-3 py-3 items-center md:w-auto md:h-auto md:flex md:justify-between lg:px-10">
+    <div className="sticky top-0 z-20 bg-background/70 backdrop-blur-md w-full h-auto px-3 py-3 items-center md:w-auto md:h-auto md:flex md:justify-between lg:px-10">
       <div className='w-auto h-auto flex flex-1 gap-2'>
         <div className='w-full flex items-center justify-between'>
           <div className='flex md:items-center md:gap-1'>
@@ -99,9 +99,9 @@ const Header = () => {
           className='w-12.5 h-12.5 shrink-0 md:hidden'
         >
           <div className="relative w-7 h-7 flex items-center justify-center">
-            <span className={clsx("absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300", isNavigationOpen ? "rotate-45 translate-y-0" : "-translate-y-2")} />
-            <span className={clsx("absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300", isNavigationOpen ? "opacity-0" : "opacity-100")} />
-            <span className={clsx("absolute h-0.75 rounded-2xl w-7 bg-deep-teal transition-all duration-300", isNavigationOpen ? "-rotate-45 translate-y-0" : "translate-y-2")} />
+            <span className={clsx("absolute h-0.75 rounded-2xl w-7 bg-primary transition-all duration-300", isNavigationOpen ? "rotate-45 translate-y-0" : "-translate-y-2")} />
+            <span className={clsx("absolute h-0.75 rounded-2xl w-7 bg-primary transition-all duration-300", isNavigationOpen ? "opacity-0" : "opacity-100")} />
+            <span className={clsx("absolute h-0.75 rounded-2xl w-7 bg-primary transition-all duration-300", isNavigationOpen ? "-rotate-45 translate-y-0" : "translate-y-2")} />
           </div>
         </Button>
       </div>

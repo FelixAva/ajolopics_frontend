@@ -20,15 +20,15 @@ const FiltersModal = ({
   if (!isOpen) return null;
 
   const modalContent = (
-    <div className="fixed inset-0 z-50 flex flex-col h-screen items-end justify-start bg-black/60 backdrop-blur-sm p-0">
-      <div className="bg-beige w-full max-w-lg flex flex-1 flex-col shadow-2xl overflow-hidden">
-        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-          <h2 className="text-2xl font-semibold text-gray-800">{t('filters.title')}</h2>
+    <div className="fixed inset-0 z-50 flex flex-col h-screen items-end justify-start bg-overlay/60 backdrop-blur-sm p-0">
+      <div className="bg-background w-full max-w-lg flex flex-1 flex-col shadow-2xl overflow-hidden">
+        <div className="flex justify-between items-center px-6 py-4 border-b border-surface-muted">
+          <h2 className="text-2xl font-semibold text-heading-foreground">{t('filters.title')}</h2>
           <Button
             onClick={onClose}
             variant='none'
             icon='x'
-            className="hover:text-black! p-0!"
+            className="hover:text-overlay! p-0!"
           />
         </div>
 

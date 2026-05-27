@@ -146,7 +146,7 @@ const CreatePostForm = ({ onClose }: Props) => {
 
       {
         createPost.isError && (
-          <span className='text-sm text-red-400 text-center'>{createPost.error.response?.data.message}</span>
+          <span className='text-sm text-error text-center'>{createPost.error.response?.data.message}</span>
         )
       }
 

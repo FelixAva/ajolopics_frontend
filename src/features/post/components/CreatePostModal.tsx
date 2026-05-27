@@ -17,15 +17,15 @@ const CreatePostModal = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   const modalContent = (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="bg-beige rounded-2xl w-full max-w-2xl flex flex-col shadow-2xl overflow-hidden">
-        <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-          <h2 className="text-2xl font-semibold text-gray-800">{t('create.title')}</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-overlay/60 backdrop-blur-sm p-4">
+      <div className="bg-background rounded-2xl w-full max-w-2xl flex flex-col shadow-2xl overflow-hidden">
+        <div className="flex justify-between items-center px-6 py-4 border-b border-surface-muted">
+          <h2 className="text-2xl font-semibold text-heading-foreground">{t('create.title')}</h2>
           <Button
             onClick={onClose}
             variant='none'
             icon='x'
-            className="hover:text-black! p-0!"
+            className="hover:text-overlay! p-0!"
           />
         </div>
 
