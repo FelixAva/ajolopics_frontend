@@ -19,7 +19,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className="flex flex-col text-left w-full">
-        <label htmlFor={inputId} className="block text-lg text-gray-700">
+        <label htmlFor={inputId} className="block text-lg text-label">
           {label}
         </label>
 
@@ -29,7 +29,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             name={name}
             ref={ref}
             type={inputType}
-            className={`block w-full border border-dusty-olive rounded-lg px-2.5 py-1.5 focus:outline-dusty-olive-700 ${className}`}
+            className={`block w-full border border-input-border rounded-lg px-2.5 py-1.5 focus:outline-input-focus ${className}`}
             {...rest}
           />
 
@@ -47,7 +47,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
 
         {error && (
-          <span className="mt-1 text-sm text-red-400">{error}</span>
+          <span className="mt-1 text-sm text-error">{error}</span>
         )}
       </div>
     );

@@ -89,19 +89,19 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={`flex flex-col items-center justify-center w-full min-h-40 p-4 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${
-          isDragging ? 'border-deep-teal bg-deep-teal/10' :
-          isProcessing ? 'border-gray-300 bg-gray-50 cursor-not-allowed' :
-          'border-dusty-olive hover:bg-dusty-olive/5'
+          isDragging ? 'border-primary bg-primary/10' :
+          isProcessing ? 'border-disabled-border bg-surface-disabled cursor-not-allowed' :
+          'border-input-border hover:bg-input-border/5'
         }`}
       >
         {isProcessing ? (
-          <div className="flex flex-col items-center justify-center py-6 text-dusty-olive">
-            <DynamicIcon name="loader-2" size={32} className="mb-3 animate-spin text-deep-teal" />
+          <div className="flex flex-col items-center justify-center py-6 text-muted-foreground">
+            <DynamicIcon name="loader-2" size={32} className="mb-3 animate-spin text-primary" />
             <p className="text-lg font-medium">Processing images...</p>
           </div>
         ) : value.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-6 text-dusty-olive">
-            <DynamicIcon name="upload" size={32} className={`mb-3 transition-transform ${isDragging ? 'scale-110 text-deep-teal' : ''}`} />
+          <div className="flex flex-col items-center justify-center py-6 text-muted-foreground">
+            <DynamicIcon name="upload" size={32} className={`mb-3 transition-transform ${isDragging ? 'scale-110 text-primary' : ''}`} />
             <p className="text-lg font-medium">{t('fileUpload.placeholder')}</p>
           </div>
         ) : (
@@ -111,17 +111,17 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
                 <div
                   key={index}
                   data-index={index}
-                  className="relative aspect-square rounded-lg overflow-hidden group border border-gray-200 shadow-sm cursor-pointer bg-gray-100"
+                  className="relative aspect-square rounded-lg overflow-hidden group border border-surface-border shadow-sm cursor-pointer bg-surface-muted"
                   title={t('fileUpload.remove')}
                 >
                   <img src={fileObj.previewUrl} alt={`preview-${index}`} className="w-full h-full object-cover pointer-events-none" />
-                  <div className="absolute inset-0 bg-red-500/0 group-hover:bg-red-500/40 flex items-center justify-center transition-all pointer-events-none">
-                    <DynamicIcon name="trash-2" size={24} className="text-white opacity-0 group-hover:opacity-100 drop-shadow-md" />
+                  <div className="absolute inset-0 bg-remove-hover/0 group-hover:bg-remove-hover/40 flex items-center justify-center transition-all pointer-events-none">
+                    <DynamicIcon name="trash-2" size={24} className="text-danger-contrast opacity-0 group-hover:opacity-100 drop-shadow-md" />
                   </div>
                 </div>
               ))}
             </div>
-            <p className="text-sm font-medium text-dusty-olive hover:text-deep-teal transition-colors">{t('fileUpload.addMore')}</p>
+            <p className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">{t('fileUpload.addMore')}</p>
           </div>
         )}
 
@@ -135,7 +135,7 @@ const InputFile = forwardRef<HTMLInputElement, Props>(function InputFile(
         />
       </label>
 
-      {error && <span className='text-sm text-red-400 mt-1'>{error}</span>}
+      {error && <span className='text-sm text-error mt-1'>{error}</span>}
     </div>
   );
 });

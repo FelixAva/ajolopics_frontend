@@ -17,12 +17,12 @@ const InputArea = forwardRef<HTMLTextAreaElement, Props> (function Input (
       <textarea
         ref={ref}
         {...rest}
-        className={`w-full border border-dusty-olive rounded-lg px-2.5 py-1.5 focus:outline-dusty-olive-700 ${className ?? ''}`}
+        className={`w-full border border-input-border rounded-lg px-2.5 py-1.5 focus:outline-input-focus ${className ?? ''}`}
       />
 
       {
         error && (
-          <span className='text-sm text-red-400'>{error}</span>
+          <span className='text-sm text-error'>{error}</span>
         )
       }
     </div>

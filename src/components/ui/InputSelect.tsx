@@ -34,14 +34,14 @@ const InputSelect = ({
         classNames={{
           control: ({ isFocused }) => `
             flex w-full border rounded-lg px-1.5 py-0.5 transition-all
-            ${isFocused ? 'border-dusty-olive-700 ring-1 ring-dusty-olive-700' : 'border-dusty-olive'}
+            ${isFocused ? 'border-input-focus ring-1 ring-input-focus' : 'border-input-border'}
             bg-transparent
           `,
-          multiValue: () => 'bg-deep-teal text-white rounded-3xl px-2 py-0.5 m-0.5 flex items-center',
-          multiValueLabel: () => 'text-sm font-medium text-white',
-          multiValueRemove: () => 'hover:text-deep-teal-200 ml-1 rounded-full p-0.5 cursor-pointer',
+          multiValue: () => 'bg-primary text-primary-contrast rounded-3xl px-2 py-0.5 m-0.5 flex items-center',
+          multiValueLabel: () => 'text-sm font-medium text-primary-contrast',
+          multiValueRemove: () => 'hover:text-primary-soft-hover ml-1 rounded-full p-0.5 cursor-pointer',
 
-          menu: () => 'mt-2 border border-dusty-olive bg-white rounded-lg shadow-lg overflow-hidden',
+          menu: () => 'mt-2 border border-input-border bg-card rounded-lg shadow-lg overflow-hidden',
 
           // --- ESTA ES LA LÍNEA CLAVE PARA QUE NO CREZCA DE MÁS ---
           menuList: () => 'max-h-48 overflow-y-auto',
@@ -49,16 +49,16 @@ const InputSelect = ({
 
           option: ({ isFocused, isSelected }) => `
             px-3 py-2 cursor-pointer transition-colors
-            ${isSelected ? 'bg-deep-teal text-white' : ''}
-            ${isFocused && !isSelected ? 'bg-deep-teal-200 text-dusty-olive-900' : ''}
+            ${isSelected ? 'bg-primary text-primary-contrast' : ''}
+            ${isFocused && !isSelected ? 'bg-accent text-accent-foreground' : ''}
           `,
-          placeholder: () => 'text-gray-400',
-          noOptionsMessage: () => 'p-2 text-gray-500',
+          placeholder: () => 'text-placeholder',
+          noOptionsMessage: () => 'p-2 text-subtle-foreground',
         }}
       />
 
       {error && (
-        <span className='text-sm text-red-400'>{error}</span>
+        <span className='text-sm text-error'>{error}</span>
       )}
     </div>
   );
