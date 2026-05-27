@@ -17,20 +17,20 @@ const PostModalSide = ({ post, aspectLabel, resolutionLabel }: PostSidebarProps)
   return (
     <>
       <div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-1">{post.title}</h2>
-        <p className="text-gray-600 font-medium">{t('detail.by')} {post.author.name}</p>
+        <h2 className="text-2xl font-bold text-heading-foreground mb-1">{post.title}</h2>
+        <p className="text-supporting-foreground font-medium">{t('detail.by')} {post.author.name}</p>
       </div>
 
       <div>
-        <h3 className="text-sm font-semibold text-gray-500 mb-1">{t('fields.description')}</h3>
-        <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap">
+        <h3 className="text-sm font-semibold text-subtle-foreground mb-1">{t('fields.description')}</h3>
+        <p className="text-label text-sm leading-relaxed whitespace-pre-wrap">
           {post.description || 'Sin descripción.'}
         </p>
       </div>
 
       {post.tags && post.tags.length > 0 && (
         <div>
-          <h3 className="text-sm font-semibold text-gray-500 mb-3">{t('fields.tags')}</h3>
+          <h3 className="text-sm font-semibold text-subtle-foreground mb-3">{t('fields.tags')}</h3>
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <Badge
@@ -48,14 +48,14 @@ const PostModalSide = ({ post, aspectLabel, resolutionLabel }: PostSidebarProps)
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <h3 className="text-sm font-semibold text-gray-500 mb-1">{t('fields.aspectRatio')}</h3>
-          <div className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 text-center bg-transparent">
+          <h3 className="text-sm font-semibold text-subtle-foreground mb-1">{t('fields.aspectRatio')}</h3>
+          <div className="w-full border border-disabled-border rounded-lg px-3 py-2 text-sm text-label text-center bg-transparent">
             {aspectLabel}
           </div>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-gray-500 mb-1">{t('fields.resolution')}</h3>
-          <div className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-700 text-center bg-transparent">
+          <h3 className="text-sm font-semibold text-subtle-foreground mb-1">{t('fields.resolution')}</h3>
+          <div className="w-full border border-disabled-border rounded-lg px-3 py-2 text-sm text-label text-center bg-transparent">
             {resolutionLabel}
           </div>
         </div>
