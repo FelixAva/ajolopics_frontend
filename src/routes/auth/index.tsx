@@ -88,7 +88,7 @@ function RouteComponent() {
 
           {
             login.isError && (
-                <span className='text-sm text-red-400'>{t(`auth:backendErrors.${login.error.response?.data.error}`)}</span>
+                <span className='text-sm text-error'>{t(`auth:backendErrors.${login.error.response?.data.error}`)}</span>
               )
           }
 
@@ -109,7 +109,7 @@ function RouteComponent() {
         </form>
 
         <Link to="/auth/register" className="[&.active]:font-bold]" preload="intent">
-          {t('auth:login.registerPrompt')} <span className='text-deep-teal underline'>{t('auth:login.registerLink')}</span>
+          {t('auth:login.registerPrompt')} <span className='text-primary underline'>{t('auth:login.registerLink')}</span>
         </Link>
       </div>
     </div>

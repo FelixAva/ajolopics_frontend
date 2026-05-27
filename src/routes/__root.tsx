@@ -11,7 +11,7 @@ const RootComponent = () => {
       <HeadContent />
       <Header />
 
-      <hr className='text-gray-300' />
+      <hr className='border-disabled-border' />
 
       <div className='px-5 flex flex-col flex-1 lg:px-10'>
         <Outlet />

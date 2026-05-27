@@ -94,7 +94,7 @@ function RouteComponent() {
         </div>
 
         <section className="grid w-full gap-6 lg:grid-cols-[minmax(0,1fr)_24rem] xl:grid-cols-[minmax(0,1fr)_28rem]">
-          <div className="relative flex min-h-[55vh] items-center justify-center overflow-hidden rounded-lg bg-black shadow-xl lg:min-h-[calc(100vh-14rem)]">
+          <div className="relative flex min-h-[55vh] items-center justify-center overflow-hidden rounded-lg bg-overlay shadow-xl lg:min-h-[calc(100vh-14rem)]">
             {currentVariant && (
               <img
                 src={currentVariant.url}
@@ -104,7 +104,7 @@ function RouteComponent() {
             )}
 
             {!currentVariant && (
-              <div className="px-6 text-center text-sm font-medium text-white/80">
+              <div className="px-6 text-center text-sm font-medium text-overlay-foreground/80">
                 -
               </div>
             )}
