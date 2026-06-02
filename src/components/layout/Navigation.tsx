@@ -33,7 +33,7 @@ const Navigation = ({ isOpen }: Props) => {
   return (
     <nav
         className={clsx(
-          "flex flex-col lg:gap-3 overflow-hidden md:mt-0 md:flex-row md:items-center transition-all duration-500 ease-in-out",
+          "flex flex-col overflow-hidden md:mt-0 md:flex-row md:items-center transition-all duration-500 ease-in-out",
           isOpen
             ? "mt-4 max-h-80 opacity-100 flex flex-col justify-around"
             : "max-h-0 opacity-0 md:opacity-100 md:overflow-auto md:max-h-80"
