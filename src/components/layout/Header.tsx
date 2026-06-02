@@ -66,12 +66,12 @@ const Header = () => {
 
   return (
     <div className="sticky top-0 z-20 bg-background/70 backdrop-blur-md w-full h-auto px-3 py-3 items-center md:w-auto md:h-auto md:flex md:justify-between lg:px-10">
-      <div className='w-auto h-auto flex flex-1 gap-2'>
+      <div className='w-auto h-auto flex flex-1 sm:gap-2'>
         <div className='w-full flex items-center justify-between'>
           <div className='flex md:items-center md:gap-1'>
             <Link to="/" className="[&.active]:font-bold] text-xl flex items-center gap-2" preload="intent">
               <img src='/ajologo_frame.webp' className='w-10' />
-              <h1 className='font-poppins text-2xl tracking-[0.1rem] text-foreground'>ajolopics</h1>
+              <h1 className='font-poppins text-xl tracking-[0.1rem] text-foreground sm:text-2xl'>ajolopics</h1>
             </Link>
           </div>
 
@@ -84,7 +84,7 @@ const Header = () => {
                 <LogoutButtonWithModal {...sharedLogoutProps} className='w-auto' />
               </div>
             ) : (
-              <div className='md:hidden flex'>
+              <div className='flex md:hidden'>
                 {loginButton}
               </div>
             )
