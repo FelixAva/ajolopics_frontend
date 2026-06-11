@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { DynamicIcon } from 'lucide-react/dynamic';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import { useTranslation } from 'react-i18next';
 import CarouselControls from './PostModalControls';
@@ -7,12 +6,6 @@ import type { AspectRatioType, Post } from '../types/post.types';
 import usePostMutations from '../hooks/post.mutations';
 import PostModalSide from './PostModalSide';
 import Button from '@/components/ui/Button';
-
-interface Props {
-  post: Post | undefined;
-  isLoading: boolean;
-  isError: boolean;
-}
 
 const modalStyles = {
   landscape: {
@@ -35,7 +28,7 @@ const modalStyles = {
   },
 };
 
-const PostModal = ({ post, isLoading, isError }: Props) => {
+const PostModal = (post: Post) => {
   const { t } = useTranslation('post');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -88,54 +81,45 @@ const PostModal = ({ post, isLoading, isError }: Props) => {
         className={styles.container}
         onClick={e => e.stopPropagation()}
       >
-        {isLoading ? (
-          <div className="w-full h-full flex justify-center items-center">
-            <DynamicIcon name="loader-2" className="animate-spin text-primary" size={40} />
+
+        <>
+          <div className={styles.media}>
+            {currentVariant && (
+              <img
+                src={currentVariant.url}
+                alt={post.title}
+                className={styles.image}
+              />
+            )}
+            <CarouselControls
+              currentImageIndex={currentImageIndex}
+              assetLength={post?.assets.length}
+              isShown={isMultiple}
+              prevImage={prevImage}
+              nextImage={nextImage}
+            />
           </div>
-        ) : isError || !post ? (
-          <div className={styles.error}>
-            Error al cargar la publicacion.
-          </div>
-        ) : (
-          <>
-            <div className={styles.media}>
-              {currentVariant && (
-                <img
-                  src={currentVariant.url}
-                  alt={post.title}
-                  className={styles.image}
-                />
-              )}
-              <CarouselControls
-                currentImageIndex={currentImageIndex}
-                assetLength={post?.assets.length}
-                isShown={isMultiple}
-                prevImage={prevImage}
-                nextImage={nextImage}
+
+          <div className={styles.sidebar}>
+            <div className={styles.sidebarContent}>
+              <PostModalSide
+                post={post}
+                aspectLabel={aspectLabel}
+                resolutionLabel={resolutionLabel}
               />
             </div>
 
-            <div className={styles.sidebar}>
-              <div className={styles.sidebarContent}>
-                <PostModalSide
-                  post={post}
-                  aspectLabel={aspectLabel}
-                  resolutionLabel={resolutionLabel}
-                />
-              </div>
-
-              <div className={styles.download}>
-                <Button
-                  onClick={handleDownload}
-                  icon={downloadPost.isPending ? 'loader-2' : 'download'}
-                  title={isUserAuthenticated ? t('detail.download', 'Download') : t('detail.loginToDownload')}
-                  disabled={!isUserAuthenticated || !originalVariant || downloadPost.isPending}
-                  className="w-full"
-                />
-              </div>
+            <div className={styles.download}>
+              <Button
+                onClick={handleDownload}
+                icon={downloadPost.isPending ? 'loader-2' : 'download'}
+                title={isUserAuthenticated ? t('detail.download', 'Download') : t('detail.loginToDownload')}
+                disabled={!isUserAuthenticated || !originalVariant || downloadPost.isPending}
+                className="w-full"
+              />
             </div>
-          </>
-        )}
+          </div>
+        </>
       </div>
 
     </div>

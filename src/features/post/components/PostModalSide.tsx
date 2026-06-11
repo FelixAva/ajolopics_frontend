@@ -12,8 +12,6 @@ interface PostSidebarProps {
 const PostModalSide = ({ post, aspectLabel, resolutionLabel }: PostSidebarProps) => {
   const { t } = useTranslation('post');
 
-
-
   return (
     <>
       <div>

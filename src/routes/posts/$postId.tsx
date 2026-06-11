@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
-import { useSuspenseQuery } from '@tanstack/react-query';
 
 import Button from '@/components/ui/Button';
 import usePostMutations from '@/features/post/hooks/post.mutations';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import CarouselControls from '@/features/post/components/PostModalControls';
 import PostModalSide from '@/features/post/components/PostModalSide';
+import PostPageSkeleton from '@/features/post/components/skeletons/PostPageSkeleton';
 import type { AspectRatioType } from '@/features/post/types/post.types';
 import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
 import { getFallbackPostHead, getPostHead } from '@/features/post/utils/postSeo';
@@ -19,17 +19,15 @@ export const Route = createFileRoute('/posts/$postId')({
   },
   head: ({ loaderData, params: { postId } }) =>
     loaderData?.post ? getPostHead(loaderData.post) : getFallbackPostHead(postId),
+  pendingComponent: PostPageSkeleton,
+  pendingMs: 0,
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
-  const { postId } = Route.useParams();
+  const { post } = Route.useLoaderData();
   const { t } = useTranslation('post');
   const navigate = useNavigate({ from: Route.fullPath });
-
-  const { data: post } = useSuspenseQuery(
-    singlePostQueryOptions(postId),
-  );
 
   const { downloadPost } = usePostMutations();
   const token = useAuthStore((state) => state.token);

@@ -1,45 +1,56 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import ModalOverlay from '@/components/ui/ModalOverlay';
-import PostModal from '@/features/post/components/PostModal';
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
 import { getFallbackPostHead, getPostHead } from '@/features/post/utils/postSeo';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import ModalOverlay from '@/components/ui/ModalOverlay';
+import PostModalSkeleton from '@/features/post/components/skeletons/PostModalSkeleton';
+import PostModal from '@/features/post/components/PostModal';
+
 
 export const Route = createFileRoute('/_feed/posts/$postId/modal')({
-  loader: async ({ context: { queryClient }, params: { postId } }) => {
-    const post = await queryClient.ensureQueryData(singlePostQueryOptions(postId));
-    return { post };
-  },
+  loader: async ({ context: { queryClient }, params: { postId } }) => ({
+    post: await queryClient.ensureQueryData(singlePostQueryOptions(postId)),
+  }),
   head: ({ loaderData, params: { postId } }) =>
     loaderData?.post ? getPostHead(loaderData.post) : getFallbackPostHead(postId),
+  pendingComponent: PostModalPendingRoute,
+  pendingMs: 0,
   component: PostModalRoute,
-})
+});
 
-function PostModalRoute() {
-  const { postId } = Route.useParams();
+function useCloseModal() {
   const navigate = useNavigate();
 
-  const { data: post } = useSuspenseQuery(
-    singlePostQueryOptions(postId),
-  );
-
-  const onClose = () => {
+  return () => {
     navigate({
       to: '/',
       replace: true,
-    })
+    });
   };
+}
+
+function PostModalPendingRoute() {
+  const onClose = useCloseModal();
 
   return (
     <ModalOverlay
       showHeader={false}
       onClose={onClose}
     >
-      <PostModal
-        post={post}
-        isLoading={false}
-        isError={false}
-      />
+      <PostModalSkeleton />
+    </ModalOverlay>
+  );
+}
+
+function PostModalRoute() {
+  const { post } = Route.useLoaderData();
+  const onClose = useCloseModal();
+
+  return (
+    <ModalOverlay
+      onClose={onClose}
+      showHeader={false}
+    >
+      <PostModal {...post} />
     </ModalOverlay>
   );
 }

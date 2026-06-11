@@ -1,5 +1,9 @@
+import { useMemo } from 'react';
 import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router'
 import PostsMasonryGrid from '@/features/post/components/PostsMasonryGrid';
+import { postFeedQueryOptions } from '@/features/post/api/post.query-options';
+import PostMasonrySkeleton from '@/features/post/components/skeletons/PostMasonrySkeleton';
+import type { GetFeedRequestDTO } from '@/features/post/types/post.api.types';
 import type { AspectRatioType } from '@/features/post/types/post.types';
 
 type FeedSearch = {
@@ -10,8 +14,17 @@ type FeedSearch = {
   postId?: string;
 }
 
+const getFeedParams = (searchParams: FeedSearch): GetFeedRequestDTO => ({
+  size: 20,
+  search: searchParams.search,
+  filters: {
+    tagIds: searchParams.tags ? searchParams.tags.split(',').map(Number) : undefined,
+    authorIds: searchParams.authors ? searchParams.authors.split(',') : undefined,
+    aspectRatio: searchParams.aspectRatio || undefined,
+  },
+});
+
 export const Route = createFileRoute('/_feed')({
-  component: FeedLayout,
   validateSearch: (search: Record<string, unknown>): FeedSearch => {
     return {
       tags: search.tags as string | undefined,
@@ -20,12 +33,32 @@ export const Route = createFileRoute('/_feed')({
       search: search.search as string | undefined,
       postId: search.postId as string | undefined,
     }
-  }
+  },
+  loaderDeps: ({ search }) => search,
+  loader: async ({ context: { queryClient }, deps }) => {
+    await queryClient.ensureInfiniteQueryData(
+      postFeedQueryOptions(getFeedParams(deps))
+    );
+  },
+  pendingComponent: PostMasonrySkeleton,
+  pendingMs: 0,
+  component: FeedLayout,
 })
 
 function FeedLayout() {
   const searchParams = Route.useSearch();
+  const { authors, aspectRatio, search, tags } = searchParams;
   const navigate = useNavigate({ from: Route.fullPath });
+
+  const feedParams = useMemo(
+    () => getFeedParams({ authors, aspectRatio, search, tags }),
+    [
+      authors,
+      aspectRatio,
+      search,
+      tags,
+    ]
+  );
 
   const handleOpenPost = (id: string) => {
     navigate({
@@ -43,7 +76,7 @@ function FeedLayout() {
   return (
     <div className='flex-1 my-5 lg:my-10'>
       <PostsMasonryGrid
-        filters={searchParams}
+        feedParams={feedParams}
         onPostClick={handleOpenPost}
       />
 
