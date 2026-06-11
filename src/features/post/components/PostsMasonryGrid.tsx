@@ -1,51 +1,19 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import usePostQueries from '../hooks/post.queries';
+import { useResponsiveMasonryColumns } from '@/hooks/useResponsiveMasonryColumns';
+import { usePostFeedQuery } from '../hooks/usePostFeedQuery';
 import type { GetFeedRequestDTO } from '../types/post.api.types';
 import PostCard from './PostCard';
 import MasonryGrid, { type MasonryElement } from '@/components/layout/MasonryGrid';
 
 interface PostMasonryGridProps {
-  filters: {
-    tags?: string;
-    authors?: string;
-    search?: string;
-    aspectRatio?: string;
-  };
+  feedParams: GetFeedRequestDTO;
   onPostClick: (id: string) => void;
 }
 
-const PostsMasonryGrid = ({ filters, onPostClick }: PostMasonryGridProps) => {
-  const [columnsNumber, setColumnsNumber] = useState(4);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      if (width >= 1024) setColumnsNumber(4);
-      else if (width >= 768) setColumnsNumber(3);
-      else setColumnsNumber(2);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const feedParams: GetFeedRequestDTO = useMemo(
-    () => ({
-      size: 20,
-      search: filters.search,
-      filters: {
-        tagIds: filters.tags ? filters.tags.split(',').map(Number) : undefined,
-        authorIds: filters.authors ? filters.authors.split(',') : undefined,
-        aspectRatio: filters.aspectRatio || undefined,
-      },
-    }),
-    [filters]
-  );
-
-  const { getPostFeed } = usePostQueries(feedParams);
+const PostsMasonryGrid = ({ feedParams, onPostClick }: PostMasonryGridProps) => {
+  const columnsNumber = useResponsiveMasonryColumns();
 
   const {
     hasNextPage,
@@ -53,7 +21,7 @@ const PostsMasonryGrid = ({ filters, onPostClick }: PostMasonryGridProps) => {
     fetchNextPage,
     isLoading,
     data,
-  } = getPostFeed;
+  } = usePostFeedQuery(feedParams);
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -86,7 +54,10 @@ const PostsMasonryGrid = ({ filters, onPostClick }: PostMasonryGridProps) => {
     prevInViewRef.current = inView;
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  const allPosts = data?.pages.flatMap((page) => page.items) ?? [];
+  const allPosts = useMemo(
+    () => data?.pages.flatMap((page) => page.items) ?? [],
+    [data]
+  );
 
   const masonryElements: MasonryElement[] = useMemo(() => {
     return allPosts.map((post) => {
