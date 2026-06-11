@@ -23,7 +23,7 @@ const SkeletonBlock = ({
   return (
     <div
       aria-hidden="true"
-      className={clsx('animate-pulse bg-surface-border', shapeStyles[shape], className)}
+      className={clsx('animate-pulse bg-skeleton', shapeStyles[shape], className)}
       {...props}
     />
   );
