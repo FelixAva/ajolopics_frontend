@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
 import { getFallbackPostHead, getPostHead } from '@/features/post/utils/postSeo';
 import ModalOverlay from '@/components/ui/ModalOverlay';
-import PostModalSkeleton from '@/features/post/components/PostModalSkeleton';
+import PostModalSkeleton from '@/features/post/components/skeletons/PostModalSkeleton';
 import PostModal from '@/features/post/components/PostModal';
 
 

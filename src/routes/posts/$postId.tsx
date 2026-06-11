@@ -7,7 +7,7 @@ import usePostMutations from '@/features/post/hooks/post.mutations';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import CarouselControls from '@/features/post/components/PostModalControls';
 import PostModalSide from '@/features/post/components/PostModalSide';
-import PostPageSkeleton from '@/features/post/components/PostPageSkeleton';
+import PostPageSkeleton from '@/features/post/components/skeletons/PostPageSkeleton';
 import type { AspectRatioType } from '@/features/post/types/post.types';
 import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
 import { getFallbackPostHead, getPostHead } from '@/features/post/utils/postSeo';
