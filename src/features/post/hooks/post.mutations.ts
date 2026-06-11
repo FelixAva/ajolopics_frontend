@@ -9,6 +9,7 @@ import type { CreatePostRequestDTO } from '../types/post.api.types';
 import { queryClient } from '@/app/queryClient';
 import { showAjolopicsToast } from '@/components/ui/Alerts';
 import { downloadPostImage } from '../utils/downloadPostImage';
+import { postKeys } from '../api/post.query-options';
 
 interface DownloadPostImageVariables {
   post: Post;
@@ -23,7 +24,7 @@ const usePostMutations =  () => {
     onSuccess: () => {
       showAjolopicsToast('success', t('postSuccess'));
 
-      queryClient.invalidateQueries({ queryKey: ['feed'] });
+      queryClient.invalidateQueries({ queryKey: postKeys.feeds() });
     },
     onError: (error) => {
       console.error(error);

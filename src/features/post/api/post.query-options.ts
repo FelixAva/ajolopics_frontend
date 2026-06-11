@@ -6,8 +6,11 @@ import type { GetFeedRequestDTO } from '../types/post.api.types';
 export const postKeys = {
   all: ['posts'] as const,
 
+  feeds: () =>
+    [...postKeys.all, 'feed'] as const,
+
   feed: (params: Omit<GetFeedRequestDTO, 'page'>) =>
-    [...postKeys.all, 'feed', params] as const,
+    [...postKeys.feeds(), params] as const,
 
   detail: (postId: string) =>
     [...postKeys.all, 'detail', postId] as const,
