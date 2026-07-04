@@ -5,7 +5,6 @@ import ModalOverlay from '@/components/ui/ModalOverlay';
 import PostModalSkeleton from '@/features/post/components/skeletons/PostModalSkeleton';
 import PostModal from '@/features/post/components/PostModal';
 
-
 export const Route = createFileRoute('/_feed/posts/$postId/modal')({
   loader: async ({ context: { queryClient }, params: { postId } }) => ({
     post: await queryClient.ensureQueryData(singlePostQueryOptions(postId)),
