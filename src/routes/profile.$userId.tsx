@@ -47,10 +47,6 @@ function RouteComponent() {
         >Posts</Link>
       </nav>
 
-      <section>
-        {/* Masonry */}
-      </section>
-
       <Outlet />
     </main>
   );
