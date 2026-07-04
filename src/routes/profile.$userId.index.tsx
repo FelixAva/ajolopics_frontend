@@ -1,15 +1,73 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { postFeedQueryOptions } from '@/features/post/api/post.query-options';
+import PostsMasonryGrid from '@/features/post/components/PostsMasonryGrid';
+import PostMasonrySkeleton from '@/features/post/components/skeletons/PostMasonrySkeleton';
+import type { AspectRatioType } from '@/features/post/types/post.types';
+import { getFeedParams, type FeedSearch } from '@/utils/getFeedParams';
+import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router'
+import { useMemo } from 'react';
 
 export const Route = createFileRoute('/profile/$userId/')({
+  validateSearch: (search: Record<string, unknown>): FeedSearch => {
+    return {
+      tags: search.tags as string | undefined,
+      aspectRatio: search.aspectRatio as AspectRatioType | undefined,
+      search: search.search as string | undefined,
+      postId: search.postId as string | undefined,
+    }
+  },
+  loaderDeps: ({ search }) => ({
+    tags: search.tags,
+    aspectRatio: search.aspectRatio,
+    search: search.search,
+  }),
+  loader: async ({ context: { queryClient }, deps, params: { userId } }) => {
+    await queryClient.ensureInfiniteQueryData(
+      postFeedQueryOptions(getFeedParams({ ...deps, authors: userId }))
+    )
+  },
+  pendingComponent: PostMasonrySkeleton,
+  pendingMs: 0,
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const navigate = useNavigate({ from: Route.fullPath });
   const { userId } = Route.useParams();
+  const searchParams = Route.useSearch();
+  const { aspectRatio, search, tags } = searchParams;
+
+  const feedParams = useMemo(
+    () => getFeedParams({ authors: userId, aspectRatio, search, tags }),
+    [
+      userId,
+      aspectRatio,
+      search,
+      tags
+    ]
+  )
+
+  const handleOpenPost = (id: string) => {
+    navigate({
+      to: '/profile/$userId/$postId/modal',
+      params: { userId, postId: id },
+      search: { ...searchParams, postId: id },
+      mask: {
+        to: '/posts/$postId', // La "máscara" visual en la barra de direcciones
+        params: { postId: id }, // Los parámetros a usar en la mascara
+        unmaskOnReload: true, // Permite desenmascarar al recargar
+      }
+    });
+  };
+
 
   return (
     <div>
-      <p>User: {userId} posts</p>
+      <PostsMasonryGrid
+        feedParams={feedParams}
+        onPostClick={handleOpenPost}
+      />
+
+      <Outlet />
     </div>
   );
 }
