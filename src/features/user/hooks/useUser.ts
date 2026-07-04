@@ -1,21 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import { UserService } from '../services/user.service';
-import { AxiosError } from 'axios';
 import { useEffect } from 'react';
 import { useAuthStore } from '../../auth/store/useAuthStore';
-import type { ErrorDTO } from '../../../types/api.types';
-import type { User } from '../types/user.types';
+import { userVerifyQueryOptions, usersQueryOptions } from '../api/user.query-options';
 
 const useUser = () => {
   const token = useAuthStore(state => state.token);
   const setUser = useAuthStore(state => state.setUser);
   const logout = useAuthStore(state => state.logout);
 
-  const getUserVerify = useQuery<User, AxiosError<ErrorDTO>>({
-    queryKey: ['userVerify'],
-    queryFn: () => UserService.getUserVerify(),
+  const getUserVerify = useQuery({
+    ...userVerifyQueryOptions(),
     enabled: !!token,
-    retry: false
   });
 
   useEffect(() => {
@@ -30,10 +25,8 @@ const useUser = () => {
     }
   }, [getUserVerify.isError, getUserVerify.error, logout]);
 
-  const getUsers = useQuery<User[], AxiosError<ErrorDTO>>({
-    queryKey: ['users'],
-    queryFn: () => UserService.getUsers()
-  })
+  const getUsers = useQuery(usersQueryOptions());
+
   return {
     getUserVerify,
     getUsers
