@@ -12,8 +12,8 @@ export const UserService = {
     return response.data;
   },
 
-  async getUser(userId: string) {
-    const response = await api.get<User>(`/users/${userId}`)
+  async getUser(username: string) {
+    const response = await api.get<User>(`/users/${username}`)
     return response.data;
   }
 }

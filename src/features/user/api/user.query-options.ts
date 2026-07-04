@@ -17,17 +17,17 @@ export const userKeys = {
   details: () =>
     [...userKeys.all, 'detail'] as const,
 
-  detail: (userId: string) =>
-    [...userKeys.details(), userId] as const,
+  detail: (username: string) =>
+    [...userKeys.details(), username] as const,
 
   me: () =>
     [...userKeys.all, 'me'] as const,
 };
 
-export const userProfileQueryOptions = (userId: string) =>
+export const userProfileQueryOptions = (username: string) =>
   queryOptions<User, AxiosError<ErrorDTO>>({
-    queryKey: userKeys.detail(userId),
-    queryFn: () => UserService.getUser(userId),
+    queryKey: userKeys.detail(username),
+    queryFn: () => UserService.getUser(username),
   })
 ;
 
