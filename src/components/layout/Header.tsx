@@ -9,6 +9,7 @@ import LanguageModal from '@/features/language/components/LanguageModal';
 import Navigation from './Navigation';
 import Button from '../ui/Button';
 import clsx from 'clsx';
+import ProfileButton from '../ui/ProfileButton';
 
 interface LogoutButtonProps {
   label: string;
@@ -80,15 +81,16 @@ const Header = () => {
 
             {isAuthenticated
               ? (
-              <div className="md:hidden">
-                <LogoutButtonWithModal {...sharedLogoutProps} className='w-auto' />
-              </div>
-            ) : (
-              <div className='flex md:hidden'>
-                {loginButton}
-              </div>
-            )
-          }
+                <div className="flex justify-center md:hidden">
+                  {/* <LogoutButtonWithModal {...sharedLogoutProps} className='w-auto' /> */}
+                  <ProfileButton />
+                </div>
+              ) : (
+                <div className='flex md:hidden'>
+                  {loginButton}
+                </div>
+              )
+            }
           </div>
         </div>
 
@@ -110,7 +112,10 @@ const Header = () => {
 
       <div className="hidden md:flex md:items-center">
         {isAuthenticated
-          ? <LogoutButtonWithModal {...sharedLogoutProps} className='w-auto' />
+          ? (
+            // <LogoutButtonWithModal {...sharedLogoutProps} className='w-auto' />
+            <ProfileButton />
+          )
           : loginButton
         }
       </div>
