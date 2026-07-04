@@ -2,11 +2,12 @@ import { postFeedQueryOptions } from '@/features/post/api/post.query-options';
 import PostsMasonryGrid from '@/features/post/components/PostsMasonryGrid';
 import PostMasonrySkeleton from '@/features/post/components/skeletons/PostMasonrySkeleton';
 import type { AspectRatioType } from '@/features/post/types/post.types';
+import { userProfileQueryOptions } from '@/features/user/api/user.query-options';
 import { getFeedParams, type FeedSearch } from '@/utils/getFeedParams';
 import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router'
 import { useMemo } from 'react';
 
-export const Route = createFileRoute('/profile/$userId/')({
+export const Route = createFileRoute('/profile/$username/')({
   validateSearch: (search: Record<string, unknown>): FeedSearch => {
     return {
       tags: search.tags as string | undefined,
@@ -20,10 +21,14 @@ export const Route = createFileRoute('/profile/$userId/')({
     aspectRatio: search.aspectRatio,
     search: search.search,
   }),
-  loader: async ({ context: { queryClient }, deps, params: { userId } }) => {
+  loader: async ({ context: { queryClient }, deps, params: { username } }) => {
+    const user = await queryClient.ensureQueryData(userProfileQueryOptions(username));
+
     await queryClient.ensureInfiniteQueryData(
-      postFeedQueryOptions(getFeedParams({ ...deps, authors: userId }))
-    )
+      postFeedQueryOptions(getFeedParams({ ...deps, authors: user.id }))
+    );
+
+    return { authorId: user.id };
   },
   pendingComponent: PostMasonrySkeleton,
   pendingMs: 0,
@@ -32,14 +37,15 @@ export const Route = createFileRoute('/profile/$userId/')({
 
 function RouteComponent() {
   const navigate = useNavigate({ from: Route.fullPath });
-  const { userId } = Route.useParams();
+  const { username } = Route.useParams();
+  const { authorId } = Route.useLoaderData();
   const searchParams = Route.useSearch();
   const { aspectRatio, search, tags } = searchParams;
 
   const feedParams = useMemo(
-    () => getFeedParams({ authors: userId, aspectRatio, search, tags }),
+    () => getFeedParams({ authors: authorId, aspectRatio, search, tags }),
     [
-      userId,
+      authorId,
       aspectRatio,
       search,
       tags
@@ -48,8 +54,8 @@ function RouteComponent() {
 
   const handleOpenPost = (id: string) => {
     navigate({
-      to: '/profile/$userId/$postId/modal',
-      params: { userId, postId: id },
+      to: '/profile/$username/$postId/modal',
+      params: { username: username, postId: id },
       search: { ...searchParams, postId: id },
       mask: {
         to: '/posts/$postId', // La "máscara" visual en la barra de direcciones

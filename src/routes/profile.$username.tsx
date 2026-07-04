@@ -6,27 +6,27 @@ import { useQuery } from '@tanstack/react-query';
 import ProfileHeader from '@/features/user/components/ProfileHeader';
 import ProfileHeaderSkeleton from '@/features/user/components/skeletons/ProfileHeaderSkeleton';
 
-export const Route = createFileRoute('/profile/$userId')({
-  loader: async ({context: { queryClient }, params: { userId }}) => {
-    void queryClient.prefetchQuery(userProfileQueryOptions(userId))
+export const Route = createFileRoute('/profile/$username')({
+  loader: async ({context: { queryClient }, params: { username }}) => {
+    void queryClient.prefetchQuery(userProfileQueryOptions(username))
   },
-  head: ({ params: { userId } }) => createSeoHead({
+  head: ({ params: { username } }) => createSeoHead({
     title: getSeoTranslation('profile.title'),
     description: getSeoTranslation('profile.description'),
-    path: `/profile/${userId}`,
+    path: `/profile/${username}`,
     type: 'profile',
   }),
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { userId } = Route.useParams();
+  const { username } = Route.useParams();
 
   const {
     data: user,
     isLoading,
     isError
-  } = useQuery(userProfileQueryOptions(userId));
+  } = useQuery(userProfileQueryOptions(username));
 
   return (
     <main>
@@ -42,8 +42,8 @@ function RouteComponent() {
 
       <nav>
         <Link
-          to="/profile/$userId"
-          params={{ userId }}
+          to="/profile/$username"
+          params={{ username }}
         >Posts</Link>
       </nav>
 

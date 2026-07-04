@@ -12,16 +12,16 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as FeedRouteRouteImport } from './routes/_feed/route'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
 import { Route as FeedIndexRouteImport } from './routes/_feed/index'
-import { Route as ProfileUserIdRouteImport } from './routes/profile.$userId'
+import { Route as ProfileUsernameRouteImport } from './routes/profile.$username'
 import { Route as PostsPostIdRouteImport } from './routes/posts/$postId'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
-import { Route as ProfileUserIdIndexRouteImport } from './routes/profile.$userId.index'
-import { Route as ProfileUserIdLikesRouteImport } from './routes/profile.$userId.likes'
-import { Route as ProfileUserIdEditRouteImport } from './routes/profile.$userId.edit'
-import { Route as ProfileUserIdBookmarksRouteImport } from './routes/profile.$userId.bookmarks'
+import { Route as ProfileUsernameIndexRouteImport } from './routes/profile.$username.index'
+import { Route as ProfileUsernameLikesRouteImport } from './routes/profile.$username.likes'
+import { Route as ProfileUsernameEditRouteImport } from './routes/profile.$username.edit'
+import { Route as ProfileUsernameBookmarksRouteImport } from './routes/profile.$username.bookmarks'
 import { Route as PostsPostIdEditRouteImport } from './routes/posts/$postId.edit'
 import { Route as FeedPostsNewRouteImport } from './routes/_feed/posts.new'
-import { Route as ProfileUserIdPostIdModalRouteImport } from './routes/profile.$userId.$postId.modal'
+import { Route as ProfileUsernamePostIdModalRouteImport } from './routes/profile.$username.$postId.modal'
 import { Route as FeedPostsPostIdModalRouteImport } from './routes/_feed/posts.$postId.modal'
 
 const FeedRouteRoute = FeedRouteRouteImport.update({
@@ -38,9 +38,9 @@ const FeedIndexRoute = FeedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => FeedRouteRoute,
 } as any)
-const ProfileUserIdRoute = ProfileUserIdRouteImport.update({
-  id: '/profile/$userId',
-  path: '/profile/$userId',
+const ProfileUsernameRoute = ProfileUsernameRouteImport.update({
+  id: '/profile/$username',
+  path: '/profile/$username',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PostsPostIdRoute = PostsPostIdRouteImport.update({
@@ -53,26 +53,27 @@ const AuthRegisterRoute = AuthRegisterRouteImport.update({
   path: '/auth/register',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProfileUserIdIndexRoute = ProfileUserIdIndexRouteImport.update({
+const ProfileUsernameIndexRoute = ProfileUsernameIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => ProfileUserIdRoute,
+  getParentRoute: () => ProfileUsernameRoute,
 } as any)
-const ProfileUserIdLikesRoute = ProfileUserIdLikesRouteImport.update({
+const ProfileUsernameLikesRoute = ProfileUsernameLikesRouteImport.update({
   id: '/likes',
   path: '/likes',
-  getParentRoute: () => ProfileUserIdRoute,
+  getParentRoute: () => ProfileUsernameRoute,
 } as any)
-const ProfileUserIdEditRoute = ProfileUserIdEditRouteImport.update({
+const ProfileUsernameEditRoute = ProfileUsernameEditRouteImport.update({
   id: '/edit',
   path: '/edit',
-  getParentRoute: () => ProfileUserIdRoute,
+  getParentRoute: () => ProfileUsernameRoute,
 } as any)
-const ProfileUserIdBookmarksRoute = ProfileUserIdBookmarksRouteImport.update({
-  id: '/bookmarks',
-  path: '/bookmarks',
-  getParentRoute: () => ProfileUserIdRoute,
-} as any)
+const ProfileUsernameBookmarksRoute =
+  ProfileUsernameBookmarksRouteImport.update({
+    id: '/bookmarks',
+    path: '/bookmarks',
+    getParentRoute: () => ProfileUsernameRoute,
+  } as any)
 const PostsPostIdEditRoute = PostsPostIdEditRouteImport.update({
   id: '/edit',
   path: '/edit',
@@ -83,11 +84,11 @@ const FeedPostsNewRoute = FeedPostsNewRouteImport.update({
   path: '/posts/new',
   getParentRoute: () => FeedRouteRoute,
 } as any)
-const ProfileUserIdPostIdModalRoute =
-  ProfileUserIdPostIdModalRouteImport.update({
+const ProfileUsernamePostIdModalRoute =
+  ProfileUsernamePostIdModalRouteImport.update({
     id: '/$postId/modal',
     path: '/$postId/modal',
-    getParentRoute: () => ProfileUserIdRoute,
+    getParentRoute: () => ProfileUsernameRoute,
   } as any)
 const FeedPostsPostIdModalRoute = FeedPostsPostIdModalRouteImport.update({
   id: '/posts/$postId/modal',
@@ -99,16 +100,16 @@ export interface FileRoutesByFullPath {
   '/': typeof FeedIndexRoute
   '/auth/register': typeof AuthRegisterRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
-  '/profile/$userId': typeof ProfileUserIdRouteWithChildren
+  '/profile/$username': typeof ProfileUsernameRouteWithChildren
   '/auth/': typeof AuthIndexRoute
   '/posts/new': typeof FeedPostsNewRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
-  '/profile/$userId/bookmarks': typeof ProfileUserIdBookmarksRoute
-  '/profile/$userId/edit': typeof ProfileUserIdEditRoute
-  '/profile/$userId/likes': typeof ProfileUserIdLikesRoute
-  '/profile/$userId/': typeof ProfileUserIdIndexRoute
+  '/profile/$username/bookmarks': typeof ProfileUsernameBookmarksRoute
+  '/profile/$username/edit': typeof ProfileUsernameEditRoute
+  '/profile/$username/likes': typeof ProfileUsernameLikesRoute
+  '/profile/$username/': typeof ProfileUsernameIndexRoute
   '/posts/$postId/modal': typeof FeedPostsPostIdModalRoute
-  '/profile/$userId/$postId/modal': typeof ProfileUserIdPostIdModalRoute
+  '/profile/$username/$postId/modal': typeof ProfileUsernamePostIdModalRoute
 }
 export interface FileRoutesByTo {
   '/auth/register': typeof AuthRegisterRoute
@@ -117,29 +118,29 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthIndexRoute
   '/posts/new': typeof FeedPostsNewRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
-  '/profile/$userId/bookmarks': typeof ProfileUserIdBookmarksRoute
-  '/profile/$userId/edit': typeof ProfileUserIdEditRoute
-  '/profile/$userId/likes': typeof ProfileUserIdLikesRoute
-  '/profile/$userId': typeof ProfileUserIdIndexRoute
+  '/profile/$username/bookmarks': typeof ProfileUsernameBookmarksRoute
+  '/profile/$username/edit': typeof ProfileUsernameEditRoute
+  '/profile/$username/likes': typeof ProfileUsernameLikesRoute
+  '/profile/$username': typeof ProfileUsernameIndexRoute
   '/posts/$postId/modal': typeof FeedPostsPostIdModalRoute
-  '/profile/$userId/$postId/modal': typeof ProfileUserIdPostIdModalRoute
+  '/profile/$username/$postId/modal': typeof ProfileUsernamePostIdModalRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_feed': typeof FeedRouteRouteWithChildren
   '/auth/register': typeof AuthRegisterRoute
   '/posts/$postId': typeof PostsPostIdRouteWithChildren
-  '/profile/$userId': typeof ProfileUserIdRouteWithChildren
+  '/profile/$username': typeof ProfileUsernameRouteWithChildren
   '/_feed/': typeof FeedIndexRoute
   '/auth/': typeof AuthIndexRoute
   '/_feed/posts/new': typeof FeedPostsNewRoute
   '/posts/$postId/edit': typeof PostsPostIdEditRoute
-  '/profile/$userId/bookmarks': typeof ProfileUserIdBookmarksRoute
-  '/profile/$userId/edit': typeof ProfileUserIdEditRoute
-  '/profile/$userId/likes': typeof ProfileUserIdLikesRoute
-  '/profile/$userId/': typeof ProfileUserIdIndexRoute
+  '/profile/$username/bookmarks': typeof ProfileUsernameBookmarksRoute
+  '/profile/$username/edit': typeof ProfileUsernameEditRoute
+  '/profile/$username/likes': typeof ProfileUsernameLikesRoute
+  '/profile/$username/': typeof ProfileUsernameIndexRoute
   '/_feed/posts/$postId/modal': typeof FeedPostsPostIdModalRoute
-  '/profile/$userId/$postId/modal': typeof ProfileUserIdPostIdModalRoute
+  '/profile/$username/$postId/modal': typeof ProfileUsernamePostIdModalRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -147,16 +148,16 @@ export interface FileRouteTypes {
     | '/'
     | '/auth/register'
     | '/posts/$postId'
-    | '/profile/$userId'
+    | '/profile/$username'
     | '/auth/'
     | '/posts/new'
     | '/posts/$postId/edit'
-    | '/profile/$userId/bookmarks'
-    | '/profile/$userId/edit'
-    | '/profile/$userId/likes'
-    | '/profile/$userId/'
+    | '/profile/$username/bookmarks'
+    | '/profile/$username/edit'
+    | '/profile/$username/likes'
+    | '/profile/$username/'
     | '/posts/$postId/modal'
-    | '/profile/$userId/$postId/modal'
+    | '/profile/$username/$postId/modal'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth/register'
@@ -165,35 +166,35 @@ export interface FileRouteTypes {
     | '/auth'
     | '/posts/new'
     | '/posts/$postId/edit'
-    | '/profile/$userId/bookmarks'
-    | '/profile/$userId/edit'
-    | '/profile/$userId/likes'
-    | '/profile/$userId'
+    | '/profile/$username/bookmarks'
+    | '/profile/$username/edit'
+    | '/profile/$username/likes'
+    | '/profile/$username'
     | '/posts/$postId/modal'
-    | '/profile/$userId/$postId/modal'
+    | '/profile/$username/$postId/modal'
   id:
     | '__root__'
     | '/_feed'
     | '/auth/register'
     | '/posts/$postId'
-    | '/profile/$userId'
+    | '/profile/$username'
     | '/_feed/'
     | '/auth/'
     | '/_feed/posts/new'
     | '/posts/$postId/edit'
-    | '/profile/$userId/bookmarks'
-    | '/profile/$userId/edit'
-    | '/profile/$userId/likes'
-    | '/profile/$userId/'
+    | '/profile/$username/bookmarks'
+    | '/profile/$username/edit'
+    | '/profile/$username/likes'
+    | '/profile/$username/'
     | '/_feed/posts/$postId/modal'
-    | '/profile/$userId/$postId/modal'
+    | '/profile/$username/$postId/modal'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   FeedRouteRoute: typeof FeedRouteRouteWithChildren
   AuthRegisterRoute: typeof AuthRegisterRoute
   PostsPostIdRoute: typeof PostsPostIdRouteWithChildren
-  ProfileUserIdRoute: typeof ProfileUserIdRouteWithChildren
+  ProfileUsernameRoute: typeof ProfileUsernameRouteWithChildren
   AuthIndexRoute: typeof AuthIndexRoute
 }
 
@@ -220,11 +221,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeedIndexRouteImport
       parentRoute: typeof FeedRouteRoute
     }
-    '/profile/$userId': {
-      id: '/profile/$userId'
-      path: '/profile/$userId'
-      fullPath: '/profile/$userId'
-      preLoaderRoute: typeof ProfileUserIdRouteImport
+    '/profile/$username': {
+      id: '/profile/$username'
+      path: '/profile/$username'
+      fullPath: '/profile/$username'
+      preLoaderRoute: typeof ProfileUsernameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/posts/$postId': {
@@ -241,33 +242,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/profile/$userId/': {
-      id: '/profile/$userId/'
+    '/profile/$username/': {
+      id: '/profile/$username/'
       path: '/'
-      fullPath: '/profile/$userId/'
-      preLoaderRoute: typeof ProfileUserIdIndexRouteImport
-      parentRoute: typeof ProfileUserIdRoute
+      fullPath: '/profile/$username/'
+      preLoaderRoute: typeof ProfileUsernameIndexRouteImport
+      parentRoute: typeof ProfileUsernameRoute
     }
-    '/profile/$userId/likes': {
-      id: '/profile/$userId/likes'
+    '/profile/$username/likes': {
+      id: '/profile/$username/likes'
       path: '/likes'
-      fullPath: '/profile/$userId/likes'
-      preLoaderRoute: typeof ProfileUserIdLikesRouteImport
-      parentRoute: typeof ProfileUserIdRoute
+      fullPath: '/profile/$username/likes'
+      preLoaderRoute: typeof ProfileUsernameLikesRouteImport
+      parentRoute: typeof ProfileUsernameRoute
     }
-    '/profile/$userId/edit': {
-      id: '/profile/$userId/edit'
+    '/profile/$username/edit': {
+      id: '/profile/$username/edit'
       path: '/edit'
-      fullPath: '/profile/$userId/edit'
-      preLoaderRoute: typeof ProfileUserIdEditRouteImport
-      parentRoute: typeof ProfileUserIdRoute
+      fullPath: '/profile/$username/edit'
+      preLoaderRoute: typeof ProfileUsernameEditRouteImport
+      parentRoute: typeof ProfileUsernameRoute
     }
-    '/profile/$userId/bookmarks': {
-      id: '/profile/$userId/bookmarks'
+    '/profile/$username/bookmarks': {
+      id: '/profile/$username/bookmarks'
       path: '/bookmarks'
-      fullPath: '/profile/$userId/bookmarks'
-      preLoaderRoute: typeof ProfileUserIdBookmarksRouteImport
-      parentRoute: typeof ProfileUserIdRoute
+      fullPath: '/profile/$username/bookmarks'
+      preLoaderRoute: typeof ProfileUsernameBookmarksRouteImport
+      parentRoute: typeof ProfileUsernameRoute
     }
     '/posts/$postId/edit': {
       id: '/posts/$postId/edit'
@@ -283,12 +284,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeedPostsNewRouteImport
       parentRoute: typeof FeedRouteRoute
     }
-    '/profile/$userId/$postId/modal': {
-      id: '/profile/$userId/$postId/modal'
+    '/profile/$username/$postId/modal': {
+      id: '/profile/$username/$postId/modal'
       path: '/$postId/modal'
-      fullPath: '/profile/$userId/$postId/modal'
-      preLoaderRoute: typeof ProfileUserIdPostIdModalRouteImport
-      parentRoute: typeof ProfileUserIdRoute
+      fullPath: '/profile/$username/$postId/modal'
+      preLoaderRoute: typeof ProfileUsernamePostIdModalRouteImport
+      parentRoute: typeof ProfileUsernameRoute
     }
     '/_feed/posts/$postId/modal': {
       id: '/_feed/posts/$postId/modal'
@@ -328,31 +329,31 @@ const PostsPostIdRouteWithChildren = PostsPostIdRoute._addFileChildren(
   PostsPostIdRouteChildren,
 )
 
-interface ProfileUserIdRouteChildren {
-  ProfileUserIdBookmarksRoute: typeof ProfileUserIdBookmarksRoute
-  ProfileUserIdEditRoute: typeof ProfileUserIdEditRoute
-  ProfileUserIdLikesRoute: typeof ProfileUserIdLikesRoute
-  ProfileUserIdIndexRoute: typeof ProfileUserIdIndexRoute
-  ProfileUserIdPostIdModalRoute: typeof ProfileUserIdPostIdModalRoute
+interface ProfileUsernameRouteChildren {
+  ProfileUsernameBookmarksRoute: typeof ProfileUsernameBookmarksRoute
+  ProfileUsernameEditRoute: typeof ProfileUsernameEditRoute
+  ProfileUsernameLikesRoute: typeof ProfileUsernameLikesRoute
+  ProfileUsernameIndexRoute: typeof ProfileUsernameIndexRoute
+  ProfileUsernamePostIdModalRoute: typeof ProfileUsernamePostIdModalRoute
 }
 
-const ProfileUserIdRouteChildren: ProfileUserIdRouteChildren = {
-  ProfileUserIdBookmarksRoute: ProfileUserIdBookmarksRoute,
-  ProfileUserIdEditRoute: ProfileUserIdEditRoute,
-  ProfileUserIdLikesRoute: ProfileUserIdLikesRoute,
-  ProfileUserIdIndexRoute: ProfileUserIdIndexRoute,
-  ProfileUserIdPostIdModalRoute: ProfileUserIdPostIdModalRoute,
+const ProfileUsernameRouteChildren: ProfileUsernameRouteChildren = {
+  ProfileUsernameBookmarksRoute: ProfileUsernameBookmarksRoute,
+  ProfileUsernameEditRoute: ProfileUsernameEditRoute,
+  ProfileUsernameLikesRoute: ProfileUsernameLikesRoute,
+  ProfileUsernameIndexRoute: ProfileUsernameIndexRoute,
+  ProfileUsernamePostIdModalRoute: ProfileUsernamePostIdModalRoute,
 }
 
-const ProfileUserIdRouteWithChildren = ProfileUserIdRoute._addFileChildren(
-  ProfileUserIdRouteChildren,
+const ProfileUsernameRouteWithChildren = ProfileUsernameRoute._addFileChildren(
+  ProfileUsernameRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   FeedRouteRoute: FeedRouteRouteWithChildren,
   AuthRegisterRoute: AuthRegisterRoute,
   PostsPostIdRoute: PostsPostIdRouteWithChildren,
-  ProfileUserIdRoute: ProfileUserIdRouteWithChildren,
+  ProfileUsernameRoute: ProfileUsernameRouteWithChildren,
   AuthIndexRoute: AuthIndexRoute,
 }
 export const routeTree = rootRouteImport
