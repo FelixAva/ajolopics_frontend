@@ -3,26 +3,8 @@ import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router'
 import PostsMasonryGrid from '@/features/post/components/PostsMasonryGrid';
 import { postFeedQueryOptions } from '@/features/post/api/post.query-options';
 import PostMasonrySkeleton from '@/features/post/components/skeletons/PostMasonrySkeleton';
-import type { GetFeedRequestDTO } from '@/features/post/types/post.api.types';
 import type { AspectRatioType } from '@/features/post/types/post.types';
-
-type FeedSearch = {
-  tags?: string;
-  authors?: string;
-  aspectRatio?: string;
-  search?: string;
-  postId?: string;
-}
-
-const getFeedParams = (searchParams: FeedSearch): GetFeedRequestDTO => ({
-  size: 20,
-  search: searchParams.search,
-  filters: {
-    tagIds: searchParams.tags ? searchParams.tags.split(',').map(Number) : undefined,
-    authorIds: searchParams.authors ? searchParams.authors.split(',') : undefined,
-    aspectRatio: searchParams.aspectRatio || undefined,
-  },
-});
+import { getFeedParams, type FeedSearch } from '@/utils/getFeedParams';
 
 export const Route = createFileRoute('/_feed')({
   validateSearch: (search: Record<string, unknown>): FeedSearch => {
