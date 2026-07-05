@@ -1,14 +1,16 @@
-import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
+import { useQuery } from '@tanstack/react-query';
+import { createFileRoute, Outlet } from '@tanstack/react-router';
+
+import ProfileHeader from '@/features/user/components/ProfileHeader';
+import ProfileTabNavigation from '@/features/user/components/layout/ProfileTabNavigation';
+import ProfileHeaderSkeleton from '@/features/user/components/skeletons/ProfileHeaderSkeleton';
+import { userProfileQueryOptions } from '@/features/user/api/user.query-options';
 import { createSeoHead } from '@/utils/seo';
 import { getSeoTranslation } from '@/utils/seoTranslations';
-import { userProfileQueryOptions } from '@/features/user/api/user.query-options';
-import { useQuery } from '@tanstack/react-query';
-import ProfileHeader from '@/features/user/components/ProfileHeader';
-import ProfileHeaderSkeleton from '@/features/user/components/skeletons/ProfileHeaderSkeleton';
 
 export const Route = createFileRoute('/profile/$username')({
-  loader: ({context: { queryClient }, params: { username }}) => {
-    void queryClient.prefetchQuery(userProfileQueryOptions(username))
+  loader: ({ context: { queryClient }, params: { username } }) => {
+    void queryClient.prefetchQuery(userProfileQueryOptions(username));
   },
   head: ({ params: { username } }) => createSeoHead({
     title: getSeoTranslation('profile.title'),
@@ -17,7 +19,7 @@ export const Route = createFileRoute('/profile/$username')({
     type: 'profile',
   }),
   component: RouteComponent,
-})
+});
 
 function RouteComponent() {
   const { username } = Route.useParams();
@@ -25,7 +27,7 @@ function RouteComponent() {
   const {
     data: user,
     isLoading,
-    isError
+    isError,
   } = useQuery(userProfileQueryOptions(username));
 
   return (
@@ -40,12 +42,7 @@ function RouteComponent() {
         <ProfileHeader user={user} />
       )}
 
-      <nav>
-        <Link
-          to="/profile/$username"
-          params={{ username }}
-        >Posts</Link>
-      </nav>
+      <ProfileTabNavigation username={username} />
 
       <Outlet />
     </main>
