@@ -7,14 +7,14 @@ interface ProfileHeaderProps {
 
 const ProfileHeader = ({ user }: ProfileHeaderProps) => {
   return (
-    <section className="h-80 flex items-center justify-center">
+    <section className="py-3 flex flex-col items-center justify-center md:flex-row md:h-80">
       <img
         src="https://placehold.co/200"
         alt={user.username}
-        className="w-70 h-70 rounded-full"
+        className="w-55 h-55 rounded-full md:w-70 md:h-70"
       />
 
-      <div className="pl-5 self-center">
+      <div className="pt-2 text-center md:self-center md:pl-5 md:pt-0 md:text-left">
         <div className="flex gap-3">
           <h2 className="text-[28px] font-semibold">{user.name}</h2>
 
