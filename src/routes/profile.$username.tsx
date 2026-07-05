@@ -7,7 +7,7 @@ import ProfileHeader from '@/features/user/components/ProfileHeader';
 import ProfileHeaderSkeleton from '@/features/user/components/skeletons/ProfileHeaderSkeleton';
 
 export const Route = createFileRoute('/profile/$username')({
-  loader: async ({context: { queryClient }, params: { username }}) => {
+  loader: ({context: { queryClient }, params: { username }}) => {
     void queryClient.prefetchQuery(userProfileQueryOptions(username))
   },
   head: ({ params: { username } }) => createSeoHead({
