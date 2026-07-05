@@ -2,7 +2,6 @@ import { postFeedQueryOptions } from '@/features/post/api/post.query-options';
 import PostsMasonryGrid from '@/features/post/components/PostsMasonryGrid';
 import PostMasonrySkeleton from '@/features/post/components/skeletons/PostMasonrySkeleton';
 import type { AspectRatioType } from '@/features/post/types/post.types';
-import { userProfileQueryOptions } from '@/features/user/api/user.query-options';
 import { getFeedParams, type FeedSearch } from '@/utils/getFeedParams';
 import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router'
 import { useMemo } from 'react';
@@ -22,13 +21,9 @@ export const Route = createFileRoute('/profile/$username/')({
     search: search.search,
   }),
   loader: async ({ context: { queryClient }, deps, params: { username } }) => {
-    const user = await queryClient.ensureQueryData(userProfileQueryOptions(username));
-
     await queryClient.ensureInfiniteQueryData(
-      postFeedQueryOptions(getFeedParams({ ...deps, authors: user.id }))
+      postFeedQueryOptions(getFeedParams({ ...deps, authors: username }))
     );
-
-    return { authorId: user.id };
   },
   pendingComponent: PostMasonrySkeleton,
   pendingMs: 0,
@@ -38,14 +33,13 @@ export const Route = createFileRoute('/profile/$username/')({
 function RouteComponent() {
   const navigate = useNavigate({ from: Route.fullPath });
   const { username } = Route.useParams();
-  const { authorId } = Route.useLoaderData();
   const searchParams = Route.useSearch();
   const { aspectRatio, search, tags } = searchParams;
 
   const feedParams = useMemo(
-    () => getFeedParams({ authors: authorId, aspectRatio, search, tags }),
+    () => getFeedParams({ authors: username, aspectRatio, search, tags }),
     [
-      authorId,
+      username,
       aspectRatio,
       search,
       tags
