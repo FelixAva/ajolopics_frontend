@@ -34,7 +34,7 @@ function RouteComponent() {
         <ProfileHeaderSkeleton />
       ) : isError || !user ? (
         <section className="h-80 flex items-center justify-center">
-          <p>No se pudo cargar el perfil.</p>
+          <p>No se pudo cargar la información del perfil.</p>
         </section>
       ) : (
         <ProfileHeader user={user} />
