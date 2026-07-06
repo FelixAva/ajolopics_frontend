@@ -1,69 +1,22 @@
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { DynamicIcon } from 'lucide-react/dynamic';
 
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
-import LogoutModal from '@/features/auth/components/LogoutModal';
 import LanguageModal from '@/features/language/components/LanguageModal';
 import Navigation from './Navigation';
 import Button from '../ui/Button';
 import clsx from 'clsx';
 import ProfileButton from '../ui/ProfileButton';
 
-interface LogoutButtonProps {
-  label: string;
-  className?: string;
-  onOpen: () => void;
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const LogoutButtonWithModal = ({ label, className, onOpen, isOpen, onClose }: LogoutButtonProps) => (
-  <div className="relative">
-    <Button
-      onClick={onOpen}
-      variant='ghost'
-      className={className}
-    >
-      <DynamicIcon name='log-out' size={22} />
-      <p className="hidden sm:block">{label}</p>
-    </Button>
-    <div className="absolute right-0 top-full mt-1 z-50">
-      <LogoutModal isOpen={isOpen} onClose={onClose} />
-    </div>
-  </div>
-);
-
 const Header = () => {
   const [isNavigationOpen, setIsNavigationOpen] = useState<boolean>(false);
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
-  const { t } = useTranslation('header');
 
-  const token = useAuthStore((state) => state.token);
+  const token = useAuthStore(state => state.token);
+  const user = useAuthStore(state => state.user);
+  const logout = useAuthStore(state => state.logout);
   const isAuthenticated = !!token;
 
   const onMenuClick = () => setIsNavigationOpen(!isNavigationOpen);
-
-  const sharedLogoutProps = {
-    label: t('logout'),
-    isOpen: isLogoutModalOpen,
-    onOpen: () => setIsLogoutModalOpen(true),
-    onClose: () => setIsLogoutModalOpen(false),
-  };
-
-  const loginButton = (
-    <Link
-      to="/auth"
-      className="[&.active]:font-bold] w-auto h-min px-3.5 py-2 rounded-lg text-primary transition-colors duration-200 select-none hover:cursor-pointer hover:bg-primary-hover hover:border-primary-hover sm:text-lg"
-      preload="intent"
-    >
-      <div className="flex items-center justify-center gap-2 text-center">
-        <DynamicIcon name='log-in' size={22} />
-        <p className="hidden sm:block">{t('login')}</p>
-      </div>
-    </Link>
-  );
 
   return (
     <div className="sticky top-0 z-20 bg-background/70 backdrop-blur-md w-full h-auto px-3 py-3 items-center md:w-auto md:h-auto md:flex md:justify-between lg:px-10">
@@ -79,18 +32,13 @@ const Header = () => {
           <div className='inline-flex items-center shrink-0'>
             <LanguageModal />
 
-            {isAuthenticated
-              ? (
-                <div className="flex justify-center md:hidden">
-                  {/* <LogoutButtonWithModal {...sharedLogoutProps} className='w-auto' /> */}
-                  <ProfileButton />
-                </div>
-              ) : (
-                <div className='flex md:hidden'>
-                  {loginButton}
-                </div>
-              )
-            }
+            <div className="flex justify-center md:hidden">
+              <ProfileButton
+                isAuthenticated={isAuthenticated}
+                user={user}
+                logout={logout}
+              />
+            </div>
           </div>
         </div>
 
@@ -111,13 +59,11 @@ const Header = () => {
       <Navigation isOpen={isNavigationOpen} />
 
       <div className="hidden md:flex md:items-center">
-        {isAuthenticated
-          ? (
-            // <LogoutButtonWithModal {...sharedLogoutProps} className='w-auto' />
-            <ProfileButton />
-          )
-          : loginButton
-        }
+        <ProfileButton
+          isAuthenticated={isAuthenticated}
+          user={user}
+          logout={logout}
+        />
       </div>
     </div>
   )
