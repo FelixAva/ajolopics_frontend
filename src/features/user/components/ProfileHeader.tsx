@@ -19,8 +19,8 @@ const ProfileHeader = ({ user }: ProfileHeaderProps) => {
           <h2 className="text-[28px] font-semibold">{user.name}</h2>
 
           <>
-            <Button icon="pencil" variant="none" size="none" />
-            <Button icon="share" variant="none" size="none" />
+            <Button icon="pencil" variant="none" size="none" className='hidden!' />
+            <Button icon="share" variant="none" size="none" className='hidden!'/>
           </>
         </div>
         <h3 className="text-[22px]">@{user.username}</h3>
