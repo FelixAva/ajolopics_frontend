@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { useAuthStore } from '@/features/auth/store/useAuthStore'; // Ajusta tu ruta
+import { useAuthStore } from '../store/useAuthStore'; // Ajusta tu ruta
 import Button from '@/components/ui/Button';
 
 interface Props {
