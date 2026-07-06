@@ -16,5 +16,8 @@
     "passwordPattern": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
     "passwordsMatch": "Passwords must match",
     "invalidFormat": "Invalid format"
+  },
+  "popovers": {
+    "viewProfile": "View Profile"
   }
 }

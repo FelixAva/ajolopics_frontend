@@ -16,5 +16,9 @@
     "passwordPattern": "La contraseña debe contener al menos una letra mayúscula, una minúscula y un número",
     "passwordsMatch": "Las contraseñas deben coincidir",
     "invalidFormat": "Formato inválido"
+  },
+  "popovers": {
+    "viewProfile": "Ver Perfil"
   }
+
 }
