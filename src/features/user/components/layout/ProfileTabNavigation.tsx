@@ -11,8 +11,8 @@ const ProfileTabNavigation = ({ username }: TabNavigationProps) => {
         {(
           [
             ['/profile/$username', 'Posts'],
-            ['/profile/$username/likes', 'Likes'],
-            ['/profile/$username/bookmarks', 'Bookmarks'],
+            // ['/profile/$username/likes', 'Likes'],
+            // ['/profile/$username/bookmarks', 'Bookmarks'],
           ] as const
         ).map(([to, label]) => {
           return (
