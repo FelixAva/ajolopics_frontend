@@ -6,7 +6,7 @@ import { getFeedParams, type FeedSearch } from '@/utils/getFeedParams';
 import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router'
 import { useMemo } from 'react';
 
-export const Route = createFileRoute('/profile/$username/')({
+export const Route = createFileRoute('/profile/$username/_posts')({
   validateSearch: (search: Record<string, unknown>): FeedSearch => {
     return {
       tags: search.tags as string | undefined,
@@ -58,7 +58,6 @@ function RouteComponent() {
       }
     });
   };
-
 
   return (
     <div>
