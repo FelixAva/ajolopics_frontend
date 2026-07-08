@@ -19,6 +19,8 @@
   },
   "popovers": {
     "viewProfile": "Ver Perfil"
+  },
+  "loadingFailure": {
+    "profileData": "No se pudo cargar la información del perfil"
   }
-
 }

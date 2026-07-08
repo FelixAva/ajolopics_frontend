@@ -19,5 +19,8 @@
   },
   "popovers": {
     "viewProfile": "View Profile"
+  },
+  "loadingFailure": {
+    "profileData": "Failed to load the profile data"
   }
 }

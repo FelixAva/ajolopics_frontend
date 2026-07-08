@@ -7,6 +7,7 @@ import ProfileHeaderSkeleton from '@/features/user/components/skeletons/ProfileH
 import { userProfileQueryOptions } from '@/features/user/api/user.query-options';
 import { createSeoHead } from '@/utils/seo';
 import { getSeoTranslation } from '@/utils/seoTranslations';
+import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/profile/$username')({
   loader: ({ context: { queryClient }, params: { username } }) => {
@@ -23,6 +24,7 @@ export const Route = createFileRoute('/profile/$username')({
 
 function RouteComponent() {
   const { username } = Route.useParams();
+  const { t } = useTranslation('components');
 
   const {
     data: user,
@@ -36,7 +38,7 @@ function RouteComponent() {
         <ProfileHeaderSkeleton />
       ) : isError || !user ? (
         <section className="h-80 flex items-center justify-center">
-          <p>No se pudo cargar la información del perfil.</p>
+          <p>{t('loadingFailure.profileData')}</p>
         </section>
       ) : (
         <ProfileHeader user={user} />
