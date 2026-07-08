@@ -10,5 +10,10 @@ export const UserService = {
   async getUsers() {
     const response = await api.get<User[]>('/users');
     return response.data;
+  },
+
+  async getUser(username: string) {
+    const response = await api.get<User>(`/users/${username}`)
+    return response.data;
   }
 }

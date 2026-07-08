@@ -1,11 +1,11 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
-import { getFallbackPostHead, getPostHead } from '@/features/post/utils/postSeo';
 import ModalOverlay from '@/components/ui/ModalOverlay';
-import PostModalSkeleton from '@/features/post/components/skeletons/PostModalSkeleton';
+import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
 import PostModal from '@/features/post/components/PostModal';
+import PostModalSkeleton from '@/features/post/components/skeletons/PostModalSkeleton';
+import { getFallbackPostHead, getPostHead } from '@/features/post/utils/postSeo';
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_feed/posts/$postId/modal')({
+export const Route = createFileRoute('/profile/$username/_posts/$postId/modal')({
   loader: async ({ context: { queryClient }, params: { postId } }) => ({
     post: await queryClient.ensureQueryData(singlePostQueryOptions(postId)),
   }),
@@ -13,15 +13,17 @@ export const Route = createFileRoute('/_feed/posts/$postId/modal')({
     loaderData?.post ? getPostHead(loaderData.post) : getFallbackPostHead(postId),
   pendingComponent: PostModalPendingRoute,
   pendingMs: 0,
-  component: PostModalRoute,
+  component: RouteComponent,
 });
 
 function useCloseModal() {
   const navigate = useNavigate();
+  const { username } = Route.useParams();
 
   return () => {
     navigate({
-      to: '/',
+      to: '/profile/$username',
+      params: { username },
       replace: true,
     });
   };
@@ -40,7 +42,7 @@ function PostModalPendingRoute() {
   );
 }
 
-function PostModalRoute() {
+function RouteComponent() {
   const { post } = Route.useLoaderData();
   const onClose = useCloseModal();
 

@@ -32,7 +32,7 @@ const LanguageModal = () => {
       <Button
         size='sm'
         title={currentLanguageDisplay}
-        icon='globe'
+        icon='languages'
         onClick={() => setIsOpen(!isOpen)}
         variant='none'
       />
