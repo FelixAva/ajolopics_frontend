@@ -1,8 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { createSeoHead } from '@/utils/seo';
 import { getSeoTranslation } from '@/utils/seoTranslations';
+import EditProfileForm from '@/features/user/components/EditProfileForm';
 
-export const Route = createFileRoute('/profile/$username/edit')({
+export const Route = createFileRoute('/profile/$username_/edit')({
   head: ({ params: { username } }) => createSeoHead({
     title: getSeoTranslation('profile.editTitle'),
     description: getSeoTranslation('profile.editDescription'),
@@ -13,5 +14,7 @@ export const Route = createFileRoute('/profile/$username/edit')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/profile"!</div>
+  return (
+    <EditProfileForm />
+  );
 }
