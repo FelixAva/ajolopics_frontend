@@ -27,8 +27,14 @@
   },
   "detail": {
     "by": "Por",
+    "actions": "Acciones de la publicación",
+    "like": "Me gusta",
+    "comment": "Comentar",
+    "share": "Compartir",
     "download": "Descargar",
-    "loginToDownload": "Inicia sesión para descargar"
+    "bookmark": "Favoritos",
+    "loginToDownload": "Inicia sesión para descargar",
+    "notAvailableYet": "Aún no disponible"
   },
   "aspectOptions": {
     "landscape": "HORIZONTAL",

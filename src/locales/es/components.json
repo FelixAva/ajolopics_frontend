@@ -3,7 +3,19 @@
     "placeholder": "Arrastra y suelta o haz clic para subir",
     "processError": "Error al procesar",
     "remove": "Haz clic para eliminar",
-    "addMore": "+ Haz clic aquí para añadir más fotos"
+    "addMore": "+ Haz clic aquí para añadir más fotos",
+    "changeProfilePicture": "Cambiar foto de perfil"
+  },
+  "profileEdit": {
+    "title": "Editar perfil",
+    "description": "Actualiza cómo se muestra tu perfil a otras personas.",
+    "pictureLegend": "Foto de perfil",
+    "pictureHint": "Elige una imagen JPEG, PNG o WebP. Haz clic en la foto para reemplazarla.",
+    "detailsLegend": "Datos del perfil",
+    "nameLabel": "Nombre para mostrar",
+    "usernameLabel": "Nombre de usuario",
+    "usernameHint": "Tu nombre de usuario no se puede cambiar.",
+    "save": "Guardar cambios"
   },
   "links": {
     "forgotPassword": "¿Olvidaste tu contraseña?"

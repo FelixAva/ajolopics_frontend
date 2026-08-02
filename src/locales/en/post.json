@@ -27,8 +27,14 @@
   },
   "detail": {
     "by": "By",
+    "actions": "Post actions",
+    "like": "Like",
+    "comment": "Comment",
+    "share": "Share",
     "download": "Download",
-    "loginToDownload": "Login To Download"
+    "bookmark": "Bookmark",
+    "loginToDownload": "Login To Download",
+    "notAvailableYet": "Not available yet"
   },
   "aspectOptions": {
     "landscape": "LANDSCAPE",
