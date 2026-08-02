@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import { useTranslation } from 'react-i18next';
+import { DynamicIcon } from 'lucide-react/dynamic';
 import CarouselControls from './PostModalControls';
 import type { AspectRatioType, Post } from '../types/post.types';
 import usePostMutations from '../hooks/post.mutations';
@@ -112,11 +113,14 @@ const PostModal = (post: Post) => {
             <div className={styles.download}>
               <Button
                 onClick={handleDownload}
-                icon={downloadPost.isPending ? 'loader-2' : 'download'}
-                title={isUserAuthenticated ? t('detail.download', 'Download') : t('detail.loginToDownload')}
                 disabled={!isUserAuthenticated || !originalVariant || downloadPost.isPending}
                 className="w-full"
-              />
+              >
+                <DynamicIcon name={downloadPost.isPending ? 'loader-2' : 'download'} size={22} />
+                <span>
+                  {isUserAuthenticated ? t('detail.download', 'Download') : t('detail.loginToDownload')}
+                </span>
+              </Button>
             </div>
           </div>
         </>

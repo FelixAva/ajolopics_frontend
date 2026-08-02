@@ -27,21 +27,23 @@ const LogoutModal = ({ onClose, isOpen }: Props) => {
       <ul className="flex flex-col gap-1 mt-1">
         <li>
           <Button
-            title={t('header:accept')}
             variant='danger'
             size='sm'
             onClick={handleConfirmLogout}
             className="w-full font-semibold hover:text-danger-contrast"
-          />
+          >
+            {t('header:accept')}
+          </Button>
         </li>
         <li>
           <Button
-            title={t('header:cancel')}
             variant='ghost'
             size='sm'
             onClick={onClose}
             className="w-full text-primary-soft-foreground hover:bg-primary-subtle"
-          />
+          >
+            {t('header:cancel')}
+          </Button>
         </li>
       </ul>
     </div>

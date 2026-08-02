@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
+import { DynamicIcon } from 'lucide-react/dynamic';
 
 import Button from '@/components/ui/Button';
 import usePostMutations from '@/features/post/hooks/post.mutations';
@@ -85,10 +86,11 @@ function RouteComponent() {
           <Button
             onClick={handleBack}
             variant="ghost"
-            icon="arrow-left"
             aria-label="Back to feed"
             className="px-3!"
-          />
+          >
+            <DynamicIcon name='arrow-left' size={22} />
+          </Button>
         </div>
 
         <section className="grid w-full gap-6 lg:grid-cols-[minmax(0,1fr)_24rem] xl:grid-cols-[minmax(0,1fr)_28rem]">
@@ -128,11 +130,14 @@ function RouteComponent() {
             <div className="p-5">
               <Button
                 onClick={handleDownload}
-                icon={downloadPost.isPending ? 'loader-2' : 'download'}
-                title={isUserAuthenticated ? t('detail.download', 'Download') : t('detail.loginToDownload')}
                 disabled={!isUserAuthenticated || !originalVariant || downloadPost.isPending}
                 className="w-full"
-              />
+              >
+                <DynamicIcon name={downloadPost.isPending ? 'loader-2' : 'download'} size={22} />
+                <span>
+                  {isUserAuthenticated ? t('detail.download', 'Download') : t('detail.loginToDownload')}
+                </span>
+              </Button>
             </div>
           </aside>
         </section>

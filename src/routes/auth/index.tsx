@@ -101,9 +101,10 @@ function RouteComponent() {
               )
               : (
                 <Button
-                  title={t('auth:login.submit')}
                   type='submit'
-                />
+                >
+                  {t('auth:login.submit')}
+                </Button>
               )
           }
         </form>

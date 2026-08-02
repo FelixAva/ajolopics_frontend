@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { DynamicIcon } from 'lucide-react/dynamic';
 
 import usePostMutations from '@/features/post/hooks/post.mutations';
 import useTag from '@/features/tag/hooks/useTag';
@@ -152,12 +153,13 @@ const CreatePostForm = ({ onClose }: Props) => {
 
       <div className="pt-2">
         <Button
-          title={createPost.isPending ? t('post:create.submitting') : t('post:create.submit')}
           type='submit'
-          icon={createPost.isPending ? 'loader-2' : 'upload'}
           className="w-full"
           disabled={createPost.isPending}
-        />
+        >
+          <DynamicIcon name={createPost.isPending ? 'loader-2' : 'upload'} size={22} />
+          <span>{createPost.isPending ? t('post:create.submitting') : t('post:create.submit')}</span>
+        </Button>
       </div>
     </form>
   );

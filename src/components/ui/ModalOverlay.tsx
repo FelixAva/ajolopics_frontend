@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { DynamicIcon } from 'lucide-react/dynamic';
 import Button from './Button';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 
@@ -37,10 +38,11 @@ const ModalOverlay = ({
           <Button
             onClick={onClose}
             variant='none'
-            icon='x'
             aria-label='Close'
             className="absolute top-4 right-4 z-20 hover:text-overlay! bg-card/80! rounded-full! p-1!"
-          />
+          >
+            <DynamicIcon name='x' size={22} />
+          </Button>
 
           {children}
         </div>
@@ -65,10 +67,11 @@ const ModalOverlay = ({
           <Button
             onClick={onClose}
             variant='none'
-            icon='x'
             aria-label='Close'
             className="hover:text-overlay! bg-card/80! rounded-full! p-1!"
-          />
+          >
+            <DynamicIcon name='x' size={22} />
+          </Button>
         </div>
 
         {children}

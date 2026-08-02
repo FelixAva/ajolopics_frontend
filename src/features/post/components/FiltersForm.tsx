@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from '@tanstack/react-router';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
+import { DynamicIcon } from 'lucide-react/dynamic';
 
 import { Route } from '@/routes/_feed/route.tsx';
 import useTag from '@/features/tag/hooks/useTag.ts';
@@ -181,16 +182,18 @@ const FiltersForm = ({ onClose }: Props) => {
 
       <div className='flex flex-col gap-2.5'>
         <Button
-          title={t('post:filters.clear')}
-          icon='x'
           onClick={handleClear}
           variant='outline'
-        />
+        >
+          <DynamicIcon name='x' size={22} />
+          <span>{t('post:filters.clear')}</span>
+        </Button>
         <Button
-          title={t('post:filters.submit')}
-          icon='search'
           type='submit'
-        />
+        >
+          <DynamicIcon name='search' size={22} />
+          <span>{t('post:filters.submit')}</span>
+        </Button>
       </div>
     </form>
   );

@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import FiltersForm from './FiltersForm';
 import { useTranslation } from 'react-i18next';
+import { DynamicIcon } from 'lucide-react/dynamic';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import Button from '@/components/ui/Button';
 
@@ -27,9 +28,11 @@ const FiltersModal = ({
           <Button
             onClick={onClose}
             variant='none'
-            icon='x'
+            aria-label={t('filters.close', 'Close')}
             className="hover:text-overlay! p-0!"
-          />
+          >
+            <DynamicIcon name='x' size={22} />
+          </Button>
         </div>
 
         <div className="p-6 overflow-y-auto max-h-[80vh]">

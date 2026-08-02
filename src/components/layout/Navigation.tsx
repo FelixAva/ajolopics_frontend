@@ -3,6 +3,7 @@ import { useLocation } from '@tanstack/react-router';
 import clsx from 'clsx';
 
 import { useTranslation } from 'react-i18next';
+import { DynamicIcon } from 'lucide-react/dynamic';
 
 import Button from '@/components/ui/Button';
 
@@ -42,19 +43,21 @@ const Navigation = ({ isOpen }: Props) => {
         { showButton && (
           <>
             <Button
-              title={t('filters')}
               onClick={ () =>  setIsFiltersModalOpen(true)}
-              icon='sliders-horizontal'
               variant='ghost'
-              />
+            >
+              <DynamicIcon name='sliders-horizontal' size={22} />
+              <span>{t('filters')}</span>
+            </Button>
 
             {isAuthenticated && canCreatePost && (
               <Button
-                title={t('createPost')}
                 onClick={ () => setIsCreatePostModalOpen(true) }
-                icon='plus'
                 variant='ghost'
-              />
+              >
+                <DynamicIcon name='plus' size={22} />
+                <span>{t('createPost')}</span>
+              </Button>
             )}
             {isAuthenticated && canCreatePost && (
               <CreatePostModal

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { DynamicIcon } from 'lucide-react/dynamic';
 import Button from '@/components/ui/Button';
 import { useLanguageStore } from '../store/useLanguageStore';
 
@@ -31,11 +32,12 @@ const LanguageModal = () => {
     <div className="relative inline-block text-left">
       <Button
         size='sm'
-        title={currentLanguageDisplay}
-        icon='languages'
         onClick={() => setIsOpen(!isOpen)}
         variant='none'
-      />
+      >
+        <DynamicIcon name='languages' size={22} />
+        <span>{currentLanguageDisplay}</span>
+      </Button>
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-32 bg-background rounded-lg shadow-lg z-50 overflow-hidden">
@@ -45,13 +47,14 @@ const LanguageModal = () => {
                 <Button
                   variant='ghost'
                   onClick={() => handleLanguageChange(lang.code)}
-                  title={lang.label}
                   className={`w-full text-left px-4 py-2 hover:bg-primary-hover transition-colors ${
                     i18n.resolvedLanguage === lang.code
                       ? 'bg-primary-selected! rounded-none! text-primary-active font-bold'
                       : 'text-label'
                   }`}
-                />
+                >
+                  {lang.label}
+                </Button>
               </li>
             ))}
           </ul>

@@ -1,5 +1,6 @@
 import { forwardRef, useState } from 'react';
 import type { InputHTMLAttributes } from 'react';
+import { DynamicIcon } from 'lucide-react/dynamic';
 import Button from './Button';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -40,9 +41,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
               className="absolute right-2 top-1/2 -translate-y-1/2"
               variant="none"
               size="sm"
-              icon={showPassword ? 'eye-off' : 'eye'}
               onClick={() => setShowPassword(prev => !prev)}
-            />
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              <DynamicIcon name={showPassword ? 'eye-off' : 'eye'} size={22} />
+            </Button>
           )}
         </div>
 
