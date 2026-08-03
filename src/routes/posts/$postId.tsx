@@ -5,15 +5,23 @@ import { DynamicIcon } from 'lucide-react/dynamic';
 
 import Button from '@/components/ui/Button';
 import usePostMutations from '@/features/post/hooks/post.mutations';
-import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import CarouselControls from '@/features/post/components/PostModalControls';
 import PostModalSide from '@/features/post/components/PostModalSide';
+import PostActions from '@/features/post/components/PostActions';
+import SharePostModal from '@/features/post/components/SharePostModal';
 import PostPageSkeleton from '@/features/post/components/skeletons/PostPageSkeleton';
 import type { AspectRatioType } from '@/features/post/types/post.types';
 import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
 import { getFallbackPostHead, getPostHead } from '@/features/post/utils/postSeo';
 
+type PostSearch = {
+  share?: boolean;
+};
+
 export const Route = createFileRoute('/posts/$postId')({
+  validateSearch: (search: Record<string, unknown>): PostSearch => ({
+    share: search.share === true || search.share === 'true' || undefined,
+  }),
   loader: async ({ context: { queryClient }, params: { postId } }) => {
     const post = await queryClient.ensureQueryData(singlePostQueryOptions(postId));
     return { post };
@@ -27,12 +35,11 @@ export const Route = createFileRoute('/posts/$postId')({
 
 function RouteComponent() {
   const { post } = Route.useLoaderData();
+  const { share } = Route.useSearch();
   const { t } = useTranslation('post');
   const navigate = useNavigate({ from: Route.fullPath });
 
   const { downloadPost } = usePostMutations();
-  const token = useAuthStore((state) => state.token);
-  const isUserAuthenticated = !!token;
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {
@@ -79,6 +86,16 @@ function RouteComponent() {
     });
   };
 
+  const setShareSearch = (isOpen: boolean) => {
+    navigate({
+      search: (previous) => ({
+        ...previous,
+        share: isOpen || undefined,
+      }),
+      replace: isOpen,
+    });
+  };
+
   return (
     <main className="flex-1 py-5 lg:py-10">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-5">
@@ -118,7 +135,7 @@ function RouteComponent() {
             />
           </div>
 
-          <aside className="flex flex-col rounded-lg shadow-sm lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)]">
+          <aside className="flex flex-col rounded-lg shadow-sm lg:sticky lg:top-24 lg:max-h-[calc(100vh-8rem)] lg:justify-between">
             <div className="flex flex-col gap-4 overflow-y-auto p-5">
               <PostModalSide
                 post={post}
@@ -128,20 +145,24 @@ function RouteComponent() {
             </div>
 
             <div className="p-5">
-              <Button
-                onClick={handleDownload}
-                disabled={!isUserAuthenticated || !originalVariant || downloadPost.isPending}
-                className="w-full"
-              >
-                <DynamicIcon name={downloadPost.isPending ? 'loader-2' : 'download'} size={22} />
-                <span>
-                  {isUserAuthenticated ? t('detail.download', 'Download') : t('detail.loginToDownload')}
-                </span>
-              </Button>
+              <PostActions
+                canDownload={!!originalVariant}
+                isDownloading={downloadPost.isPending}
+                onDownload={handleDownload}
+                onShare={() => setShareSearch(true)}
+              />
             </div>
           </aside>
         </section>
       </div>
+
+      {share && currentVariant && (
+        <SharePostModal
+          onClose={() => setShareSearch(false)}
+          post={post}
+          image={currentVariant}
+        />
+      )}
     </main>
   );
 }

@@ -1,12 +1,16 @@
-import { useState } from 'react';
-import { useAuthStore } from '@/features/auth/store/useAuthStore';
 import { useTranslation } from 'react-i18next';
-import { DynamicIcon } from 'lucide-react/dynamic';
 import CarouselControls from './PostModalControls';
 import type { AspectRatioType, Post } from '../types/post.types';
 import usePostMutations from '../hooks/post.mutations';
 import PostModalSide from './PostModalSide';
-import Button from '@/components/ui/Button';
+import PostActions from './PostActions';
+
+type PostModalProps = {
+  post: Post;
+  currentImageIndex: number;
+  onCurrentImageIndexChange: (index: number) => void;
+  onShare: () => void;
+};
 
 const modalStyles = {
   landscape: {
@@ -16,7 +20,7 @@ const modalStyles = {
     image: 'w-130 sm:h-75 sm:object-cover lg:h-110 lg:w-auto lg:object-fill xl:object-cover xl:h-auto xl:w-186 2xl:w-250',
     sidebar: 'px-6 flex flex-col lg:max-w-[40%] xl:max-w-[50%] 2xl:w-[29%]',
     sidebarContent: 'h-full py-4 flex flex-col justify-start gap-4 overflow-y-auto lg:py-4',
-    download: 'py-2 sm:py-4',
+    actions: 'my-4 sm:mb-0 sm:py-4',
   },
   vertical: {
     container: 'h-full w-full relative flex flex-col bg-background shadow-2xl overflow-hidden transition-all duration-500 ease-in-out md:w-auto md:h-auto md:max-w-[85%] md:max-h-[75%] md:rounded-2xl md:flex-row lg:max-h-[85%] 2xl:max-h-[80%]',
@@ -25,23 +29,35 @@ const modalStyles = {
     image: 'h-full sm:object-cover',
     sidebar: 'max-h-[40%] px-6 flex flex-col md:max-h-none md:w-80 lg:w-90',
     sidebarContent: 'h-full relative flex flex-col py-4 gap-4 overflow-y-auto sm:justify-start sm:gap-4',
-    download: 'py-2 md:py-4',
+    actions: 'my-4 sm:mb-0 md:py-4',
   },
 };
 
-const PostModal = (post: Post) => {
+const PostModal = ({
+  post,
+  currentImageIndex,
+  onCurrentImageIndexChange,
+  onShare,
+}: PostModalProps) => {
   const { t } = useTranslation('post');
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {
     if (post && post.assets.length > 0) {
-      setCurrentImageIndex((prev) => (prev === post.assets.length - 1 ? 0 : prev + 1));
+      onCurrentImageIndexChange(
+        currentImageIndex === post.assets.length - 1
+          ? 0
+          : currentImageIndex + 1,
+      );
     }
   };
 
   const prevImage = () => {
     if (post && post.assets.length > 0) {
-      setCurrentImageIndex((prev) => (prev === 0 ? post.assets.length - 1 : prev - 1));
+      onCurrentImageIndexChange(
+        currentImageIndex === 0
+          ? post.assets.length - 1
+          : currentImageIndex - 1,
+      );
     }
   };
 
@@ -61,7 +77,9 @@ const PostModal = (post: Post) => {
   };
 
   const currentAsset = post?.assets[currentImageIndex];
-  const currentVariant = currentAsset?.variants.find((variant) => variant.variant === 'MEDIUM');
+  const currentVariant = currentAsset?.variants.find((variant) => variant.variant === 'MEDIUM')
+    || currentAsset?.variants.find((variant) => variant.variant === 'ORIGINAL')
+    || currentAsset?.variants.find((variant) => variant.variant === 'THUMBNAIL');
   const originalVariant = currentAsset?.variants.find((variant) => variant.variant === 'ORIGINAL');
   const isMultiple = post && post.assets.length > 1;
 
@@ -71,8 +89,6 @@ const PostModal = (post: Post) => {
   const aspectLabel = width && height ? t(`aspectOptions.${aspectType.toLowerCase()}`) : '-';
   const resolutionLabel = originalVariant ? `${originalVariant.width} x ${originalVariant.height}` : '-';
 
-  const token = useAuthStore((state) => state.token);
-  const isUserAuthenticated = !!token;
   const { downloadPost } = usePostMutations();
   const styles = aspectType === 'LANDSCAPE' ? modalStyles.landscape : modalStyles.vertical;
 
@@ -110,18 +126,13 @@ const PostModal = (post: Post) => {
               />
             </div>
 
-            <div className={styles.download}>
-              <Button
-                onClick={handleDownload}
-                disabled={!isUserAuthenticated || !originalVariant || downloadPost.isPending}
-                className="w-full"
-              >
-                <DynamicIcon name={downloadPost.isPending ? 'loader-2' : 'download'} size={22} />
-                <span>
-                  {isUserAuthenticated ? t('detail.download', 'Download') : t('detail.loginToDownload')}
-                </span>
-              </Button>
-            </div>
+            <PostActions
+              canDownload={!!originalVariant}
+              isDownloading={downloadPost.isPending}
+              onDownload={handleDownload}
+              onShare={onShare}
+              className={styles.actions}
+            />
           </div>
         </>
       </div>
