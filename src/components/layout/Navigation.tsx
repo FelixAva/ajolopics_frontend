@@ -9,7 +9,7 @@ import Button from '@/components/ui/Button';
 
 import FiltersModal from '@/features/post/components/FiltersModal';
 import CreatePostModal from '@/features/post/components/CreatePostModal';
-import { useAuthStore } from '@/features/auth/store/useAuthStore';
+import { useAuthStore } from '@/features/auth';
 
 interface Props {
   isOpen: boolean;

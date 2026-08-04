@@ -1,14 +1,14 @@
 // Libraries imports
 import { createFileRoute, Link } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 
-// Hooks imports
-import useAuth from '@/features/auth/hooks/useAuth';
-
-// Types and Interfaces imports
-import type { SubmitHandler } from 'react-hook-form';
-import type { ILoginFormInput } from '@/features/auth/types/auth.form.types';
+import {
+  useAuth,
+  createLoginSchema,
+  type LoginSchema,
+} from '@/features/auth';
 
 // Components imports
 import Input from '@/components/ui/Input';
@@ -34,11 +34,14 @@ function RouteComponent() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginFormInput>();
+  } = useForm<LoginSchema>({
+    resolver: yupResolver(createLoginSchema(t)),
+    mode: 'onSubmit'
+  });
 
   const { login } = useAuth();
 
-  const onSubmit: SubmitHandler<ILoginFormInput> = async(data) => {
+  const onSubmit: SubmitHandler<LoginSchema> = async (data) => {
     login.mutate(data);
   };
 
@@ -58,38 +61,21 @@ function RouteComponent() {
             label={t('auth:fields.email')}
             type='index'
             placeholder={t('auth:fields.emailPlaceholder')}
-            {...register('email', {
-              required: t('components:validation.required', { field: t('auth:fields.email') }),
-              maxLength: {
-                value: 255,
-                message: t('components:validation.maxLength', { max: 255 })
-              },
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: t('components:validation.emailPattern')
-              }
-            })}
-            error={ errors.email?.message }
+            {...register('email')}
+            error={errors.email?.message}
           />
           <Input
             label={t('auth:fields.password')}
             type='password'
             placeholder='••••••••'
-            {...register("password",
-              {
-                required: t('components:validation.required', { field: t('auth:fields.password') }),
-                minLength: {
-                  value: 8,
-                  message: t('components:validation.minLength', { min: 8 })
-                },
-            })}
-            error={ errors.password?.message }
+            {...register("password")}
+            error={errors.password?.message}
           />
 
           {
             login.isError && (
-                <span className='text-sm text-error'>{t(`auth:backendErrors.${login.error.response?.data.error}`)}</span>
-              )
+              <span className='text-sm text-error'>{t(`auth:backendErrors.${login.error.response?.data.error}`)}</span>
+            )
           }
 
           {

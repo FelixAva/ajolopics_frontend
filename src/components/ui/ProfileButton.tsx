@@ -4,12 +4,12 @@ import Popover from './Popover';
 import { useNavigate } from '@tanstack/react-router';
 import { Route } from '@/routes/__root';
 import { useTranslation } from 'react-i18next';
-import type { User } from '@/features/user/types/user.types';
 import type { PopoverAction } from './Popover';
+import type { UserSession } from '@/features/auth';
 
 interface ProfileButtonProps {
   isAuthenticated: boolean;
-  user?: User | null;
+  user?: UserSession | null;
   logout: () => void;
 }
 

@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 
-import { useAuthStore } from '@/features/auth/store/useAuthStore';
+import { useAuthStore } from '@/features/auth';
 import LanguageModal from '@/features/language/components/LanguageModal';
 import Navigation from './Navigation';
 import Button from '../ui/Button';

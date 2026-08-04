@@ -4,44 +4,37 @@ import type { AxiosError } from 'axios';
 import { useTranslation } from 'react-i18next';
 
 import { AuthService } from '../services/auth.service';
-import { useAuthStore } from '../store/useAuthStore';
+import { useAuthStore } from '../store/auth.store';
 import { router } from '@/app/router';
-import { UserService } from '@/features/user/services/user.service';
-import { queryClient } from '@/app/queryClient';
 import { showAjolopicsToast } from '@/components/ui/Alerts';
 import type { ErrorDTO } from '@/types/api.types';
 import type {
   LoginDTO,
-  LoginResponseDTO,
+  LoginResponse,
   RegisterDTO,
   RegisterResponseDTO
 } from '../types/auth.api.types';
+import { queryClient } from '@/app/queryClient';
+import { userKeys } from '@/features/user/api/user.keys';
 
 const useAuth = () => {
   const { t } = useTranslation('toast');
 
   // Get the setToken function from Zustand
   const setToken = useAuthStore(state => state.setToken);
-  const setUser = useAuthStore(state => state.setUser);
   const navigate = useNavigate({ from: '/auth/' });
 
-  const login = useMutation<LoginResponseDTO, AxiosError<ErrorDTO>, LoginDTO>({
+  const login = useMutation<LoginResponse, AxiosError<ErrorDTO>, LoginDTO>({
     mutationFn: (data) => AuthService.login(data),
     onSuccess: async (data) => {
       // Set the user token with Zustand
       setToken(data.token);
-      try {
-        const user = await queryClient.fetchQuery({
-          queryKey: ['userVerify'],
-          queryFn: () => UserService.getUserVerify()
-        });
-        setUser(user);
 
-        navigate({to: '/'});
-      } catch (error) {
-        console.error('Error al verificar tras login', error);
-        useAuthStore.getState().logout();
-      }
+      queryClient.resetQueries({
+        queryKey: userKeys.lists()
+      });
+
+      navigate({to: '/'});
     },
     onError: (error) => {
       // Error cathching. The error is also render with a span in /src/routes/auth/index.tsx
@@ -58,6 +51,7 @@ const useAuth = () => {
       router.navigate({ to: '/auth' });
     },
     onError: (error) => {
+      // Error cathching. The error is also render with a span in /src/routes/auth/index.tsx
       console.error(error.response?.data.message);
     }
   })

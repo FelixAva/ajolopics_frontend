@@ -1,14 +1,14 @@
 import type {
-  LoginDTO,
-  LoginResponseDTO,
+  LoginResponse,
   RegisterDTO,
   RegisterResponseDTO
 } from '../types/auth.api.types';
 import { api } from '../../../api/axios';
+import type { LoginSchema } from '../schemas/auth.schemas';
 
 export const AuthService = {
-  async login(data: LoginDTO) {
-    const response = await api.post<LoginResponseDTO>('/auth/login', data);
+  async login(loginData: LoginSchema): Promise<LoginResponse> {
+    const response = await api.post<LoginResponse>('/auth/login', loginData);
     return response.data;
   },
 

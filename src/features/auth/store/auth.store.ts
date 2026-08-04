@@ -1,35 +1,36 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { AUTH_TOKEN_KEY } from '../utils/auth.constants';
-import type { User } from '../../user/types/user.types';
 import { queryClient } from '../../../app/queryClient';
-
-type AuthState = {
-  token: string | null;
-  user: User | null;
-  setToken: (token: string) => void;
-  setUser: (user: User) => void;
-  logout: () => void;
-  isAuthenticated: () => boolean;
-};
+import type { AuthState } from '../types/auth.store.types';
+import { userKeys } from '../../user/api/user.keys';
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
       token: null,
       user: null,
+      status: 'idle',
 
       setToken: (token) => set({ token }),
       setUser: (user) => set({ user }),
+      setStatus: (status) => set({ status }),
       logout: () => {
-        set({ token: null, user: null });
-        queryClient.removeQueries({ queryKey:['userVerify'] });
+        set({
+          token: null,
+          user: null,
+          status: 'unauthenticated'
+        });
+
+        queryClient.removeQueries({
+          queryKey: userKeys.all
+        });
       },
       isAuthenticated: () => !!get().token,
     }),
     {
       name: AUTH_TOKEN_KEY,
-      // partialize: (state) => ({ token: state.token })
+      partialize: (state) => ({ token: state.token })
     }
   )
 )

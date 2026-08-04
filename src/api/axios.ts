@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { useAuthStore } from '../features/auth/store/useAuthStore';
-import { router } from '../app/router';
+import { useAuthStore } from '../features/auth';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -32,9 +31,6 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       // Logout procces from >ustand
       useAuthStore.getState().logout();
-
-      // Redirect to auth - without hard reload
-      router.navigate({ to: '/auth' });
     }
 
     return Promise.reject(error);

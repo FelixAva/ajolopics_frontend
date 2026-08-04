@@ -5,7 +5,7 @@ export interface LoginDTO {
   password: string;
 }
 
-export interface LoginResponseDTO {
+export interface LoginResponse {
   token: string;
 }
 
