@@ -6,7 +6,7 @@ import { DynamicIcon } from 'lucide-react/dynamic';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input';
 import InputFile from '@/components/ui/InputFile';
-import { useAuthStore } from '@/features/auth/store/auth.store';
+import { useAuthStore } from '@/features/auth';
 import type { IEditProfileFormInput } from '../types/user.forms.types';
 import { redirect } from '@tanstack/react-router';
 

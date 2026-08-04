@@ -8,11 +8,11 @@ import usePostMutations from '@/features/post/hooks/post.mutations';
 import CarouselControls from '@/features/post/components/PostModalControls';
 import PostModalSide from '@/features/post/components/PostModalSide';
 import PostActions from '@/features/post/components/PostActions';
-import SharePostModal from '@/features/post/components/SharePostModal';
 import PostPageSkeleton from '@/features/post/components/skeletons/PostPageSkeleton';
 import type { AspectRatioType } from '@/features/post/types/post.types';
 import { singlePostQueryOptions } from '@/features/post/api/post.query-options';
 import { getFallbackPostHead, getPostHead } from '@/features/post/utils/postSeo';
+import { useAuthStore } from '@/features/auth';
 
 type PostSearch = {
   share?: boolean;

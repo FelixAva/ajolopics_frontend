@@ -3,8 +3,10 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-// Hooks imports
-import useAuth from '@/features/auth/hooks/useAuth';
+import {
+  useAuth,
+  type RegisterSchema,
+} from '@/features/auth';
 
 // Types and Interfaces imports
 import type { SubmitHandler } from 'react-hook-form';

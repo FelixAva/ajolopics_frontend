@@ -1,5 +1,5 @@
 // Componentes
-export * from './components/LogoutModal';
+export { default as LogoutModal } from './components/LogoutModal';
 
 // Hooks
 export { default as useAuth } from './hooks/useAuth';

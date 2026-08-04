@@ -4,6 +4,8 @@ import type { AspectRatioType, Post } from '../types/post.types';
 import usePostMutations from '../hooks/post.mutations';
 import PostModalSide from './PostModalSide';
 import PostActions from './PostActions';
+import { useAuthStore } from '@/features/auth';
+import { useState } from 'react';
 
 type PostModalProps = {
   post: Post;

@@ -4,7 +4,7 @@ import { DynamicIcon } from 'lucide-react/dynamic';
 import clsx from 'clsx';
 
 import Button from '@/components/ui/Button';
-import { useAuthStore } from '@/features/auth/store/useAuthStore';
+import { useAuthStore } from '@/features/auth';
 
 interface PostActionsProps {
   canDownload: boolean;
