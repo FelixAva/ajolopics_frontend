@@ -21,7 +21,6 @@ const FiltersForm = ({ onClose }: Props) => {
   const { t } = useTranslation(['post', 'components']);
   const navigate = useNavigate({ from: Route.fullPath });
 
-
   const {
     register,
     handleSubmit,
