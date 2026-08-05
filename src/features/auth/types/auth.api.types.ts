@@ -1,6 +1,6 @@
 import type { UserRole } from '../../user/types/user.types';
 
-export interface LoginDTO {
+export interface LoginRequest {
   email: string;
   password: string;
 }
@@ -9,13 +9,13 @@ export interface LoginResponse {
   token: string;
 }
 
-export interface RegisterDTO {
+export interface RegisterRequest {
   name: string;
   email: string;
   password: string;
 }
 
-export interface RegisterResponseDTO {
+export interface RegisterResponse {
   name: string;
   email: string;
   id: string;

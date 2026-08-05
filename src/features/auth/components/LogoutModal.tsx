@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useAuthStore } from '../store/auth.store'; // Ajusta tu ruta
 import Button from '@/components/ui/Button';
+import { showAjolopicsToast } from '@/components/ui/Alerts';
 
 interface Props {
   isOpen: boolean;
@@ -14,6 +15,7 @@ const LogoutModal = ({ onClose, isOpen }: Props) => {
 
   const handleConfirmLogout = () => {
     logout();
+    showAjolopicsToast('info', t('toast:loggedOut'));
     onClose();
   };
 

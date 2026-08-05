@@ -3,5 +3,7 @@
   "postSuccess": "Publicado correctamente",
   "postFailed": "Error al publicar",
   "postDownloadSuccess": "Imagen descargada correctamente",
-  "postDownloadFailed": "Error al descargar la imagen"
+  "postDownloadFailed": "Error al descargar la imagen",
+  "sessionExpired": "Tu sesión ha expirado. Inicia sesión de nuevo",
+  "loggedOut": "Sesión cerrada"
 }

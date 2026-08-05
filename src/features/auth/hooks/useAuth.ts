@@ -9,10 +9,10 @@ import { router } from '@/app/router';
 import { showAjolopicsToast } from '@/components/ui/Alerts';
 import type { ErrorDTO } from '@/types/api.types';
 import type {
-  LoginDTO,
+  LoginRequest,
   LoginResponse,
-  RegisterDTO,
-  RegisterResponseDTO
+  RegisterRequest,
+  RegisterResponse
 } from '../types/auth.api.types';
 import { queryClient } from '@/app/queryClient';
 import { userKeys } from '@/features/user/api/user.keys';
@@ -24,7 +24,7 @@ const useAuth = () => {
   const setToken = useAuthStore(state => state.setToken);
   const navigate = useNavigate({ from: '/auth/' });
 
-  const login = useMutation<LoginResponse, AxiosError<ErrorDTO>, LoginDTO>({
+  const login = useMutation<LoginResponse, AxiosError<ErrorDTO>, LoginRequest>({
     mutationFn: (data) => AuthService.login(data),
     onSuccess: async (data) => {
       // Set the user token with Zustand
@@ -42,7 +42,7 @@ const useAuth = () => {
     }
   });
 
-  const register = useMutation<RegisterResponseDTO, AxiosError<ErrorDTO>, RegisterDTO>({
+  const register = useMutation<RegisterResponse, AxiosError<ErrorDTO>, RegisterRequest>({
     mutationFn: (data) => AuthService.register(data),
     onSuccess: () => {
       showAjolopicsToast('success', t('register'));

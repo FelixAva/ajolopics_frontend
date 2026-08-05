@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useAuthStore } from '@/features/auth';
+import { showAjolopicsToast } from '@/components/ui/Alerts';
+import i18n from '@/app/i18n';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -29,8 +31,14 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Logout procces from >ustand
+      const hadSession = !!useAuthStore.getState().token;
+
+      // Logout procces from zustand
       useAuthStore.getState().logout();
+
+      if (hadSession) {
+        showAjolopicsToast('error', i18n.t('toast:sessionExpired'));
+      }
     }
 
     return Promise.reject(error);

@@ -3,5 +3,7 @@
   "postSuccess": "Post created successfully",
   "postFailed": "Failed to create post",
   "postDownloadSuccess": "Image downloaded successfully",
-  "postDownloadFailed": "Failed to download image"
+  "postDownloadFailed": "Failed to download image",
+  "sessionExpired": "Your session has expired. Log in again",
+  "loggedOut": "Logged out"
 }

@@ -2,15 +2,16 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import {
+  createRegisterSchema,
   useAuth,
   type RegisterSchema,
 } from '@/features/auth';
 
 // Types and Interfaces imports
 import type { SubmitHandler } from 'react-hook-form';
-import type { IRegisterFormInput } from '@/features/auth/types/auth.form.types';
 
 // Components imports
 import Input from '@/components/ui/Input';
@@ -34,13 +35,15 @@ function RouteComponent() {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
-  } = useForm<IRegisterFormInput>();
+  } = useForm<RegisterSchema>({
+    resolver: yupResolver(createRegisterSchema(t)),
+    mode: 'onTouched'
+  });
 
   const { register: authRegister } = useAuth();
 
-  const onSubmit: SubmitHandler<IRegisterFormInput> = async(data) => {
+  const onSubmit: SubmitHandler<RegisterSchema> = async(data) => {
     authRegister.mutate(data);
   };
 
@@ -60,65 +63,28 @@ function RouteComponent() {
             label={t('auth:fields.name')}
             type='text'
             placeholder={t('auth:fields.namePlaceholder')}
-            {...register('name', {
-              required: t('components:validation.required', { field: t('auth:fields.name') }),
-              minLength: {
-                value: 3,
-                message: t('components:validation.minLength', { min: 3 })
-              },
-              maxLength: {
-                value: 100,
-                message: t('components:validation.maxLength', { max: 100 })
-              },
-            })}
+            {...register('name')}
             error={ errors.name?.message }
           />
           <Input
             label={t('auth:fields.email')}
             type='email'
             placeholder={t('auth:fields.emailPlaceholder')}
-            {...register('email', {
-              required: t('components:validation.required', { field: t('auth:fields.email') }),
-              maxLength: {
-                value: 255,
-                message: t('components:validation.maxLength', { max: 255 })
-              },
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: t('components:validation.emailPattern')
-              }
-            })}
+            {...register('email')}
             error={ errors.email?.message }
           />
           <Input
             type='password'
             placeholder='••••••••'
             label={t('auth:fields.password')}
-            {...register("password",
-              {
-                required: t('components:validation.required', { field: t('auth:fields.password') }),
-                minLength: {
-                  value: 8,
-                  message: t('components:validation.minLength', { min: 8 })
-                },
-                pattern: {
-                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-                  message: t('components:validation.passwordPattern')
-                }
-            })}
+            {...register("password")}
             error={ errors.password?.message }
           />
           <Input
             type='password'
             label={t('auth:fields.confirmPassword')}
             placeholder='••••••••'
-            {...register("confPassword",
-              {
-                required: t('components:validation.required', { field: t('auth:fields.confirmPassword') }),
-                deps: ['password'],
-                validate: (value) =>
-                  value === getValues('password') || t('components:validation.passwordsMatch')
-            })}
+            {...register("confPassword")}
             error={ errors.confPassword?.message }
           />
 

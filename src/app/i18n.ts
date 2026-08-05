@@ -57,7 +57,7 @@ i18n
     resources,
     lng: initialLng,
     fallbackLng: 'en',
-    ns: ['auth', 'components', 'header', 'post', 'seo'],
+    ns: ['auth', 'components', 'header', 'post', 'seo', 'toast'],
     interpolation: {
       escapeValue: false,
     },
